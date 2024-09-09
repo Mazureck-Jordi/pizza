@@ -1,4 +1,4 @@
-package com.example.demoGit.bo;
+package fr.eni.pizza.bo;
 
 import java.time.LocalDate;
 

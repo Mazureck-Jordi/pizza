@@ -1,4 +1,4 @@
-package com.example.demoGit.bo;
+package fr.eni.pizza.bo;
 
 public class DetailCommande {
 

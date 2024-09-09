@@ -1,8 +1,8 @@
-package com.example.demoGit.bo;
+package fr.eni.pizza.bo;
 
 public class Produit {
 
-    private Long id_produit
+    private Long id_produit;
     private String nom;
     private String description;
     private Double prix;
