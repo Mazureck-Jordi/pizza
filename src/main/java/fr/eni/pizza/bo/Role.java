@@ -1,4 +1,4 @@
-package com.example.demoGit;
+package com.example.demoGit.bo;
 
 public class Role {
 

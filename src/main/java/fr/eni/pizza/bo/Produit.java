@@ -1,3 +1,5 @@
+package com.example.demoGit.bo;
+
 public class Produit {
 
     private Long id_produit
@@ -78,7 +80,7 @@ public class Produit {
 
     @Override
     public String toString() {
-        return "Produit{" +
+        return "com.example.demoGit.bo.Produit{" +
                 "id_produit=" + id_produit +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +

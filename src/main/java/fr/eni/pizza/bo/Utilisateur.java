@@ -1,3 +1,5 @@
+package com.example.demoGit.bo;
+
 public class Utilisateur {
 
     private Long id_utilisateur;
@@ -78,7 +80,7 @@ public class Utilisateur {
 
     @Override
     public String toString() {
-        return "Utilisateur{" +
+        return "com.example.demoGit.bo.Utilisateur{" +
                 "id_utilisateur=" + id_utilisateur +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
