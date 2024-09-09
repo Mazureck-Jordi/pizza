@@ -13,6 +13,14 @@ public class Utilisateur {
         super();
     }
 
+    public Utilisateur(Long id_utilisateur, String nom, String prenom, String email, String mot_de_passe) {
+        this.id_utilisateur = id_utilisateur;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mot_de_passe = mot_de_passe;
+    }
+
     public Utilisateur(String nom, String prenom, String email, String mot_de_passe, Commande id_commande) {
         this.nom = nom;
         this.prenom = prenom;
@@ -29,6 +37,8 @@ public class Utilisateur {
         this.mot_de_passe = mot_de_passe;
         this.id_commande = id_commande;
     }
+
+
 
     public Long getId_utilisateur() {
         return id_utilisateur;

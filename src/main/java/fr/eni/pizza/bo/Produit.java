@@ -21,6 +21,14 @@ public class Produit {
         this.id_type_produit = id_type_produit;
     }
 
+    public Produit(Long id_produit, String nom, String description, Double prix, String image_url) {
+        this.id_produit = id_produit;
+        this.nom = nom;
+        this.description = description;
+        this.prix = prix;
+        this.image_url = image_url;
+    }
+
     public Produit(Long id_produit, String nom, String description, Double prix, String image_url, TypeProduit id_type_produit) {
         this.id_produit = id_produit;
         this.nom = nom;
