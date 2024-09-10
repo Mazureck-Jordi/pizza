@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -46,13 +47,11 @@ public class ProduitController {
         //Sinon On injecte le produit dans le model
         model.addAttribute("produit", produit);
 
-       return "/details-produit";
+        return "/details-produit";
     }
 
 
-
-
-    @GetMapping({"produit-form/{id}", "produit-form"})
+    @GetMapping({"show-produit-form/{id}", "show-produit-form"})
     public String showFormProduit(@PathVariable(required = false) Long id, Model model) {
 
         //Instancier un produit par default
@@ -78,6 +77,19 @@ public class ProduitController {
         return "/produit-form";
     }
 
+    @PostMapping("produit-form")
+    public String produitForm(Produit produit, Model model) {
 
+        //Si le produit n'existe pas on l'ajoute
+        if (produit.getId_produit() == null) {
+            produitManager.addProduit(produit);
+        }
 
+        //Si le produit existe on le modifie
+        if (produit.getId_produit() != null) {
+            produitManager.updateProduit(produit);
+        }
+
+            return "redirect:/list-produits";
+    }
 }
