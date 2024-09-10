@@ -49,8 +49,8 @@ public class ClientController {
 public String showClientForm(@PathVariable(required = false) Long id, Model model) {
 
         Client client = new Client();
-        if (client.getId_client() != null) {
-            client = clientManager.getClientByID(client.getId_client());
+        if (id != null) {
+            client = clientManager.getClientByID(id);
         }
         model.addAttribute("client", client);
 
