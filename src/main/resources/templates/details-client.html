@@ -13,7 +13,14 @@
   <li th:text="${'Rue : ' + client.rue}"></li>
   <li th:text="${'Code Postal : ' +  client.code_postal}"></li>
   <li th:text="${' Ville : ' + client.ville}"></li>
-
 </ul>
+<div>
+    <a th:href="@{'/show-client-form/' +${client.id_client}}">Modifier</a>
+</div>
+<div>
+    <a th:href="@{'/delete-client/' +${client.id_client}}">Supprimer</a>
+</div>
+
 </body>
+
 </html>

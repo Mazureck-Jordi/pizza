@@ -68,6 +68,15 @@ public String clientForm(Client client) {
         }
         return "redirect:/list-clients";
     }
+    @GetMapping("/delete-client/{id}")
+    public String deleteClient(@PathVariable Long id) {
 
+        if (clientManager.getClientByID(id) == null) {
 
+        }
+        if (clientManager.getClientByID(id) != null) {
+            clientManager.deleteClient(clientManager.getClientByID(id));
+        }
+        return "redirect:/list-clients";
+    }
 }
