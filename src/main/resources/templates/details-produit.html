@@ -16,5 +16,13 @@
     <li th:text="${'Type de produit : ' + produit.getId_type_produit().libelle}"></li>
 </ul>
 
+<div>
+    <a th:href="@{'/show-produit-form/' + ${produit.id_produit}}">Modifier</a>
+</div>
+
+<div>
+    <a th:href="@{'/delete-produit/' + ${produit.id_produit}}">Supprimer</a>
+</div>
+
 </body>
 </html>

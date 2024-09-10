@@ -58,12 +58,11 @@ public class ProduitController {
         //Instancier un produit par default
         Produit produit = new Produit();
 
-
         //S'il y a deja un produit existant avec cet id, on recupère le produit par son id
         //PS : On écrase le produit vide qu'on voulait afficher dans le form
         //Donc on affichera un produit existant dans le formulaire
-        if (produit.getId_produit() != null) {
-            produit = produitManager.getProduitById(produit.getId_produit());
+        if (id != null) {
+            produit = produitManager.getProduitById(id);
         }
 
         //On injecte le produit dans le modèle
@@ -93,4 +92,18 @@ public class ProduitController {
 
             return "redirect:/list-produits";
     }
+
+    @GetMapping("/delete-produit/{id}")
+    public String deleteProduit (@PathVariable Long id) {
+
+        if (produitManager.getProduitById(id) == null) {
+        System.out.println("erreur");
+        }
+        if (produitManager.getProduitById(id) != null) {
+            //Supprime le produit
+            produitManager.deleteProduit(produitManager.getProduitById(id));
+        }
+        return "redirect:/list-produits";
+    }
+
 }
