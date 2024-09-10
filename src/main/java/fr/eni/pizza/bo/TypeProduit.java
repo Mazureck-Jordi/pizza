@@ -9,10 +9,6 @@ public class TypeProduit {
         super();
     }
 
-    public TypeProduit(String libelle) {
-        this.libelle = libelle;
-    }
-
     public TypeProduit(Long id_type_produit, String libelle) {
         this.id_type_produit = id_type_produit;
         this.libelle = libelle;
