@@ -21,7 +21,7 @@ public class Client {
         this.ville = ville;
     }
 
-    public Client(long id_client, String prenom, String nom, String rue, String code_postal, String ville) {
+    public Client(Long id_client, String prenom, String nom, String rue, String code_postal, String ville) {
         this.id_client = id_client;
         this.prenom = prenom;
         this.nom = nom;
@@ -34,7 +34,7 @@ public class Client {
         return id_client;
     }
 
-    public void setId_client(long id_client) {
+    public void setId_client(Long id_client) {
         this.id_client = id_client;
     }
 

@@ -31,7 +31,7 @@ public class DAOClientMySQL implements IDAOClient {
         @Override
         public Client mapRow(ResultSet rs, int rowNum) throws SQLException {
             Client client = new Client();
-            client.setId_client(rs.getInt("id_client"));
+            client.setId_client(rs.getLong("id_client"));
             client.setPrenom(rs.getString("prenom"));
             client.setNom(rs.getString("nom"));
             client.setRue(rs.getString("rue"));
@@ -60,8 +60,8 @@ public class DAOClientMySQL implements IDAOClient {
 
     private String sqlSelectAllClients = "SELECT c.id_client, c.prenom, c.nom,c.rue, c.code_postal, c.ville FROM client c";
     private String sqlSelectClientById = "SELECT c.id_client, c.prenom, c.nom,c.rue, c.code_postal, c.ville FROM client c WHERE c.id_client = ?";
-    private String sqlInsertClient = "INSERT INTO client(id.client, prenom, nom, rue, code_postal, ville) VALUES (:id_client, :prenomClient, :nomCLient, :rueClient, :code_postalClient, :villeClient) ";
-    private String sqlUpdateClient = "UPDATE client SET prenom = :prenomClient, nom = :nomCLient, rue = :rueClient, code_postal = :code_postalClient, ville = :villeClient WHERE id_client = :id_client";
+    private String sqlInsertClient = "INSERT INTO client(id_client, prenom, nom, rue, code_postal, ville) VALUES (:id_client, :prenomClient, :nomClient, :rueClient, :code_postalClient, :villeClient) ";
+    private String sqlUpdateClient = "UPDATE client SET prenom = :prenomClient, nom = :nomClient, rue = :rueClient, code_postal = :code_postalClient, ville = :villeClient WHERE id_client = :id_client";
     private String sqlDeleteClient = "DELETE FROM client WHERE id_client = :id_client";
 
 
