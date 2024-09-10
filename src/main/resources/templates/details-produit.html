@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${produit.nom}"></title>
+</head>
+<body>
+
+<h1>Détails du produit</h1>
+
+<ul>
+  <img th:src="${produit.image_url}" alt="image d'un produit"></img>
+  <li th:text="${'Nom : ' + produit.nom}"></li>
+  <li th:text="${'Description : ' + produit.description}"></li>
+  <li th:text="${'Prix : ' + produit.prix} + ' €'"></li>
+  <!--        <li th:text="${'Type de produit : ' + produit.id_type_produit.getLibelle()}"></li>-->
+</ul>
+
+</body>
+</html>

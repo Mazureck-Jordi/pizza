@@ -27,12 +27,36 @@ public class ProduitController {
         List<Produit> produits = produitManager.getAllProduits();
         List<TypeProduit> typeProduits = produitManager.getAllTypeProduits();
 
-        //On injecte la liste des produits et des types produits dans le modèle
+        //On injecte la liste des produits et des types produits dans le model
         model.addAttribute("produits", produits);
         model.addAttribute("typeProduits", typeProduits);
 
         return "/list-produits";
     }
+
+    @GetMapping("details-produit/{id}")
+    public String showDetailProduit(@PathVariable Long id, Model model) {
+
+        //On récupère un produit en fonction de son id
+        Produit produit = produitManager.getProduitById(id);
+
+        //Si le produit n'existe pas on redirige vers la page d'accueil
+        if (produit == null) {
+            return "redirect:/";
+        }
+
+        //Sinon On injecte le produit dans le model
+        model.addAttribute("produit", produit);
+
+        //On récupère le type de produit du produit
+       TypeProduit typeProduit = produitManager.getTypeProduitById(produit.getId_produit());
+
+       //On injecte le type de produit du produit dans le model
+       model.addAttribute("typeProduit", typeProduit);
+
+       return "/details-produit";
+    }
+
 
 
 

@@ -13,8 +13,9 @@
         <img th:src="${produit.image_url}" alt="image d'un produit"></img>
         <li th:text="${'Nom : ' + produit.nom}"></li>
         <li th:text="${'Description : ' + produit.description}"></li>
-        <li th:text="${'Prix : ' + produit.prix}"></li>
+        <li th:text="${'Prix : ' + produit.prix + ' €'}"></li>
 <!--        <li th:text="${'Type de produit : ' + produit.id_type_produit.getLibelle()}"></li>-->
+        <a th:href="@{'/details-produit/' + ${produit.id_produit}}">Voir détails</a>
     </ul>
 </div>
 
