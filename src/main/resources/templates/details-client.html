@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> th:text="${client.nom}""</title>
+</head>
+<body>
+<h1>Détails client</h1>
+
+<ul>
+  <li th:text="${'Prénom : ' + client.prenom}"></li>
+  <li th:text="${'Nom : ' + client.nom}"></li>
+  <li th:text="${'Rue : ' + client.rue}"></li>
+  <li th:text="${'Code Postal : ' +  client.code_postal}"></li>
+  <li th:text="${' Ville : ' + client.ville}"></li>
+
+</ul>
+</body>
+</html>
