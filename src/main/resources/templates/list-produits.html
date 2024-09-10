@@ -10,7 +10,7 @@
 
 <div th:each="produit: ${produits}">
     <ul>
-        <li th:src="${produit.image_url}" alt="image d'un produit"></li>
+        <img th:src="${produit.image_url}" alt="image d'un produit"></img>
         <li th:text="${'Nom : ' + produit.nom}"></li>
         <li th:text="${'Description : ' + produit.description}"></li>
         <li th:text="${'Prix : ' + produit.prix}"></li>
