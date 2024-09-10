@@ -6,6 +6,7 @@ public class TypeProduit {
     private String libelle;
 
     public TypeProduit() {
+        super();
     }
 
     public TypeProduit(String libelle) {

@@ -25,11 +25,9 @@ public class ProduitController {
 
         //On récupère la liste des produit et des types produits
         List<Produit> produits = produitManager.getAllProduits();
-        List<TypeProduit> typeProduits = produitManager.getAllTypeProduits();
 
         //On injecte la liste des produits et des types produits dans le model
         model.addAttribute("produits", produits);
-        model.addAttribute("typeProduits", typeProduits);
 
         return "/list-produits";
     }
@@ -47,12 +45,6 @@ public class ProduitController {
 
         //Sinon On injecte le produit dans le model
         model.addAttribute("produit", produit);
-
-        //On récupère le type de produit du produit
-       TypeProduit typeProduit = produitManager.getTypeProduitById(produit.getId_produit());
-
-       //On injecte le type de produit du produit dans le model
-       model.addAttribute("typeProduit", typeProduit);
 
        return "/details-produit";
     }

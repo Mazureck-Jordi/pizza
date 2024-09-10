@@ -4,12 +4,11 @@ import fr.eni.pizza.bo.Produit;
 import fr.eni.pizza.dao.IDAOProduit;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Profile("mock")
+@Profile("produit-mock")
 @Repository
 public class DAOProduitMock implements IDAOProduit {
 

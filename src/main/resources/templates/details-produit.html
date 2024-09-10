@@ -9,11 +9,11 @@
 <h1>Détails du produit</h1>
 
 <ul>
-  <img th:src="${produit.image_url}" alt="image d'un produit"></img>
-  <li th:text="${'Nom : ' + produit.nom}"></li>
-  <li th:text="${'Description : ' + produit.description}"></li>
-  <li th:text="${'Prix : ' + produit.prix} + ' €'"></li>
-  <!--        <li th:text="${'Type de produit : ' + produit.id_type_produit.getLibelle()}"></li>-->
+    <img th:src="${produit.image_url}" alt="image d'un produit"></img>
+    <li th:text="${'Nom : ' + produit.nom}"></li>
+    <li th:text="${'Description : ' + produit.description}"></li>
+    <li th:text="${'Prix : ' + produit.prix} + ' €'"></li>
+    <li th:text="${'Type de produit : ' + produit.getId_type_produit().libelle}"></li>
 </ul>
 
 </body>
