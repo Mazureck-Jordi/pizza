@@ -2,7 +2,7 @@ package fr.eni.pizza.bo;
 
 public class Client {
 
-    private long id_client;
+    private Long id_client;
     private String prenom;
     private String nom;
     private String rue;
@@ -30,7 +30,7 @@ public class Client {
         this.ville = ville;
     }
 
-    public long getId_client() {
+    public Long getId_client() {
         return id_client;
     }
 
