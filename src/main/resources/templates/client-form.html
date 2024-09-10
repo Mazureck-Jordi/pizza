@@ -6,7 +6,45 @@
 </head>
 <body>
 <h1> Forulaire Client</h1>
-<P> </P>
+<form th:object="${client}" th:action="@{/client-form}" method="post">
 
+    <!-- champ id -->
+    <input th:field="*{id_client}" type="hidden">
+
+    <!-- champ prenom -->
+    <div>
+        <label for="prenom">Prenom</label>
+        <input th:field="*{prenom}" type="text" placeholder="Saisir le Prénom">
+    </div>
+
+    <!-- champ nom -->
+    <div>
+        <label for="nom">Nom</label>
+        <input th:field="*{nom}" type="text" placeholder="Saisir le Nom de famille">
+    </div>
+
+    <!-- champ rue -->
+    <div>
+        <label for="rue">Rue</label>
+        <input th:field="*{rue}" type="text" placeholder="Saisir le nom de la rue">
+    </div>
+
+    <!-- champ code_postal -->
+    <div>
+        <label for="code_postal">Code postal</label>
+        <input th:field="*{code_postal}" type="text" placeholder="Saisir le Code Postal">
+    </div>
+
+    <!-- champ ville -->
+    <div>
+        <label for="ville">Ville</label>
+        <input th:field="*{ville}" type="text" placeholder="Saisir le nom de la ville">
+    </div>
+
+<!-- Bouton submit -->
+    <div>
+        <input type="submit" value="Save">
+    </div>
+</form>
 </body>
 </html>

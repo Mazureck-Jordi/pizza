@@ -58,7 +58,7 @@ public String showClientForm(@PathVariable(required = false) Long id, Model mode
     }
 
     @PostMapping ("client-form")
-public String clientForm(Client client, Model model) {
+public String clientForm(Client client) {
 
         if (client.getId_client() == null) {
             clientManager.addClient(client);
