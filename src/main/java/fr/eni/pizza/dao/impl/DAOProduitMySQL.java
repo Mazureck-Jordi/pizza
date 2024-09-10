@@ -62,7 +62,7 @@ public class DAOProduitMySQL implements IDAOProduit {
        mapSqlParameterSource.addValue("descriptionProduit", produit.getDescription());
        mapSqlParameterSource.addValue("prixProduit", produit.getPrix());
        mapSqlParameterSource.addValue("imageProduit", produit.getImage_url());
-       mapSqlParameterSource.addValue("typeProduit", produit.getId_type_produit());
+       mapSqlParameterSource.addValue("typeProduit", produit.getId_type_produit().getId_type_produit());
 
        return mapSqlParameterSource;
     }

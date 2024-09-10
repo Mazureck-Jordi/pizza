@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Arrays;
 import java.util.List;
 
-@Profile("mock")
+@Profile("type-produit-mock")
 @Repository
 public class DAOTypeProduitMock implements IDAOTypeProduit {
 

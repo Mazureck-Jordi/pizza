@@ -6,5 +6,51 @@
 </head>
 <body>
 
+<h1>Formulaire de produit</h1>
+
+<form th:object="${produit}" th:action="@{/produit-form}" method="post">
+
+    <!-- Champ id -->
+    <input th:field="*{id_produit}" type="hidden">
+
+    <!-- Champ nom -->
+    <div>
+        <label for="nom">Nom</label>
+        <input th:field="*{nom}" type="text" placeholder="Saisir le nom">
+    </div>
+
+    <!-- Champ description -->
+    <div>
+        <label for="description">Description</label>
+        <input th:field="*{description}" type="text" placeholder="Saisir la description">
+    </div>
+
+    <!-- Champ prix -->
+    <div>
+        <label for="prix">Prix</label>
+        <input th:field="*{prix}" type="number" placeholder="Saisir le prix">
+    </div>
+
+    <!-- Champ image -->
+    <div>
+        <label for="image">Image</label>
+        <input th:field="*{image_url}" type="text" placeholder="Saisir l' url de l'image">
+    </div>
+
+    <!-- Champ typeProduit -->
+    <div>
+        <label for="typeProduit">Type de Produit</label>
+        <select th:field="*{id_type_produit}">
+            <option th:each="typeProduit : ${typeProduits}" th:value="${typeProduit.id_type_produit}"
+                    th:text="${typeProduit.libelle}"></option>
+        </select>
+    </div>
+
+    <!-- Bouton submit -->
+    <div>
+        <input type="submit" value="Enregister">
+    </div>
+
+</form>
 </body>
 </html>
