@@ -215,3 +215,10 @@ ALTER TABLE UTILISATEUR
     INSERT INTO produit (id_produit, nom, description, prix, image_url, TYPE_PRODUIT_id_type_produit) VALUES (5, 'Ice-Tea', 'Canette 33cl', 1.50, 'https://i0.wp.com/commechezmams.fr/wp-content/uploads/2021/01/ICE-TEA-33.jpg?fit=2000%2C2000&ssl=1', 2);
     INSERT INTO produit (id_produit, nom, description, prix, image_url, TYPE_PRODUIT_id_type_produit) VALUES (6, 'Perrier', 'Canette 33cl', 1.50, 'https://maxifournitures.fr/12364-large_default/perrier-canette-d-eau-petillante-33-cl-minerale.jpg', 2);
 
+    ------------------------------------------------------
+
+    USE db_pizza;
+
+    INSERT INTO client (id_client, prenom, nom, rue, code_postal, ville) VALUES (1, 'Mehdi', 'Rochereau', 'Rue de l avenir', '85000', 'La Roche-sur-Yon');
+    INSERT INTO client (id_client, prenom, nom, rue, code_postal, ville) VALUES (2, 'Jordi', 'Mazureck', 'Rue de la galère', '85500', 'Les Herbiers');
+    INSERT INTO client (id_client, prenom, nom, rue, code_postal, ville) VALUES (3, 'Maxime', 'Gilbert', 'Rue du Front', '85300', 'Soullans');

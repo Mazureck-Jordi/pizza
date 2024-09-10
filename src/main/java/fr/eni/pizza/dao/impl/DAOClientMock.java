@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-@Profile("mock")
+@Profile("client-mock")
 @Repository
 public class DAOClientMock implements IDAOClient {
 
