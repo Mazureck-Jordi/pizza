@@ -56,7 +56,7 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
         mapSqlParameterSource.addValue("nomUtilisateur", utilisateur.getNom());
         mapSqlParameterSource.addValue("prenomUtilisateur", utilisateur.getPrenom());
         mapSqlParameterSource.addValue("emailUtilisateur", utilisateur.getEmail());
-        mapSqlParameterSource.addValue("motdepasseUtilisateur", Utilisateur.getMot_de_passe());
+        mapSqlParameterSource.addValue("motdepasseUtilisateur", utilisateur.getMot_de_passe());
         mapSqlParameterSource.addValue("commandeUtilisateur", utilisateur.getId_commande().getId_commande());
         return mapSqlParameterSource;
 

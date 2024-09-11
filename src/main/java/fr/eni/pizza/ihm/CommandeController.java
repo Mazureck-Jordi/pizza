@@ -36,6 +36,8 @@ public class CommandeController {
 
         model.addAttribute("commandes", commandes);
 
+
+
         return "list-commandes";
     }
 
@@ -46,6 +48,9 @@ public class CommandeController {
             return "redirect:/";
         }
         model.addAttribute("commande", commande);
+
+
+
         return "details-commande";
     }
 

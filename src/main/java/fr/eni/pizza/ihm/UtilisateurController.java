@@ -67,7 +67,7 @@ public class UtilisateurController {
 
     @PostMapping("/utilisateur-form")
 
-    public String utilisateurForm(@ModelAttribute Utilisateur utilisateur) {
+    public String utilisateurForm(@ModelAttribute (name = "utilisateur") Utilisateur utilisateur) {
 
         if (utilisateur.getId_utilisateur() == null) {
             utilisateurManager.addUtilisateur(utilisateur);

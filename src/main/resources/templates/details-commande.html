@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h1>Liste des clients</h1>
+<h1>Détails de la commande</h1>
 
   <ul>
     <li th:text="${'N° de la commande : ' + commande.id_commande}"></li>
@@ -14,7 +14,7 @@
     <li th:text="${'Date de la commande : ' + commande.date_heure_livraison}"></li>
     <li th:text="${'Client  de la commande : ' + commande.id_client.nom + ' ' +commande.id_client.prenom}"></li>
     <li th:text="${'Etat de la commande : ' +  commande.id_etat.libelle}"></li>
-    <li th:text="${'Utilisateur de la commande : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>
+    <li th:text="${'Utilisateur de la commande : ' + commande.getId_utilisateur().nom + ' ' + commande.getId_utilisateur().prenom}"></li>
     <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
     <li th:if="${commande.livraison} == 0">Type de commande : Sur place ou à emporter</li>
     <li th:if="${commande.est_paye} == 0">Commande non réglées</li>

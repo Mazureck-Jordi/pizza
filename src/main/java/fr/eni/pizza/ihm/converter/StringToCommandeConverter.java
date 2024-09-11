@@ -14,6 +14,7 @@ public class StringToCommandeConverter implements Converter<String, Commande> {
 
     @Override
     public Commande convert(String idCommande) {
+
         return commandeManager.getCommandeById(Long.parseLong(idCommande));
     }
 }

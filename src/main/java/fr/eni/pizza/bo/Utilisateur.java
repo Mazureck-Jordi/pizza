@@ -6,7 +6,7 @@ public class Utilisateur {
     private String nom;
     private String prenom;
     private String email;
-    private static String mot_de_passe;
+    private String mot_de_passe;
     private Commande id_commande;
 
     public Utilisateur() {
@@ -72,7 +72,7 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public static String getMot_de_passe() {
+    public String getMot_de_passe() {
         return mot_de_passe;
     }
 
