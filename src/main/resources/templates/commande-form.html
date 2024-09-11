@@ -11,7 +11,56 @@
 <form th:object="${commande}" th:action="@{/commande-form}" method="post">
 
   <!-- Champ id -->
-  <input th:field="*{id_produit}" type="hidden">
+  <input th:field="*{id_commande}" type="hidden">
+
+    <!-- Champ nom -->
+    <div>
+        <label for="date">Date de commande</label>
+        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+    </div>
+
+    <!-- Champ nom -->
+    <div>
+        <label for="livraison">livraison ou </label>
+        <input th:field="*{livraison}" type="date" placeholder="Saisir 0 ">
+    </div>
+
+    <!-- Champ nom -->
+    <div>
+        <label for="date">Date de commande</label>
+        <input th:field="*{date_heure_livraison}" type="int" placeholder="Saisir 0 pour ">
+    </div>
+
+    <!-- Champ nom -->
+    <div>
+        <label for="date">Date de commande</label>
+        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+    </div>
+
+    <!-- Champ nom -->
+    <div>
+        <label for="date">Date de commande</label>
+        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+    </div>
+
+    <!-- Champ nom -->
+    <div>
+        <label for="date">Date de commande</label>
+        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+    </div>
+
+    <!-- Champ nom -->
+    <div>
+        <label for="date">Date de commande</label>
+        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+    </div>
+
+    <!-- Champ nom -->
+    <div>
+        <label for="date">Date de commande</label>
+        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+    </div>
+
 
 
 
