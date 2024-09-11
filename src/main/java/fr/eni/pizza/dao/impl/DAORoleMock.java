@@ -31,4 +31,18 @@ public class DAORoleMock implements IDAORole {
 
         return roleToFound;
     }
+
+    @Override
+    public void addRoleToDB(Role role) {
+    }
+
+    @Override
+    public void updateRoleToDB(Role role) {
+
+    }
+
+    @Override
+    public void deleteRoleToDB(Role role) {
+
+    }
 }

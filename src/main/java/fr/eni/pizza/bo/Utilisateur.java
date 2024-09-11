@@ -6,7 +6,7 @@ public class Utilisateur {
     private String nom;
     private String prenom;
     private String email;
-    private String mot_de_passe;
+    private static String mot_de_passe;
     private Commande id_commande;
 
     public Utilisateur() {
