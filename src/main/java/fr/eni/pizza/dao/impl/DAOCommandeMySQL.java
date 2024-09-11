@@ -81,16 +81,7 @@ public class DAOCommandeMySQL implements IDAOCommande {
         return mapSqlParameterSource;
     }
 
-
-
-    private String sqlSelectAllCommande = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye\n" +
-            ", co.CLIENT_id_client, cl.id_client, cl.prenom, cl.nom, cl.rue, cl.code_postal, cl.ville\n" +
-            ", co.ETAT_id_etat, e.id_etat, e.libelle\n" +
-//            ", co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe\n" +
-            "FROM commande co\n" +
-            "JOIN client cl ON co.CLIENT_id_client = cl.id_client\n" +
-            "JOIN etat e ON co.ETAT_id_etat = e.id_etat";
-//            "JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur";
+    private String sqlSelectAllCommande = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, co.CLIENT_id_client, cl.id_client, cl.prenom, cl.nom, cl.rue, cl.code_postal, cl.ville, co.ETAT_id_etat, e.id_etat, e.libelle, co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe FROM commande co JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur";
     private String sqlSelectCommandeById = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye\n" +
             ", co.CLIENT_id_client, cl.id_client, cl.prenom, cl.nom, cl.rue, cl.code_postal, cl.ville\n" +
             ", co.ETAT_id_etat, e.id_etat, e.libelle\n" +

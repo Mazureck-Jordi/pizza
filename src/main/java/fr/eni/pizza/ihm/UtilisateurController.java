@@ -1,6 +1,8 @@
 package fr.eni.pizza.ihm;
 
+import fr.eni.pizza.bll.ICommandeManager;
 import fr.eni.pizza.bll.IUtilisateurManager;
+import fr.eni.pizza.bo.Commande;
 import fr.eni.pizza.bo.Role;
 import fr.eni.pizza.bo.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class UtilisateurController {
     @Autowired
     private IUtilisateurManager utilisateurManager;
 
+    @Autowired
+    private ICommandeManager commandeManager;
+
     @GetMapping("/list-utilisateur")
     public String showListUtilisateur(Model model) {
 
@@ -28,7 +33,7 @@ public class UtilisateurController {
         return "list-utilisateur";
     }
 
-    @GetMapping("/details-utilisateurs/{id}")
+    @GetMapping("/details-utilisateur/{id}")
     public String showDetailUtilisateur(@PathVariable Long id, Model model) {
 
         Utilisateur utilisateur = utilisateurManager.getUtilisateurById(id);
@@ -52,6 +57,10 @@ public class UtilisateurController {
         List<Role> Roles = utilisateurManager.getAllRoles();
 
         model.addAttribute("Roles", Roles);
+
+        List<Commande> commandes = commandeManager.getAllCommandes();
+
+        model.addAttribute("commandes", commandes);
 
         return "utilisateur-form";
     }

@@ -41,7 +41,7 @@
         <label for="Commande"> Commande</label>
         <select th:field="*{id_commande}">
             <option th:each="commande : ${commandes}" th:value="${commande.id_commande}"
-                    th:text="${commande.libelle}"></option>
+                    th:text="${commande.id_commande}"></option>
         </select>
     </div>
 
