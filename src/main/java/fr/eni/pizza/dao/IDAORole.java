@@ -9,4 +9,12 @@ public interface IDAORole {
     List<Role> findAllRoles();
 
     Role findRoleById(Long id_role);
+
+
+    void addRoleToDB (Role role);
+
+    void updateRoleToDB(Role role);
+
+    void deleteRoleToDB(Role role);
 }
+

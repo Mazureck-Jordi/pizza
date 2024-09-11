@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Profile("mysql")
+@Profile("role-mysql")
 @Repository
 public class DAORoleMySQL implements IDAORole {
     @Override
@@ -18,5 +18,20 @@ public class DAORoleMySQL implements IDAORole {
     @Override
     public Role findRoleById(Long id_role) {
         return null;
+    }
+
+    @Override
+    public void addRoleToDB(Role role) {
+
+    }
+
+    @Override
+    public void updateRoleToDB(Role role) {
+
+    }
+
+    @Override
+    public void deleteRoleToDB(Role role) {
+
     }
 }
