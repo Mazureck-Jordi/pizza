@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Arrays;
 import java.util.List;
 
-@Profile("mock")
+@Profile("role-mock")
 @Repository
 public class DAORoleMock implements IDAORole {
 

@@ -20,7 +20,7 @@ public class ClientController {
     @Autowired
     private ProduitManager produitManager;
 
-    @GetMapping("list-clients")
+    @GetMapping("/list-clients")
     public String showListClients(Model model) {
 
 
@@ -28,12 +28,12 @@ public class ClientController {
         model.addAttribute("clients", clients);
 
 
-        return "/list-clients";
+        return "list-clients";
 
 
     }
 
-    @GetMapping("details-client/{id}")
+    @GetMapping("/details-client/{id}")
 
     public String showDetailClient(@PathVariable Long id, Model model) {
 
@@ -43,9 +43,9 @@ public class ClientController {
         }
         model.addAttribute("client", client);
 
-        return "/details-client";
+        return "details-client";
     }
-    @GetMapping({"show-client-form/{id}", "show-client-form"})
+    @GetMapping({"/show-client-form/{id}", "/show-client-form"})
 public String showClientForm(@PathVariable(required = false) Long id, Model model) {
 
         Client client = new Client();
@@ -54,10 +54,10 @@ public String showClientForm(@PathVariable(required = false) Long id, Model mode
         }
         model.addAttribute("client", client);
 
-        return "/client-form";
+        return "client-form";
     }
 
-    @PostMapping ("client-form")
+    @PostMapping ("/client-form")
 public String clientForm(Client client) {
 
         if (client.getId_client() == null) {

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire</title>
+</head>
+<body>
+<h1>Formulaire de l'utilisateur</h1>
+
+<form th:object="${utilisateur}" th:action="@{/utilisateur-form}" method="post">
+
+    <!-- Champ id utilisateur -->
+    <input th:field="*{id_utilisateur}" type="hidden">
+   <div>
+
+       <!-- Champ nom utilisateur -->
+    <label for="nom"> Nom/label>
+    <input th:field="*{nom}" type="text" placeholder="Saisir le nom">
+   </div>
+
+    <!-- Champ prénom utilisateur -->
+    <div>
+        <label for="penom">Prénom </label>
+        <input th:field="*{prenom}" type="text" placeholder="Saisir le prénom">
+    </div>
+
+    <!-- Champ email de l'utilisateur -->
+    <div>
+        <label for="email">Email</label>
+        <input th:field="*{email}" type="text" placeholder="Saisir l'email">
+    </div>
+
+    <!-- Champ du Mot de passe de l'utilisateur -->
+    <div>
+        <label for="Motdepasse">Mot de passe</label>
+        <input th:field="*{mot_de_passe}" type="text" placeholder="Saisir le mot de passe">
+    </div>
+
+    <!-- Champ de l'id client -->
+    <div>
+        <label for="Commande"> Commande</label>
+        <select th:field="*{id_commande}">
+            <option th:each="commande : ${commandes}" th:value="${commande.id_commande}"
+                    th:text="${commande.libelle}"></option>
+        </select>
+    </div>
+
+    <!-- Champ Submit -->
+    <div>
+        <input type="submit" value="Enregistrer">
+    </div>
+
+</form>
+</body>
+</html>
