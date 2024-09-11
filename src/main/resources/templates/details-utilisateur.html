@@ -14,10 +14,10 @@
     <li th:text="${'Mot de passe : ' + utilisateur.getMot_de_passe()}"></li>
 </ul>
 <div>
-    <a th:href="@{'/show-utilisateur-form/' +{utilisateur.id_utilisateur}}">Modifier</a>
+    <a th:href="@{'/show-utilisateur-form/' +${utilisateur.id_utilisateur}}">Modifier</a>
 </div>
 <div>
-    <a th:href="@{'/delete_utilisateur/' + ${utilisateur.id_utilisateur}}">Supprimer</a>
+    <a th:href="@{'/delete-utilisateur/' + ${utilisateur.id_utilisateur}}">Supprimer</a>
 </div>
 
 </body>
