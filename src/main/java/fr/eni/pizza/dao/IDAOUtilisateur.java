@@ -8,7 +8,7 @@ public interface IDAOUtilisateur {
 
     List<Utilisateur> findAllUtilisateurs ();
 
-    Utilisateur findUtilisateurById (Long id);
+    Utilisateur findUtilisateurById (Long id_utilisateur);
 
     void addUtilisateurToDB (Utilisateur utilisateur);
 

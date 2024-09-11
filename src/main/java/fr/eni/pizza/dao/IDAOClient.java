@@ -13,5 +13,6 @@ public interface IDAOClient {
     void addClientToDB(Client client);
 
     void updateClientToDB(Client client);
+
     void deleteClientToDB(Client client);
 }
