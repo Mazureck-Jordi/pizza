@@ -1,4 +1,29 @@
 package fr.eni.pizza.bll;
 
+import fr.eni.pizza.bo.Commande;
+import fr.eni.pizza.bo.Etat;
+
+import java.util.List;
+
 public interface ICommandeManager {
+
+    List<Commande> getAllCommandes() ;
+
+    Commande getCommandeById(Long id) ;
+
+    List<Etat> getAllEtats() ;
+
+    Etat getEtatById(Long id) ;
+
+    void addCommande(Commande commande) ;
+
+    void updateCommande(Commande commande) ;
+
+    void deleteCommande(Commande commande) ;
+
+    void addEtat(Etat etat) ;
+
+    void updateEtat(Etat etat) ;
+
+    void deleteEtat(Etat etat) ;
 }

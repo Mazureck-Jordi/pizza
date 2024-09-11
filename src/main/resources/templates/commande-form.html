@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire</title>
+</head>
+<body>
+
+<h1>Formulaire de commande</h1>
+
+<form th:object="${commande}" th:action="@{/commande-form}" method="post">
+
+  <!-- Champ id -->
+  <input th:field="*{id_produit}" type="hidden">
+
+
+
+
+</form>
+</body>
+</html>

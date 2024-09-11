@@ -97,9 +97,10 @@ public class DAOCommandeMySQL implements IDAOCommande {
             "JOIN client cl ON co.CLIENT_id_client = cl.id_client\n" +
             "JOIN etat e ON co.ETAT_id_etat = e.id_etat\n" +
             "JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur WHERE co.id_commande = ?";
-private String sqlInsertCommande = "INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, prix_total, est_paye) " +
-        "VALUES (:idCommande, :dateCommande, :clientCommande, :livraisonCommande, :etatCommande, :utilisateurCommande, :prixTotalCommande, :estPayeCommande)";
-private String sqlUdateCommande = "UDATE";
+    private String sqlInsertCommande = "INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, prix_total, est_paye) " +
+            "VALUES (:idCommande, :dateCommande, :clientCommande, :livraisonCommande, :etatCommande, :utilisateurCommande, :prixTotalCommande, :estPayeCommande)";
+    private String sqlUpdateCommande = "UPDATE commande SET id_commande = :idCommande, date_heure_livraison = :dateCommande, CLIENT_id_client = :clientCommande, livraison = :livraisonCommande, ETAT_id_etat =:etatCommande, UTILISATEUR_id_utilisateur = :utilisateurCommande, prix_total = :prixTotalCommande, est_paye = :estPayeCommande";
+    private String sqlDeleteCommande = "DELETE FROM commande WHERE id_commande = :idCommande";
 
     @Override
     public List<Commande> findAllCommandes() {
@@ -113,20 +114,16 @@ private String sqlUdateCommande = "UDATE";
 
     @Override
     public void addCommandeToDB(Commande commande) {
-    namedParameterJdbcTemplate.update(sqlInsertCommande, map(commande));
+        namedParameterJdbcTemplate.update(sqlInsertCommande, map(commande));
     }
 
     @Override
     public void updateCommandeToDB(Commande commande) {
-
+        namedParameterJdbcTemplate.update(sqlUpdateCommande, map(commande));
     }
 
     @Override
     public void deleteCommandeToDB(Commande commande) {
-
+        namedParameterJdbcTemplate.update(sqlDeleteCommande, map(commande));
     }
-
-
-
-    
 }

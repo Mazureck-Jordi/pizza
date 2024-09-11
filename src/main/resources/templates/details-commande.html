@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${'Commande ' + commande.id_commande}"></title>
+</head>
+<body>
+
+<h1>Liste des clients</h1>
+
+  <ul>
+    <li th:text="${'N° de la commande : ' + commande.id_commande}"></li>
+    <li th:text="${'Prix total de la commande : ' + commande.prix_total}"></li>
+    <li th:text="${'Date de la commande : ' + commande.date_heure_livraison}"></li>
+    <li th:text="${'Client  de la commande : ' + commande.id_client.nom + ' ' +commande.id_client.prenom}"></li>
+    <li th:text="${'Etat de la commande : ' +  commande.id_etat.libelle}"></li>
+    <li th:text="${'Utilisateur de la commande : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>
+    <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
+    <li th:if="${commande.livraison} == 0">Type de commande : Sur place ou à emporter</li>
+    <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
+    <li th:if="${commande.livraison} == 0">Commande réglées</li>
+  </ul>
+<div>
+  <a th:href="@{'/show-commande-form/' + ${commande.id_commande}}">Modifier</a>
+</div>
+
+<div>
+  <a th:href="@{'/delete-commande/' + ${commande.id_commande}}">Supprimer</a>
+</div>
+</body>
+</html>

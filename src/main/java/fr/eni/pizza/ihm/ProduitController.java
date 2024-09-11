@@ -22,7 +22,7 @@ public class ProduitController {
     private IProduitManager produitManager;
 
 
-    @GetMapping("list-produits")
+    @GetMapping("/list-produits")
     public String showListProduits(Model model) {
 
         //On récupère la liste des produit et des types produits
@@ -31,10 +31,10 @@ public class ProduitController {
         //On injecte la liste des produits et des types produits dans le model
         model.addAttribute("produits", produits);
 
-        return "/list-produits";
+        return "list-produits";
     }
 
-    @GetMapping("details-produit/{id}")
+    @GetMapping("/details-produit/{id}")
     public String showDetailProduit(@PathVariable Long id, Model model) {
 
         //On récupère un produit en fonction de son id
@@ -48,11 +48,11 @@ public class ProduitController {
         //Sinon On injecte le produit dans le model
         model.addAttribute("produit", produit);
 
-        return "/details-produit";
+        return "details-produit";
     }
 
 
-    @GetMapping({"show-produit-form/{id}", "show-produit-form"})
+    @GetMapping({"/show-produit-form/{id}", "/show-produit-form"})
     public String showFormProduit(@PathVariable(required = false) Long id, Model model) {
 
         //Instancier un produit par default
@@ -74,10 +74,10 @@ public class ProduitController {
         //On injecte la liste de type de produit
         model.addAttribute("typeProduits", typeProduits);
 
-        return "/produit-form";
+        return "produit-form";
     }
 
-    @PostMapping("produit-form")
+    @PostMapping("/produit-form")
     public String produitForm(@ModelAttribute Produit produit) {
 
         //Si le produit n'existe pas on l'ajoute
