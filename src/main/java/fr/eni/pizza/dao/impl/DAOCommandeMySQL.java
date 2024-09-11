@@ -32,8 +32,8 @@ public class DAOCommandeMySQL implements IDAOCommande {
         @Override
         public Commande mapRow(ResultSet rs, int rowNum) throws SQLException {
             Commande commande = new Commande();
-            commande.setId_commande(rs.getLong("id"));
-            commande.setDate_heure_livraison(rs.getDate("date_heure_livraison").toLocalDate());
+            commande.setId_commande(rs.getLong("id_commande"));
+            commande.setDate_heure_livraison(rs.getDate("date_heure_livraison"));
             commande.setLivraison(rs.getInt("livraison"));
             commande.setEst_paye(rs.getInt("est_paye"));
 
@@ -66,6 +66,21 @@ public class DAOCommandeMySQL implements IDAOCommande {
         }
     };
 
+    static final RowMapper<Commande> COMMANDESIMPLE_ROW_MAPPER = new RowMapper<Commande>() {
+        @Override
+        public Commande mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Commande commande = new Commande();
+            commande.setId_commande(rs.getLong("id_commande"));
+            commande.setDate_heure_livraison(rs.getDate("date_heure_livraison"));
+            commande.setPrix_total(rs.getInt("prix_total"));
+            commande.setLivraison(rs.getInt("livraison"));
+            commande.setEst_paye(rs.getInt("est_paye"));
+
+        return commande;
+        }
+    };
+
+
     private MapSqlParameterSource map(Commande commande) {
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
@@ -81,6 +96,8 @@ public class DAOCommandeMySQL implements IDAOCommande {
         return mapSqlParameterSource;
     }
 
+    private String getSqlSelectAllCommandeSimple = "SELECT * FROM commande";
+    private String sqlSelectCommandeByIdSimple= "SELECT * FROM commande WHERE id_commande = ?";
     private String sqlSelectAllCommande = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, co.CLIENT_id_client, cl.id_client, cl.prenom, cl.nom, cl.rue, cl.code_postal, cl.ville, co.ETAT_id_etat, e.id_etat, e.libelle, co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe FROM commande co JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur";
     private String sqlSelectCommandeById = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye\n" +
             ", co.CLIENT_id_client, cl.id_client, cl.prenom, cl.nom, cl.rue, cl.code_postal, cl.ville\n" +
@@ -88,7 +105,7 @@ public class DAOCommandeMySQL implements IDAOCommande {
             ", co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe\n" +
             "FROM commande co\n" +
             "JOIN client cl ON co.CLIENT_id_client = cl.id_client\n" +
-            "JOIN etat e ON co.ETAT_id_etat = e.id_etat\n" +
+            "JOIN etat e ON co.ETAT_id_etat = e.id_etat" +
             "JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur WHERE co.id_commande = ?";
     private String sqlInsertCommande = "INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, prix_total, est_paye) " +
             "VALUES (:idCommande, :dateCommande, :clientCommande, :livraisonCommande, :etatCommande, :utilisateurCommande, :prixTotalCommande, :estPayeCommande)";
@@ -97,12 +114,12 @@ public class DAOCommandeMySQL implements IDAOCommande {
 
     @Override
     public List<Commande> findAllCommandes() {
-        return jdbcTemplate.query(sqlSelectAllCommande, COMMANDE_ROW_MAPPER);
+        return jdbcTemplate.query(getSqlSelectAllCommandeSimple, COMMANDESIMPLE_ROW_MAPPER);
     }
 
     @Override
     public Commande findCommandeById(Long id) {
-        return jdbcTemplate.queryForObject(sqlSelectCommandeById, COMMANDE_ROW_MAPPER, id);
+        return jdbcTemplate.queryForObject(sqlSelectCommandeByIdSimple, COMMANDESIMPLE_ROW_MAPPER, id);
     }
 
     @Override

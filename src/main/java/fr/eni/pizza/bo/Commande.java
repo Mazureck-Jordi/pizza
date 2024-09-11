@@ -1,11 +1,12 @@
 package fr.eni.pizza.bo;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Commande {
 
     private Long id_commande;
-    private LocalDate date_heure_livraison;
+    private Date date_heure_livraison;
     private int livraison;
     private double prix_total;
     private int est_paye;
@@ -16,7 +17,15 @@ public class Commande {
     public Commande() {
     }
 
-    public Commande(LocalDate date_heure_livraison, int livraison, double prix_total, int est_paye, Etat id_etat, Client id_client, Utilisateur id_utilisateur) {
+    public Commande(Long id_commande, Date date_heure_livraison, int livraison, double prix_total, int est_paye) {
+        this.id_commande = id_commande;
+        this.date_heure_livraison = date_heure_livraison;
+        this.livraison = livraison;
+        this.prix_total = prix_total;
+        this.est_paye = est_paye;
+    }
+
+    public Commande(Date date_heure_livraison, int livraison, double prix_total, int est_paye, Etat id_etat, Client id_client, Utilisateur id_utilisateur) {
         this.date_heure_livraison = date_heure_livraison;
         this.livraison = livraison;
         this.prix_total = prix_total;
@@ -26,7 +35,7 @@ public class Commande {
         this.id_utilisateur = id_utilisateur;
     }
 
-    public Commande(Long id_commande, LocalDate date_heure_livraison, int livraison, double prix_total, int est_paye, Etat id_etat, Client id_client, Utilisateur id_utilisateur) {
+    public Commande(Long id_commande, Date date_heure_livraison, int livraison, double prix_total, int est_paye, Etat id_etat, Client id_client, Utilisateur id_utilisateur) {
         this.id_commande = id_commande;
         this.date_heure_livraison = date_heure_livraison;
         this.livraison = livraison;
@@ -45,11 +54,11 @@ public class Commande {
         this.id_commande = id_commande;
     }
 
-    public LocalDate getDate_heure_livraison() {
+    public Date getDate_heure_livraison() {
         return date_heure_livraison;
     }
 
-    public void setDate_heure_livraison(LocalDate date_heure_livraison) {
+    public void setDate_heure_livraison(Date date_heure_livraison) {
         this.date_heure_livraison = date_heure_livraison;
     }
 

@@ -38,7 +38,7 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
 
             Commande commande = new Commande();
             commande.setId_commande(rs.getLong("id_commande"));
-            commande.setDate_heure_livraison(rs.getDate("date_heure_livraison").toLocalDate());
+            commande.setDate_heure_livraison(rs.getDate("date_heure_livraison"));
             commande.setLivraison(rs.getInt("livraison"));
             commande.setPrix_total(rs.getDouble("prix_total"));
             commande.setEst_paye(rs.getInt("est_paye"));
@@ -52,7 +52,7 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
 
     private MapSqlParameterSource map(Utilisateur utilisateur) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-        mapSqlParameterSource.addValue("id_utilisateur", utilisateur.getId_utilisateur());
+        mapSqlParameterSource.addValue("idUtilisateur", utilisateur.getId_utilisateur());
         mapSqlParameterSource.addValue("nomUtilisateur", utilisateur.getNom());
         mapSqlParameterSource.addValue("prenomUtilisateur", utilisateur.getPrenom());
         mapSqlParameterSource.addValue("emailUtilisateur", utilisateur.getEmail());
@@ -69,9 +69,9 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
             "c.id_commande, c.date_heure_livraison, c.CLIENT_id_client, c.livraison, c.ETAT_id_etat, c.UTILISATEUR_id_utilisateur, c.prix_total, c.est_paye\n" +
             "FROM utilisateur u JOIN commande c ON u.COMMANDE_id_commande = c.id_commande WHERE u.id_utilisateur = ?";
     private String sqlInsertUtilisateur = "INSERT INTO utilisateur(id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) " +
-            "VALUES ( :id_Utilisateur, :nomUtilisateur, :prenomUtilisateur, :emailUtilisateur, :motdepasseUtilisateur, :commandeUtilisateur)";
+            "VALUES ( :idUtilisateur, :nomUtilisateur, :prenomUtilisateur, :emailUtilisateur, :motdepasseUtilisateur, :commandeUtilisateur)";
     private String sqlUpdateUtilisateur = "UPDATE utilisateur SET nom = :nomUtilisateur, prenom = :prenomUtilisateur, email = :emailUtilisateur, mot_de_passe = :motdepasseUtilisateur, COMMANDE_id_commande = :commandeUtilisateur WHERE id_utilisateur = :idUtilisateur";
-    private String sqlDeleteUtilisateur = "DELETE FROM utilisateur WHERE id_utilisateur = :id_utilisateur";
+    private String sqlDeleteUtilisateur = "DELETE FROM utilisateur WHERE id_utilisateur = :idUtilisateur";
 
     @Override
     public List<Utilisateur> findAllUtilisateurs() {
