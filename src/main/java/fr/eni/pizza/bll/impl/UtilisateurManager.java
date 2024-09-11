@@ -58,4 +58,19 @@ public class UtilisateurManager implements IUtilisateurManager {
     public void deleteUtilisateur(Utilisateur utilisateur) {
         daoUtilisateur.deleteUtilisateurToDB(utilisateur);
     }
+
+    @Override
+    public void addRole(Role role) {
+        daoRole.addRoleToDB(role);
+    }
+
+    @Override
+    public void updateRole(Role role) {
+    daoRole.updateRoleToDB(role);
+    }
+
+    @Override
+    public void deleteRole(Role role) {
+    daoRole.deleteRoleToDB(role);
+    }
 }

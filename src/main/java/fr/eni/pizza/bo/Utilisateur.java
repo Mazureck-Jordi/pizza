@@ -72,7 +72,7 @@ public class Utilisateur {
         this.email = email;
     }
 
-    public String getMot_de_passe() {
+    public static String getMot_de_passe() {
         return mot_de_passe;
     }
 
