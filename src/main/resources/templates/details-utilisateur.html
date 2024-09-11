@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${utilisateur.nom}"></title>
+</head>
+<body>
+<h1>Détails de l'utilisateur</h1>
+
+<ul>
+    <li th:text="${'Nom : ' + utilisateur.nom}"></li>
+    <li th:text="${'Prénom : ' + utilisateur.prenom}"></li>
+    <li th:text="${'Email : ' + utilisateur.getEmail()}"></li>
+    <li th:text="${'Mot de passe : ' + utilisateur.getMot_de_passe()}"></li>
+</ul>
+<div>
+    <a th:href="@{'/show-utilisateur-form/' +{utilisateur.id_utilisateur}}">Modifier</a>
+</div>
+<div>
+    <a th:href="@{'/delete_utilisateur/' + ${utilisateur.id_utilisateur}}">Supprimer</a>
+</div>
+
+</body>
+</html>
