@@ -114,5 +114,9 @@ public class CommandeController {
     return "redirect:/list-commandes";
     }
 
+@GetMapping("/creation-commande")
+    public String creationCommande(Model model) {
 
+        return "form/creation-commande-form";
+}
 }
