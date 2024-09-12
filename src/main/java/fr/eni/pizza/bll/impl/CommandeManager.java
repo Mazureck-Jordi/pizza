@@ -32,6 +32,11 @@ public class CommandeManager implements ICommandeManager {
     }
 
     @Override
+    public Commande getLastCommande() {
+        return commandeDAO.findLastCommande();
+    }
+
+    @Override
     public List<Etat> getAllEtats() {
         return etatDAO.findAllEtats();
     }

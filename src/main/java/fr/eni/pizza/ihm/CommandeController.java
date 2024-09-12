@@ -92,13 +92,18 @@ public class CommandeController {
 
     @PostMapping("/commande-form")
     public String commandeForm (@ModelAttribute Commande commande) {
+
+        Long lastIdCommande = commandeManager.getLastCommande().getId_commande();
+
         if (commande.getId_commande() == null) {
             commandeManager.addCommande(commande);
         }
         if (commande.getId_commande() != null) {
             commandeManager.updateCommande(commande);
         }
-        return "redirect:/list-commandes";
+
+
+        return "redirect:/show-creation-commande/" + lastIdCommande;
     }
 
     @GetMapping("/delete-commande/{id}")

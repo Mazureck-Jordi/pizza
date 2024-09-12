@@ -68,8 +68,16 @@ public class DAOCommandeMySQL implements IDAOCommande {
         }
     };
 
-    private MapSqlParameterSource map(Commande commande) {
+    static final RowMapper<Commande> IDCOMMANDE_ROW_MAPPER = new RowMapper<Commande>() {
+        @Override
+        public Commande mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Commande commande = new Commande();
+            commande.setId_commande(rs.getLong("id_commande"));
+            return commande;
+        }
+    };
 
+    private MapSqlParameterSource map(Commande commande) {
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("idCommande", commande.getId_commande());
         mapSqlParameterSource.addValue("dateCommande", commande.getDate_heure_livraison());
@@ -88,6 +96,7 @@ public class DAOCommandeMySQL implements IDAOCommande {
     private String sqlInsertCommande = "INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (:idCommande, :dateCommande, :clientCommande, :livraisonCommande, :etatCommande, :utilisateurCommande, :prixTotalCommande, :estPayeCommande)";
     private String sqlUpdateCommande = "UPDATE commande SET id_commande = :idCommande, date_heure_livraison = :dateCommande, CLIENT_id_client = :clientCommande, livraison = :livraisonCommande, ETAT_id_etat =:etatCommande, UTILISATEUR_id_utilisateur = :utilisateurCommande, prix_total = :prixTotalCommande, est_paye = :estPayeCommande";
     private String sqlDeleteCommande = "DELETE FROM commande WHERE id_commande = :idCommande";
+    private String sqlSelectByLastId = "SELECT id_commande FROM commande ORDER BY id_commande DESC LIMIT 1";
 
     @Override
     public List<Commande> findAllCommandes() {
@@ -96,10 +105,14 @@ public class DAOCommandeMySQL implements IDAOCommande {
 
     @Override
     public Commande findCommandeById(Long id) {
-
-       Commande cmd =  jdbcTemplate.queryForObject(sqlSelectCommandeById, COMMANDE_ROW_MAPPER, id);
-        return cmd;
+        return jdbcTemplate.queryForObject(sqlSelectCommandeById, COMMANDE_ROW_MAPPER, id);
     }
+
+    @Override
+    public Commande findLastCommande() {
+        return jdbcTemplate.queryForObject(sqlSelectByLastId, IDCOMMANDE_ROW_MAPPER);
+    }
+
 
     @Override
     public void addCommandeToDB(Commande commande) {

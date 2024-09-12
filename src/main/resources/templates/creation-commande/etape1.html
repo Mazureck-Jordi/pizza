@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+</head>
+<body>
+<h1>Etape 1</h1>
+
+<p>client existant ?</p>
+<!-- Champ client -->
+<div>
+
+  <label for="client">Client de la commande</label>
+  <select>
+    <option th:each="client: ${clients}" th:value="${client.id_client}"
+            th:text="${client.nom + ' ' + client.prenom}"></option>
+  </select>
+  <a th:href="@{'/show-commande-form'}">suivant</a>
+</div>
+<a th:href="@{'/etape2'}"></a>
+
+<p>Nouveau client ?</p>
+<a th:href="@{'/show-client-form'}">Création client</a>
+</body>
+</html>

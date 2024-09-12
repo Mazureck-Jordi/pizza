@@ -90,6 +90,7 @@ public class DAODetailCommandeMySQL implements IDAODetailCommande {
             return detailCommande;
         }
     };
+
         private MapSqlParameterSource map(DetailCommande detailCommande) {
 
             MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
@@ -102,6 +103,7 @@ public class DAODetailCommandeMySQL implements IDAODetailCommande {
 
         private String sqlSelectAllDetailCommande ="SELECT dc.quantite, co.id_commande AS COMMANDE_id_commande , co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, cl.id_client AS CLIENT_id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, e.id_etat AS ETAT_id_etat , e.libelle, u.id_utilisateur AS UTILISATEUR_id_utilisateur , u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe , p.id_produit AS PRODUIT_id_produit , p.nom, p.description, p.prix, p.image_url, t.id_type_produit AS TYPE_PRODUIT_id_type_produit, t.libelle FROM detail_commande dc JOIN commande co ON co.id_commande = dc.COMMANDE_id_commande JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur JOIN produit p ON p.id_produit = dc.PRODUIT_id_produit JOIN type_produit t ON p.TYPE_PRODUIT_id_type_produit = t.id_type_produit";
         private String sqlSelectDetailCommandeByIdCommande = "SELECT dc.quantite, co.id_commande AS COMMANDE_id_commande , co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, cl.id_client AS CLIENT_id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, e.id_etat AS ETAT_id_etat , e.libelle, u.id_utilisateur AS UTILISATEUR_id_utilisateur , u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe , p.id_produit AS PRODUIT_id_produit , p.nom, p.description, p.prix, p.image_url, t.id_type_produit AS TYPE_PRODUIT_id_type_produit, t.libelle FROM detail_commande dc JOIN commande co ON co.id_commande = dc.COMMANDE_id_commande JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur JOIN produit p ON p.id_produit = dc.PRODUIT_id_produit JOIN type_produit t ON p.TYPE_PRODUIT_id_type_produit = t.id_type_produit WHERE dc.COMMANDE_id_commande = ?";
+        private String sqlSelectSommePrixProduitsByIdCommande = "SELECT co.id_commande AS COMMANDE_id_commande, SUM(p.prix) AS somme_totale FROM detail_commande dc JOIN commande co ON co.id_commande = dc.COMMANDE_id_commande JOIN produit p ON p.id_produit = dc.PRODUIT_id_produit WHERE co.id_commande = ?";
         private String sqlInsertDetailCommande ="INSERT INTO detail_commande (quantite, COMMANDE_id_commande, PRODUIT_id_produit) VALUES ( :detailCommandeQuantite, :detailCommandeIdCommande, :detailCommandeIdProduit)";
         private String sqlUpdateDetailCommande ="UPDATE detail_commande SET quantite = :detailCommandeQuantite, COMMANDE_id_commande = :detailCommandeIdCommande, PRODUIT_id_produit = :detailCommandeIdProduit";
         private String sqlDeleteDetailCommande = "DELETE FROM detail_commande WHERE id_commande = :detailCommandeIdCommande";
@@ -121,6 +123,12 @@ public class DAODetailCommandeMySQL implements IDAODetailCommande {
     public DetailCommande findDetailCommandeByIdCommande(Long id) {
         return jdbcTemplate.queryForObject(sqlSelectDetailCommandeByIdCommande, DETAIL_COMMANDE_ROW_MAPPER, id);
     }
+
+    @Override
+    public DetailCommande findSommePrixByIdCommande(Long id) {
+        return jdbcTemplate.queryForObject(sqlSelectSommePrixProduitsByIdCommande, DETAIL_COMMANDE_ROW_MAPPER, id);
+    }
+
 
     @Override
     public void addDetailCommandeToDB(DetailCommande detailCommande) {

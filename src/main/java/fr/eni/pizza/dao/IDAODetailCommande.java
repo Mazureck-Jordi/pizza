@@ -12,6 +12,8 @@ public interface IDAODetailCommande {
 
     DetailCommande findDetailCommandeByIdCommande(Long id);
 
+    DetailCommande findSommePrixByIdCommande(Long id);
+
     void addDetailCommandeToDB(DetailCommande detailCommande);
 
     void updateDetailCommandeToDB(DetailCommande detailCommande);

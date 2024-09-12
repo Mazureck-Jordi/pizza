@@ -29,6 +29,11 @@ public class DetailCommandeManager implements IDetailCommandeManager {
         return detailCommandeDAO.findDetailCommandeByIdCommande(id);
     }
 
+    @Override
+    public DetailCommande getSommePrixByIdCommande(Long id) {
+        return detailCommandeDAO.findSommePrixByIdCommande(id);
+    }
+
 
     @Override
     public void addDetailCommande(DetailCommande detailCommande) {

@@ -73,11 +73,17 @@ public class PizzaController {
         List<Role> roles = utilisateurManager.getAllRoles();
         model.addAttribute("roles", roles);
 
+        Long lastIdCommande = commandeManager.getLastCommande().getId_commande();
+        model.addAttribute("lastIdCommande", lastIdCommande);
+
         return "form/creation-commande-form";
     }
 
     @PostMapping("/creation-commande")
     public String creationCommande(DetailCommande detailCommande) {
+        Commande lastCommande = commandeManager.getLastCommande();
+        detailCommande.setId_commande(commandeManager.getCommandeById(lastCommande.getId_commande()));
+
         detailCommandeManager.addDetailCommande(detailCommande);
 
         return "redirect:/show-creation-commande/" + detailCommande.getId_commande().getId_commande();

@@ -12,6 +12,8 @@ public interface IDetailCommandeManager {
 
     DetailCommande getDetailCommandeByIdCommande(Long id);
 
+    DetailCommande getSommePrixByIdCommande(Long id);
+
     void addDetailCommande(DetailCommande detailCommande);
 
     void updateDetailCommande(DetailCommande detailCommande);

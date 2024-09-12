@@ -11,6 +11,8 @@ public interface ICommandeManager {
 
     Commande getCommandeById(Long id) ;
 
+    Commande getLastCommande() ;
+
     List<Etat> getAllEtats() ;
 
     Etat getEtatById(Long id) ;

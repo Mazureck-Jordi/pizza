@@ -10,6 +10,8 @@ public interface IDAOCommande {
 
     Commande findCommandeById(Long id);
 
+    Commande findLastCommande();
+
     void addCommandeToDB(Commande commande);
 
     void updateCommandeToDB(Commande commande);
