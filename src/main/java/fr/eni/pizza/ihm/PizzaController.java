@@ -5,13 +5,11 @@ import fr.eni.pizza.bo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@SessionAttributes("")
 @Controller
 public class PizzaController {
 
@@ -37,8 +35,18 @@ public class PizzaController {
         return "accueil";
     }
 
-    @GetMapping("/show-creation-commande")
-    public String showCreationCommande(Model model) {
+    @GetMapping("/show-creation-commande/{id}")
+    public String showCreationCommande(@PathVariable Long id, Model model) {
+
+        List<DetailCommande> detailCommandes = detailCommandeManager.getAllDetailCommandeByIdCommande(id);
+        if (detailCommandes == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("detailCommandes", detailCommandes);
+
+        Commande commande = commandeManager.getCommandeById(id);
+        model.addAttribute("commande", commande);
+
 
         DetailCommande detailCommande = new DetailCommande();
 
@@ -69,10 +77,10 @@ public class PizzaController {
     }
 
     @PostMapping("/creation-commande")
-    public String creationCommande(@ModelAttribute DetailCommande detailCommande) {
-
+    public String creationCommande(DetailCommande detailCommande) {
         detailCommandeManager.addDetailCommande(detailCommande);
-        return "redirect:/show-creation-commande";
+
+        return "redirect:/show-creation-commande/" + detailCommande.getId_commande().getId_commande();
     }
 
 }

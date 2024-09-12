@@ -6,14 +6,49 @@
 </head>
 <body>
 
-<h1>Formulaire de dréation de commande</h1>
+<h1>Formulaire de création de commande</h1>
+
+<div>
+
+    <h2>Information de la commande</h2>
+    <li th:text="${' Commande Numéro : ' + commande.id_commande}"></li>
+    <h2> Clients </h2>
+    <ul>
+        <li th:text="${'Nom du client : ' + commande.id_client.nom + ' ' + commande.id_client.prenom}"></li>
+        <li th:text="${'Adresse : ' + commande.id_client.rue}"></li>
+        <li th:text="${' CP/Ville : ' + commande.id_client.code_postal + ' ' + commande.id_client.ville}"></li>
+    </ul>
+    <h2> Utilisateurs </h2>
+    <ul>
+        <li th:text="${'id Utilisateur : ' + commande.id_utilisateur.id_utilisateur}"></li>
+        <li th:text="${'Nom Utilisateur : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>
+        <li th:text="${'Email : ' + commande.id_utilisateur.email}"></li>
+        <li th:text="${'Mot de passe : ' + commande.id_utilisateur.mot_de_passe}"></li>
+    </ul>
+    <h2> Détails de la commande </h2>
+    <ul th:each="d: ${detailCommandes}">
+        <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
+        <li th:text="${'Quantité : ' + d.quantite}"></li>
+    </ul>
+    <h2> État de la commande </h2>
+    <ul>
+        <li th:text="${'Prix de la commande : ' + commande.prix_total}"></li>
+        <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
+        <li th:if="${commande.est_paye} == 1">Commande réglées</li>
+        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
+        <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
+        <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
+    </ul>
+
+</div>
+
 
 <form th:object="${detailCommande}" th:action="@{/creation-commande}" method="post">
 
     <!-- Champ livraison ou à emporter ?-->
     <div>
         <label for="commande">Numéro de la commande</label>
-        <input th:field="*{id_commande}" type="number" placeholder="Saisir le numéro de la commande">
+        <input th:field="*{id_commande}" type="number">
     </div>
 
     <!-- Champ etat -->
