@@ -1,8 +1,6 @@
 package fr.eni.pizza.dao.impl;
 
-import fr.eni.pizza.bo.Commande;
-import fr.eni.pizza.bo.DetailCommande;
-import fr.eni.pizza.bo.Produit;
+import fr.eni.pizza.bo.*;
 import fr.eni.pizza.dao.IDAODetailCommande;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -36,20 +34,56 @@ public class DAODetailCommandeMySQL implements IDAODetailCommande {
 
 
             Produit produit = new Produit();
-            produit.setId_produit(rs.getLong("id_produit"));
+            //On détermine les colonnes de la table produit qui seront mapper
+            produit.setId_produit(rs.getLong("PRODUIT_id_produit"));
             produit.setNom(rs.getString("nom"));
             produit.setDescription(rs.getString("description"));
             produit.setPrix(rs.getDouble("prix"));
             produit.setImage_url(rs.getString("image_url"));
 
+            //On instancie un Type_Produit à mapper
+            TypeProduit typeProduit = new TypeProduit();
+            //On détermine les colonnes de la table Type_Produit qui seront mapper
+            typeProduit.setId_type_produit(rs.getLong("TYPE_PRODUIT_id_type_produit"));
+            typeProduit.setLibelle(rs.getString("libelle"));
+
+            //Maintenant on peut mapper la colonne "TYPE_PRODUIT_id_type_produit" de Produit
+            // qui est de type TypeProduit
+            produit.setId_type_produit(typeProduit);
+
             detailCommande.setId_produit(produit);
 
             Commande commande = new Commande();
-            commande.setId_commande(rs.getLong("id_commande"));
+            commande.setId_commande(rs.getLong("COMMANDE_id_commande"));
             commande.setDate_heure_livraison(rs.getTimestamp("date_heure_livraison").toLocalDateTime());
             commande.setLivraison(rs.getInt("livraison"));
             commande.setEst_paye(rs.getInt("est_paye"));
             commande.setPrix_total(rs.getDouble("prix_total"));
+
+            Etat etat = new Etat();
+            etat.setId_etat(rs.getLong("ETAT_id_etat"));
+            etat.setLibelle(rs.getString("libelle"));
+
+            commande.setId_etat(etat);
+
+            Utilisateur utilisateur = new Utilisateur();
+            utilisateur.setId_utilisateur(rs.getLong("UTILISATEUR_id_utilisateur"));
+            utilisateur.setNom(rs.getString("utilisateur_nom"));
+            utilisateur.setPrenom(rs.getString("utilisateur_prenom"));
+            utilisateur.setEmail(rs.getString("email"));
+            utilisateur.setMot_de_passe("mot_de_passe");
+
+            commande.setId_utilisateur(utilisateur);
+
+            Client client = new Client();
+            client.setId_client(rs.getLong("CLIENT_id_client"));
+            client.setPrenom(rs.getString("client_prenom"));
+            client.setNom(rs.getString("client_nom"));
+            client.setRue(rs.getString("rue"));
+            client.setCode_postal(rs.getString("code_postal"));
+            client.setVille(rs.getString("ville"));
+
+            commande.setId_client(client);
 
             detailCommande.setId_commande(commande);
 
@@ -66,8 +100,8 @@ public class DAODetailCommandeMySQL implements IDAODetailCommande {
             return mapSqlParameterSource;
         }
 
-        private String sqlSelectAllDetailCommande ="SELECT c.id_commande AS COMMANDE_id_commande , dc.quantite, p.id_produit AS PRODUIT_id_produit , p.nom, p.description, p.prix, p.image_url, c.date_heure_livraison, c.livraison, c.est_paye, c.prix_total FROM detail_commande dc JOIN commande c ON dc.COMMANDE_id_commande = c.id_commande JOIN produit p ON dc.PRODUIT_id_produit = p.id_produit";
-        private String sqlSelectDetailCommandeByIdCommande = "SELECT c.id_commande AS COMMANDE_id_commande , dc.quantite, p.id_produit AS PRODUIT_id_produit , p.nom, p.description, p.prix, p.image_url, c.date_heure_livraison, c.livraison, c.est_paye, c.prix_total FROM detail_commande dc JOIN commande c ON dc.COMMANDE_id_commande = c.id_commande JOIN produit p ON dc.PRODUIT_id_produit = p.id_produit WHERE dc.COMMANDE_id_commande = ?";
+        private String sqlSelectAllDetailCommande ="SELECT dc.quantite, co.id_commande AS COMMANDE_id_commande , co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, cl.id_client AS CLIENT_id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, e.id_etat AS ETAT_id_etat , e.libelle, u.id_utilisateur AS UTILISATEUR_id_utilisateur , u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe , p.id_produit AS PRODUIT_id_produit , p.nom, p.description, p.prix, p.image_url, t.id_type_produit AS TYPE_PRODUIT_id_type_produit, t.libelle FROM detail_commande dc JOIN commande co ON co.id_commande = dc.COMMANDE_id_commande JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur JOIN produit p ON p.id_produit = dc.PRODUIT_id_produit JOIN type_produit t ON p.TYPE_PRODUIT_id_type_produit = t.id_type_produit";
+        private String sqlSelectDetailCommandeByIdCommande = "SELECT dc.quantite, co.id_commande AS COMMANDE_id_commande , co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, cl.id_client AS CLIENT_id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, e.id_etat AS ETAT_id_etat , e.libelle, u.id_utilisateur AS UTILISATEUR_id_utilisateur , u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe , p.id_produit AS PRODUIT_id_produit , p.nom, p.description, p.prix, p.image_url, t.id_type_produit AS TYPE_PRODUIT_id_type_produit, t.libelle FROM detail_commande dc JOIN commande co ON co.id_commande = dc.COMMANDE_id_commande JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur JOIN produit p ON p.id_produit = dc.PRODUIT_id_produit JOIN type_produit t ON p.TYPE_PRODUIT_id_type_produit = t.id_type_produit WHERE dc.COMMANDE_id_commande = ?";
         private String sqlInsertDetailCommande ="INSERT INTO detailCommande (quantite, COMMANDE_id_commande, PRODUIT_id_produit) VALUES ( :detailCommandeQuantite, :detailCommandeIdProduit, :detailCommandeIdCommande)";
         private String sqlUpdateDetailCommande ="UPDATE detail_commande SET quantite = :detailCommandeQuantite, COMMANDE_id_commande = :detailCommandeIdProduit, PRODUIT_id_produit = :detailCommandeIdCommande";
         private String sqlDeleteDetailCommande = "DELETE FROM detail_commande WHERE id_commande = :detailCommandeIdCommande";
