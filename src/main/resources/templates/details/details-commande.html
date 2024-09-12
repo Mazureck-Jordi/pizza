@@ -18,7 +18,7 @@
     <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
     <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
     <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
-    <li th:if="${commande.livraison} == 0">Commande réglées</li>
+    <li th:if="${commande.est_paye} == 1">Commande réglées</li>
   </ul>
 <div>
   <a th:href="@{'/show-commande-form/' + ${commande.id_commande}}">Modifier</a>
