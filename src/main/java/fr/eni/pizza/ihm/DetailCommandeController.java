@@ -45,7 +45,10 @@ public class DetailCommandeController {
         if (detailCommandes == null) {
             return "redirect:/";
         }
-        model.addAttribute("detailCommande", detailCommandes);
+        model.addAttribute("detailCommandes", detailCommandes);
+
+        Commande commande = commandeManager.getCommandeById(id);
+        model.addAttribute("commande", commande);
 
         return "details/details-detail-commande";
     }
