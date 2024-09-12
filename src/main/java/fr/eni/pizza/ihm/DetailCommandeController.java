@@ -38,6 +38,19 @@ public class DetailCommandeController {
         return "list/list-detail-commande";
     }
 
+    @GetMapping("/details-detail-commande/{id}")
+    public String ShowDetailCommande(@PathVariable Long id, Model model) {
+
+        DetailCommande detailCommande = detailCommandeManager.getDetailCommandeByIdCommande(id);
+        if (detailCommande == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("detailCommande", detailCommande);
+
+        return "details/details-detail-commande";
+    }
+
+
     @GetMapping({"/show-detail-commande-form/{id}", "/show-detail-commande-form"})
     public String ShowDetailCommandeForm(@PathVariable(required = false) Long id, Model model) {
 
@@ -53,7 +66,7 @@ public class DetailCommandeController {
         List<Commande> commandes = commandeManager.getAllCommandes();
         model.addAttribute("commandes", commandes);
 
-        return "form/detail-commande-form";
+        return "form/details-commande-form";
     }
     @PostMapping("detail-commande-form")
     public String detailCommandeForm(@ModelAttribute DetailCommande detailCommande) {
