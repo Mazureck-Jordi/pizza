@@ -8,14 +8,33 @@
 
 <h1>Formulaire de dréation de commande</h1>
 
-<form th:object="${detailCommande}" th:action="@{/commande-form}" method="post">
+<form th:object="${detailCommande}" th:action="@{/creation-commande}" method="post">
 
-    <!-- Champ id -->
-    <input th:field="*{id_commande}" type="hidden">
+    <!-- Champ livraison ou à emporter ?-->
+    <div>
+        <label for="commande">Numéro de la commande</label>
+        <input th:field="*{id_commande}" type="number" placeholder="Saisir le numéro de la commande">
+    </div>
 
+    <!-- Champ etat -->
+    <div>
+        <label for="etat">Type de produit</label>
+        <select th:field="*{id_produit}">
+            <option th:each="produit: ${produits}" th:value="${produit.id_produit}"
+                    th:text="${produit.nom}"></option>
+        </select>
+    </div>
 
+    <!-- Champ quantité-->
+    <div>
+        <label for="quantite">Quantité :</label>
+        <input th:field="*{quantite}" type="number" placeholder="Saisir la quantité">
+    </div>
 
-
+    <!-- Bouton submit -->
+    <div>
+        <input type="submit" value="Enregister">
+    </div>
 
 </form>
 

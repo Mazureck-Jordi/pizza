@@ -1,10 +1,8 @@
 package fr.eni.pizza.dao.impl;
 
-import fr.eni.pizza.bo.Client;
-import fr.eni.pizza.bo.Commande;
-import fr.eni.pizza.bo.Etat;
-import fr.eni.pizza.bo.Utilisateur;
+import fr.eni.pizza.bo.*;
 import fr.eni.pizza.dao.IDAOCommande;
+import fr.eni.pizza.dao.IDAOProduit;
 import org.apache.catalina.security.SecurityListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -27,6 +25,9 @@ public class DAOCommandeMySQL implements IDAOCommande {
 
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
+    @Autowired
+    IDAOProduit daoProduit;
 
     static final RowMapper<Commande> COMMANDE_ROW_MAPPER = new RowMapper<Commande>() {
         @Override

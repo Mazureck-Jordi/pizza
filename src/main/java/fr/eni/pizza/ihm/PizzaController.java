@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -30,7 +31,6 @@ public class PizzaController {
     private IDetailCommandeManager detailCommandeManager;
 
 
-
     @GetMapping("")
     public String showAccueil() {
 
@@ -39,7 +39,9 @@ public class PizzaController {
 
     @GetMapping("/show-creation-commande")
     public String showCreationCommande(Model model) {
+
         DetailCommande detailCommande = new DetailCommande();
+
         model.addAttribute("detailCommande", detailCommande);
 
         List<Commande> commandes = commandeManager.getAllCommandes();
@@ -66,11 +68,11 @@ public class PizzaController {
         return "form/creation-commande-form";
     }
 
-@PostMapping ("/creation-commande")
-    public String creationCommande (@ModelAttribute DetailCommande detailCommande) {
+    @PostMapping("/creation-commande")
+    public String creationCommande(@ModelAttribute DetailCommande detailCommande) {
 
         detailCommandeManager.addDetailCommande(detailCommande);
-       return  "redirect:/" ;
-}
+        return "redirect:/show-creation-commande";
+    }
 
 }
