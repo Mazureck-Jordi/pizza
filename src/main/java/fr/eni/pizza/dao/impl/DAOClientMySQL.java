@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Profile("client-mysql")
+@Profile("mysql")
 @Repository
 public class DAOClientMySQL implements IDAOClient {
 

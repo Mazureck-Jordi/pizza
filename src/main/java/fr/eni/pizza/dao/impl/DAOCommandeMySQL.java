@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Profile("commande-sql")
+@Profile("mysql")
 @Repository
 public class DAOCommandeMySQL implements IDAOCommande {
 

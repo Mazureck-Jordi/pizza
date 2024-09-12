@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Profile("detail-commande-sql")
+@Profile("mysql")
 @Repository
 public class DAODetailCommandeMySQL implements IDAODetailCommande {
 
