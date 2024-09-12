@@ -21,10 +21,10 @@ import java.util.List;
 public class DAODetailCommandeMySQL implements IDAODetailCommande {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+    private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     static final RowMapper<DetailCommande>DETAIL_COMMANDE_ROW_MAPPER = new RowMapper<DetailCommande>() {
 
