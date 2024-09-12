@@ -3,7 +3,6 @@ package fr.eni.pizza.ihm;
 import fr.eni.pizza.bll.IProduitManager;
 import fr.eni.pizza.bo.Produit;
 import fr.eni.pizza.bo.TypeProduit;
-import fr.eni.pizza.dao.IDAOTypeProduit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
