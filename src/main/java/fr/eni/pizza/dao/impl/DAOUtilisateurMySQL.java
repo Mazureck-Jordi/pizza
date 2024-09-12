@@ -15,7 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Profile("utilisateur-mysql")
+@Profile("mysql")
 @Repository
 public class DAOUtilisateurMySQL implements IDAOUtilisateur {
 

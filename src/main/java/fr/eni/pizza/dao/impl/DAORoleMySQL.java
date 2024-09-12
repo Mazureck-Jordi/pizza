@@ -14,7 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Profile("role-mysql")
+@Profile("mysql")
 @Repository
 public class DAORoleMySQL implements IDAORole {
     @Autowired

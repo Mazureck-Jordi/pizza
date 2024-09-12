@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Profile("type-produit-mysql")
+@Profile("mysql")
 @Repository
 public class DAOTypeProduitMySQL implements IDAOTypeProduit {
 
