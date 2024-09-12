@@ -2,25 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${'Détail-commande' + detailcommande.id_detail_commande}"> </title>
+<!--    <title th:text="${'Détail-commande' + detailcommande.id_detail_commande}"></title>-->
 </head>
 <body>
 <h1> Details de la détails commande</h1>
 
-<ul>
-    <li th:text="${detailCommande.id_commande.id_commande}"></li>
-
-
-    <ul th:each="d: ${detailCommande.quantite}">
-    <li th:text="${'Produit :' + detailCommande.id_produit.nom + ' Quantité : ' + detailCommande.quantite}"></li>
-   </ul>
-
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-    <li></li>
-</ul>
+<div>
+    <ul th:each="d: ${detailCommande}">
+        <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
+        <li th:text="${'Quantité : ' + d.quantite}"></li>
+    </ul>
+</div>
 
 </body>
 </html>

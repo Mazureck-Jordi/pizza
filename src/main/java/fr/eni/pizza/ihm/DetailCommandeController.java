@@ -41,11 +41,11 @@ public class DetailCommandeController {
     @GetMapping("/details-detail-commande/{id}")
     public String ShowDetailCommande(@PathVariable Long id, Model model) {
 
-        DetailCommande detailCommande = detailCommandeManager.getDetailCommandeByIdCommande(id);
-        if (detailCommande == null) {
+        List<DetailCommande> detailCommandes = detailCommandeManager.getAllDetailCommandeByIdCommande(id);
+        if (detailCommandes == null) {
             return "redirect:/";
         }
-        model.addAttribute("detailCommande", detailCommande);
+        model.addAttribute("detailCommande", detailCommandes);
 
         return "details/details-detail-commande";
     }
@@ -56,7 +56,7 @@ public class DetailCommandeController {
 
         DetailCommande detailCommande = new DetailCommande();
         if (id != null) {
-            detailCommande = detailCommandeManager.getDetailCommandeByIdCommande(id);
+            List<DetailCommande> detailCommandes = detailCommandeManager.getAllDetailCommandeByIdCommande(id);
         }
         model.addAttribute("detailCommande", detailCommande);
 
@@ -78,6 +78,7 @@ public class DetailCommandeController {
         }
         return "redirect:/list-detail-commande";
     }
+
     @GetMapping("/delete-detail-commande/{id}")
     public String deleteDetailCommande(@PathVariable Long id) {
         if (detailCommandeManager.getDetailCommandeByIdCommande(id) == null){

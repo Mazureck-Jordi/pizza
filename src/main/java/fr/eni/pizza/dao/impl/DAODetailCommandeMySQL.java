@@ -108,8 +108,13 @@ public class DAODetailCommandeMySQL implements IDAODetailCommande {
 
 
     @Override
-    public List<DetailCommande> findallDetailCommandes() {
+    public List<DetailCommande> findAllDetailCommandes() {
         return jdbcTemplate.query(sqlSelectAllDetailCommande, DETAIL_COMMANDE_ROW_MAPPER);
+    }
+
+    @Override
+    public List<DetailCommande> findAllDetailCommandeByIdCommande(Long id) {
+        return jdbcTemplate.query(sqlSelectDetailCommandeByIdCommande, DETAIL_COMMANDE_ROW_MAPPER, id);
     }
 
     @Override

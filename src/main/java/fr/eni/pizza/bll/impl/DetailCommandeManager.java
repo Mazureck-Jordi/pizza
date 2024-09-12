@@ -16,13 +16,19 @@ public class DetailCommandeManager implements IDetailCommandeManager {
 
     @Override
     public List<DetailCommande> getAllDetailCommandes() {
-        return detailCommandeDAO.findallDetailCommandes();
+        return detailCommandeDAO.findAllDetailCommandes();
+    }
+
+    @Override
+    public List<DetailCommande> getAllDetailCommandeByIdCommande(Long id) {
+        return detailCommandeDAO.findAllDetailCommandeByIdCommande(id);
     }
 
     @Override
     public DetailCommande getDetailCommandeByIdCommande(Long id) {
         return detailCommandeDAO.findDetailCommandeByIdCommande(id);
     }
+
 
     @Override
     public void addDetailCommande(DetailCommande detailCommande) {

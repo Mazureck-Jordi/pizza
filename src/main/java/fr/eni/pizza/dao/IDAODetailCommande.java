@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface IDAODetailCommande {
 
-    List<DetailCommande>findallDetailCommandes();
+    List<DetailCommande>findAllDetailCommandes();
+
+    List<DetailCommande> findAllDetailCommandeByIdCommande(Long id);
 
     DetailCommande findDetailCommandeByIdCommande(Long id);
 

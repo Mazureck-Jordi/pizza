@@ -8,6 +8,8 @@ public interface IDetailCommandeManager {
 
     List<DetailCommande> getAllDetailCommandes();
 
+    List<DetailCommande> getAllDetailCommandeByIdCommande(Long id);
+
     DetailCommande getDetailCommandeByIdCommande(Long id);
 
     void addDetailCommande(DetailCommande detailCommande);
