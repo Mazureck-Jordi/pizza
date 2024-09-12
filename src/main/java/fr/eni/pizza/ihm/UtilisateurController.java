@@ -30,7 +30,7 @@ public class UtilisateurController {
         List<Utilisateur> utilisateurs = utilisateurManager.getAllUtilisateurs();
         model.addAttribute("utilisateurs", utilisateurs);
 
-        return "list-utilisateur";
+        return "list/list-utilisateur";
     }
 
     @GetMapping("/details-utilisateur/{id}")
@@ -42,7 +42,7 @@ public class UtilisateurController {
         }
         model.addAttribute("utilisateur", utilisateur);
 
-        return "details-utilisateur";
+        return "details/details-utilisateur";
     }
     @GetMapping({"/show-utilisateur-form/{id}", "/show-utilisateur-form"})
 
@@ -62,7 +62,7 @@ public class UtilisateurController {
 
         model.addAttribute("commandes", commandes);
 
-        return "utilisateur-form";
+        return "form/utilisateur-form";
     }
 
     @PostMapping("/utilisateur-form")

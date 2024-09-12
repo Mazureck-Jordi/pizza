@@ -30,7 +30,7 @@ public class ProduitController {
         //On injecte la liste des produits et des types produits dans le model
         model.addAttribute("produits", produits);
 
-        return "list-produits";
+        return "list/list-produits";
     }
 
     @GetMapping("/details-produit/{id}")
@@ -47,7 +47,7 @@ public class ProduitController {
         //Sinon On injecte le produit dans le model
         model.addAttribute("produit", produit);
 
-        return "details-produit";
+        return "details/details-produit";
     }
 
 
@@ -73,7 +73,7 @@ public class ProduitController {
         //On injecte la liste de type de produit
         model.addAttribute("typeProduits", typeProduits);
 
-        return "produit-form";
+        return "form/produit-form";
     }
 
     @PostMapping("/produit-form")

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 public class CommandeController {
@@ -38,11 +39,12 @@ public class CommandeController {
 
 
 
-        return "list-commandes";
+        return "list/list-commandes";
     }
 
     @GetMapping("/details-commande/{id}")
     public String ShowDetailCommande(@PathVariable Long id, Model model) {
+
         Commande commande = commandeManager.getCommandeById(id);
         if (commande == null) {
             return "redirect:/";
@@ -51,7 +53,7 @@ public class CommandeController {
 
 
 
-        return "details-commande";
+        return "details/details-commande";
     }
 
 
@@ -87,7 +89,7 @@ public class CommandeController {
 
         List<TypeProduit> TypeProduits = produitManager.getAllTypeProduits();
 
-        return "commande-form";
+        return "form/commande-form";
     }
 
     @PostMapping("/commande-form")

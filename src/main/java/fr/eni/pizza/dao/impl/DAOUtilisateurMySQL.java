@@ -38,7 +38,7 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
 
             Commande commande = new Commande();
             commande.setId_commande(rs.getLong("id_commande"));
-            commande.setDate_heure_livraison(rs.getDate("date_heure_livraison"));
+            commande.setDate_heure_livraison(rs.getTimestamp("date_heure_livraison").toLocalDateTime());
             commande.setLivraison(rs.getInt("livraison"));
             commande.setPrix_total(rs.getDouble("prix_total"));
             commande.setEst_paye(rs.getInt("est_paye"));

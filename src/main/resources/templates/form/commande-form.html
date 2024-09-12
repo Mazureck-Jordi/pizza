@@ -10,61 +10,65 @@
 
 <form th:object="${commande}" th:action="@{/commande-form}" method="post">
 
-  <!-- Champ id -->
-  <input th:field="*{id_commande}" type="hidden">
+    <!-- Champ id -->
+    <input th:field="*{id_commande}" type="hidden">
 
-    <!-- Champ nom -->
+    <!-- Champ date -->
     <div>
-        <label for="date">Date de commande</label>
-        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+        <label for="date">Date et heure de livraison</label>
+        <input th:field="*{date_heure_livraison}" type="datetime-local" placeholder="Saisir la date de la commande">
     </div>
 
-    <!-- Champ nom -->
+    <!-- Champ livraison ou à emporter ?-->
     <div>
-        <label for="livraison">livraison ?</label>
-        <input th:field="*{livraison}" type="date" placeholder="Saisir 1 pour une livraison ou 0 pour la livraison ">
+        <label for="livraison">Livraison ou à emporter ?</label>
+        <input th:field="*{livraison}" type="number" placeholder="Saisir 1 pour une livraison ou 0 pour A emporter ">
     </div>
 
-    <!-- Champ nom -->
+    <!-- Champ prix totale -->
     <div>
-        <label for="date">Date de commande</label>
-        <input th:field="*{date_heure_livraison}" type="type="datetime-local"" placeholder="Saisir 0 pour ">
+        <label for="prix totale">Prix totale</label>
+        <input th:field="*{prix_total}" type="number" placeholder="Saisir le prix total ">
     </div>
 
-    <!-- Champ nom -->
+    <!-- Champ est payé ?-->
     <div>
-        <label for="date">Date de commande</label>
-        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+        <label for="est payé">La commande est payé ?</label>
+        <input th:field="*{est_paye}" type="number"
+               placeholder="Saisir 1 si la commande est réglée ou 0 si elle ne l'est pas">
     </div>
 
-    <!-- Champ nom -->
+    <!-- Champ client -->
     <div>
-        <label for="date">Date de commande</label>
-        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+        <label for="client">Client de la commande</label>
+        <select th:field="*{id_client}">
+            <option th:each="client: ${clients}" th:value="${client.id_client}"
+                    th:text="${client.nom + ' ' + client.prenom}"></option>
+        </select>
     </div>
 
-    <!-- Champ nom -->
+    <!-- Champ utilisateur -->
     <div>
-        <label for="date">Date de commande</label>
-        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+        <label for="utilisateur">Utilisateur de la commande</label>
+        <select th:field="*{id_utilisateur}">
+            <option th:each="utilisateur: ${utilisateurs}" th:value="${utilisateur.id_utilisateur}"
+                    th:text="${utilisateur.nom + ' ' + utilisateur.prenom}"></option>
+        </select>
     </div>
 
-    <!-- Champ nom -->
+    <!-- Champ etat -->
     <div>
-        <label for="date">Date de commande</label>
-        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+        <label for="etat">Etat de la commande</label>
+        <select th:field="*{id_etat}">
+            <option th:each="etat: ${etats}" th:value="${etat.id_etat}"
+                    th:text="${etat.libelle}"></option>
+        </select>
     </div>
 
-    <!-- Champ nom -->
+    <!-- Bouton submit -->
     <div>
-        <label for="date">Date de commande</label>
-        <input th:field="*{date_heure_livraison}" type="text" placeholder="Saisir la date de la commande">
+        <input type="submit" value="Enregister">
     </div>
-
-
-
-
-
 </form>
 </body>
 </html>

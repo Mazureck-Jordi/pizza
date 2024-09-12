@@ -28,7 +28,7 @@ public class ClientController {
         model.addAttribute("clients", clients);
 
 
-        return "list-clients";
+        return "list/list-clients";
 
 
     }
@@ -43,7 +43,7 @@ public class ClientController {
         }
         model.addAttribute("client", client);
 
-        return "details-client";
+        return "details/details-client";
     }
     @GetMapping({"/show-client-form/{id}", "/show-client-form"})
 public String showClientForm(@PathVariable(required = false) Long id, Model model) {
@@ -54,7 +54,7 @@ public String showClientForm(@PathVariable(required = false) Long id, Model mode
         }
         model.addAttribute("client", client);
 
-        return "client-form";
+        return "form/client-form";
     }
 
     @PostMapping ("/client-form")
