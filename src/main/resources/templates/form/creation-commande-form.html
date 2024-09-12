@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Formulaire</title>
 </head>
 <body>
+
+<h1>Formulaire de dréation de commande</h1>
+
+<form th:object="${detailCommande}" th:action="@{/commande-form}" method="post">
+
+    <!-- Champ id -->
+    <input th:field="*{id_commande}" type="hidden">
+
+
+
+
+
+</form>
 
 </body>
 </html>

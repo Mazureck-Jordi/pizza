@@ -1,10 +1,8 @@
 package fr.eni.pizza.ihm;
 
-import fr.eni.pizza.bll.IClientManager;
-import fr.eni.pizza.bll.ICommandeManager;
-import fr.eni.pizza.bll.IProduitManager;
-import fr.eni.pizza.bll.IUtilisateurManager;
+import fr.eni.pizza.bll.*;
 import fr.eni.pizza.bo.*;
+import fr.eni.pizza.dao.impl.DAODetailCommandeMySQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -114,9 +112,4 @@ public class CommandeController {
     return "redirect:/list-commandes";
     }
 
-@GetMapping("/creation-commande")
-    public String creationCommande(Model model) {
-
-        return "form/creation-commande-form";
-}
 }
