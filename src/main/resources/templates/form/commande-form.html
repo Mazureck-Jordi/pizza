@@ -28,7 +28,7 @@
     <!-- Champ prix totale -->
     <div>
         <label for="prix totale">Prix totale</label>
-        <input th:field="*{prix_total}" type="number" placeholder="Saisir le prix total ">
+        <input th:field="*{prix_total}" type="number" step="0.01" min="0" max="1000" placeholder="Saisir le prix total ">
     </div>
 
     <!-- Champ est payé ?-->
