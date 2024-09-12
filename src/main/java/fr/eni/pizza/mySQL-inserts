@@ -48,5 +48,11 @@ INSERT INTO detail_commande (quantite, COMMANDE_id_commande, PRODUIT_id_produit)
 INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (1, 'Cutraro', 'Giuseppe', 'gcutraro@gmail.com', 'pepe', 1);
 INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (2, 'Bradley', 'Andrew', 'abradley@gmail.com', 'drewdrew', 2);
 INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (3, 'Hubert', 'hubert', 'hubert@gmail.com', 'bebert', 3);
+INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (4, 'Peperoni', 'Johny', 'jpeperoni@gmail.com', 'jojo', 4);
+INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (5, 'Tricycle', 'Jean', 'jtricycle@gmail.com', 'tritroi', 5);
 
-
+UPDATE commande SET UTILISATEUR_id_utilisateur = 1 WHERE id_commande = 1;
+UPDATE commande SET UTILISATEUR_id_utilisateur = 2 WHERE id_commande = 2;
+UPDATE commande SET UTILISATEUR_id_utilisateur = 3 WHERE id_commande = 3;
+UPDATE commande SET UTILISATEUR_id_utilisateur = 4 WHERE id_commande = 4;
+UPDATE commande SET UTILISATEUR_id_utilisateur = 5 WHERE id_commande = 5;
