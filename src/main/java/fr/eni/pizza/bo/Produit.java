@@ -8,34 +8,42 @@ public class Produit {
     private Double prix;
     private String image_url;
     private TypeProduit id_type_produit;
+    private int quantite;
+    private double prixTotal;
 
     public Produit() {
         super();
     }
 
-    public Produit(String nom, String description, Double prix, String image_url, TypeProduit id_type_produit) {
+    public Produit(String nom, String description, Double prix, String image_url, TypeProduit id_type_produit, int quantite, double prixTotal) {
         this.nom = nom;
         this.description = description;
         this.prix = prix;
         this.image_url = image_url;
         this.id_type_produit = id_type_produit;
+        this.quantite = quantite;
+        this.prixTotal = prixTotal;
     }
 
-    public Produit(Long id_produit, String nom, String description, Double prix, String image_url) {
+    public Produit(Long id_produit, String nom, String description, Double prix, String image_url, int quantite, double prixTotal) {
         this.id_produit = id_produit;
         this.nom = nom;
         this.description = description;
         this.prix = prix;
         this.image_url = image_url;
+        this.quantite = quantite;
+        this.prixTotal = prixTotal;
     }
 
-    public Produit(Long id_produit, String nom, String description, Double prix, String image_url, TypeProduit id_type_produit) {
+    public Produit(Long id_produit, String nom, String description, Double prix, String image_url, TypeProduit id_type_produit, int quantite, double prixTotal) {
         this.id_produit = id_produit;
         this.nom = nom;
         this.description = description;
         this.prix = prix;
         this.image_url = image_url;
         this.id_type_produit = id_type_produit;
+        this.quantite = quantite;
+        this.prixTotal = prixTotal;
     }
 
     public Long getId_produit() {
@@ -86,15 +94,33 @@ public class Produit {
         this.id_type_produit = id_type_produit;
     }
 
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
+    public double getPrixTotal() {
+        return prixTotal;
+    }
+
+    public void setPrixTotal(double prixTotal) {
+        this.prixTotal = prixTotal;
+    }
+
     @Override
     public String toString() {
-        return "com.example.demoGit.bo.Produit{" +
+        return "Produit{" +
                 "id_produit=" + id_produit +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
                 ", prix=" + prix +
                 ", image_url='" + image_url + '\'' +
                 ", id_type_produit=" + id_type_produit +
+                ", quantite=" + quantite +
+                ", prixTotal=" + prixTotal +
                 '}';
     }
 }

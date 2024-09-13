@@ -57,6 +57,12 @@ public class CommandeManager implements ICommandeManager {
     }
 
     @Override
+    public void updteCommandeById(Commande commande) {
+        commandeDAO.updateCommandeToDBById(commande);
+
+    }
+
+    @Override
     public void deleteCommande(Commande commande) {
         commandeDAO.deleteCommandeToDB(commande);
     }

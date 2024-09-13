@@ -16,5 +16,7 @@ public interface IDAOCommande {
 
     void updateCommandeToDB(Commande commande);
 
+    void updateCommandeToDBById(Commande commande);
+
     void deleteCommandeToDB(Commande commande);
 }

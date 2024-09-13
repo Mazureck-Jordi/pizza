@@ -21,6 +21,8 @@ public interface ICommandeManager {
 
     void updateCommande(Commande commande) ;
 
+    void updteCommandeById(Commande commande) ;
+
     void deleteCommande(Commande commande) ;
 
     void addEtat(Etat etat) ;

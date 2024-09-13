@@ -87,6 +87,8 @@ public class DAODetailCommandeMySQL implements IDAODetailCommande {
 
             detailCommande.setId_commande(commande);
 
+
+
             return detailCommande;
         }
     };

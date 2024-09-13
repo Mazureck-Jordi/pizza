@@ -3,6 +3,7 @@ package fr.eni.pizza.bo;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 public class Commande {
 
@@ -14,6 +15,7 @@ public class Commande {
     private Etat id_etat;
     private Client id_client;
     private Utilisateur id_utilisateur;
+    private List<DetailCommande> detail_commandes;
 
     public Commande() {
     }
@@ -45,6 +47,18 @@ public class Commande {
         this.id_etat = id_etat;
         this.id_client = id_client;
         this.id_utilisateur = id_utilisateur;
+    }
+
+    public Commande(Long id_commande, LocalDateTime date_heure_livraison, int livraison, double prix_total, int est_paye, Etat id_etat, Client id_client, Utilisateur id_utilisateur, List<DetailCommande> detail_commandes) {
+        this.id_commande = id_commande;
+        this.date_heure_livraison = date_heure_livraison;
+        this.livraison = livraison;
+        this.prix_total = prix_total;
+        this.est_paye = est_paye;
+        this.id_etat = id_etat;
+        this.id_client = id_client;
+        this.id_utilisateur = id_utilisateur;
+        this.detail_commandes = detail_commandes;
     }
 
     public Long getId_commande() {
@@ -111,6 +125,14 @@ public class Commande {
         this.id_utilisateur = id_utilisateur;
     }
 
+    public List<DetailCommande> getDetail_commandes() {
+        return detail_commandes;
+    }
+
+    public void setDetail_commandes(List<DetailCommande> detail_commandes) {
+        this.detail_commandes = detail_commandes;
+    }
+
     @Override
     public String toString() {
         return "Commande{" +
@@ -122,6 +144,7 @@ public class Commande {
                 ", id_etat=" + id_etat +
                 ", id_client=" + id_client +
                 ", id_utilisateur=" + id_utilisateur +
+                ", detail_commandes=" + detail_commandes +
                 '}';
     }
 }

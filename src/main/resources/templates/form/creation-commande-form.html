@@ -28,8 +28,9 @@
     <ul th:each="d: ${detailCommandes}">
         <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
         <li th:text="${'Quantité : ' + d.quantite}"></li>
+        <li th:text="${'Prix cumulé : ' + d.quantite*d.id_produit.prix}"></li>
+        <li th:text="${'Prix total : ' + d.id_commande.prix_total}"></li>
     </ul>
-
 </div>
 
 
@@ -62,6 +63,6 @@
     </div>
 
 </form>
-
+<a th:href="@{'/details-detail-commande/' + ${commande.id_commande}}">Etape final</a>
 </body>
 </html>
