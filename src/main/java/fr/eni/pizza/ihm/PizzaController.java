@@ -81,14 +81,16 @@ public class PizzaController {
 
     @PostMapping("/creation-commande")
     public String creationCommande(DetailCommande detailCommande) {
+
+        Long lastId = commandeManager.getLastCommande().getId_commande();
         Commande lastCommande = commandeManager.getLastCommande();
-        detailCommande.setId_commande(commandeManager.getCommandeById(6L));
+        detailCommande.setId_commande(commandeManager.getCommandeById(lastId));
 
 double prixTotal = 0.0;
-        for (DetailCommande d : detailCommandeManager.getAllDetailCommandeByIdCommande(6L)) {
+        for (DetailCommande d : detailCommandeManager.getAllDetailCommandeByIdCommande(lastId)) {
           prixTotal += d.getQuantite() * d.getId_produit().getPrix();
     }
-Commande commande = commandeManager.getCommandeById(6L);
+Commande commande = commandeManager.getCommandeById(lastId);
         commande.setPrix_total(prixTotal);
         commandeManager.updteCommandeById(commande);
         detailCommandeManager.addDetailCommande(detailCommande);

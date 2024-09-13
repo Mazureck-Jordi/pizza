@@ -93,7 +93,7 @@ public class CommandeController {
     @PostMapping("/commande-form")
     public String commandeForm (@ModelAttribute Commande commande) {
 
-        Long lastIdCommande = commandeManager.getLastCommande().getId_commande();
+        Long lastIdCommande = commandeManager.getLastCommande().getId_commande()+1;
 
         if (commande.getId_commande() == null) {
             commandeManager.addCommande(commande);

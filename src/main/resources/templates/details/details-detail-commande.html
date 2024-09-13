@@ -29,6 +29,7 @@
     <ul th:each="d: ${detailCommandes}">
         <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
         <li th:text="${'Quantité : ' + d.quantite}"></li>
+        <li th:text="${'Prix cumulé : ' + d.quantite*d.id_produit.prix}"></li>
     </ul>
     <h2> État de la commande </h2>
     <ul>
