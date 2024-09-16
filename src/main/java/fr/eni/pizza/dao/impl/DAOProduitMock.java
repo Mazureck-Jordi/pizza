@@ -20,6 +20,7 @@ public class DAOProduitMock implements IDAOProduit {
             new Produit(5L, "Ice-Tea", "Canette 33cl", 1.50, "https://i0.wp.com/commechezmams.fr/wp-content/uploads/2021/01/ICE-TEA-33.jpg?fit=2000%2C2000&ssl=1", 0, 0),
             new Produit(6L, "Perrier", "Canette 33cl", 1.50, "https://maxifournitures.fr/12364-large_default/perrier-canette-d-eau-petillante-33-cl-minerale.jpg", 0, 0)
     );
+    
 
     @Override
     public List<Produit> findAllProduits() {
