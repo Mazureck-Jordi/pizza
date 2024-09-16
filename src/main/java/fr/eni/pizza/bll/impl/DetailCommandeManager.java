@@ -25,15 +25,9 @@ public class DetailCommandeManager implements IDetailCommandeManager {
     }
 
     @Override
-    public DetailCommande getDetailCommandeByIdCommande(Long id) {
-        return detailCommandeDAO.findDetailCommandeByIdCommande(id);
+    public DetailCommande getDetailCommandeByIdCommandeAndIdProduit(Long idCommande, Long idProduit) {
+        return detailCommandeDAO.findDetailCommandeByIdCommande(idCommande, idProduit);
     }
-
-    @Override
-    public DetailCommande getSommePrixByIdCommande(Long id) {
-        return detailCommandeDAO.findSommePrixByIdCommande(id);
-    }
-
 
     @Override
     public void addDetailCommande(DetailCommande detailCommande) {
@@ -46,7 +40,7 @@ public class DetailCommandeManager implements IDetailCommandeManager {
     }
 
     @Override
-    public void deleteDetailCommande(DetailCommande detailCommande) {
-       detailCommandeDAO.deleteDetailCommandeToDB(detailCommande);
+    public void deleteDetailCommande(Long idCommande, Long idProduit) {
+       detailCommandeDAO.deleteDetailCommandeToDB(idCommande, idProduit);
     }
 }

@@ -2,7 +2,7 @@ package fr.eni.pizza.bo;
 
 public class Produit {
 
-    private Long id_produit;
+    private Long idProduit;
     private String nom;
     private String description;
     private Double prix;
@@ -25,8 +25,8 @@ public class Produit {
         this.prixTotal = prixTotal;
     }
 
-    public Produit(Long id_produit, String nom, String description, Double prix, String image_url, int quantite, double prixTotal) {
-        this.id_produit = id_produit;
+    public Produit(Long idProduit, String nom, String description, Double prix, String image_url, int quantite, double prixTotal) {
+        this.idProduit = idProduit;
         this.nom = nom;
         this.description = description;
         this.prix = prix;
@@ -35,8 +35,8 @@ public class Produit {
         this.prixTotal = prixTotal;
     }
 
-    public Produit(Long id_produit, String nom, String description, Double prix, String image_url, TypeProduit id_type_produit, int quantite, double prixTotal) {
-        this.id_produit = id_produit;
+    public Produit(Long idProduit, String nom, String description, Double prix, String image_url, TypeProduit id_type_produit, int quantite, double prixTotal) {
+        this.idProduit = idProduit;
         this.nom = nom;
         this.description = description;
         this.prix = prix;
@@ -46,12 +46,12 @@ public class Produit {
         this.prixTotal = prixTotal;
     }
 
-    public Long getId_produit() {
-        return id_produit;
+    public Long getIdProduit() {
+        return idProduit;
     }
 
-    public void setId_produit(Long id_produit) {
-        this.id_produit = id_produit;
+    public void setIdProduit(Long idProduit) {
+        this.idProduit = idProduit;
     }
 
     public String getNom() {
@@ -113,7 +113,7 @@ public class Produit {
     @Override
     public String toString() {
         return "Produit{" +
-                "id_produit=" + id_produit +
+                "id_produit=" + idProduit +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
                 ", prix=" + prix +

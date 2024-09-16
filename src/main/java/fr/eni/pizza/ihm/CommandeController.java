@@ -103,7 +103,7 @@ public class CommandeController {
         }
 
 
-        return "redirect:/show-creation-commande/" + lastIdCommande;
+        return "redirect:/show-creation-commande/" + commande.getId_commande();
     }
 
     @GetMapping("/delete-commande/{id}")

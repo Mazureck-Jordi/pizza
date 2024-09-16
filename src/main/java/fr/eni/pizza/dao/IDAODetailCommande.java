@@ -10,13 +10,11 @@ public interface IDAODetailCommande {
 
     List<DetailCommande> findAllDetailCommandeByIdCommande(Long id);
 
-    DetailCommande findDetailCommandeByIdCommande(Long id);
-
-    DetailCommande findSommePrixByIdCommande(Long id);
+    public DetailCommande findDetailCommandeByIdCommande(Long idCommande, Long idProduit);
 
     void addDetailCommandeToDB(DetailCommande detailCommande);
 
     void updateDetailCommandeToDB(DetailCommande detailCommande);
 
-    void deleteDetailCommandeToDB(DetailCommande detailCommande);
+    void deleteDetailCommandeToDB(Long idCommande, Long idProduit);
 }

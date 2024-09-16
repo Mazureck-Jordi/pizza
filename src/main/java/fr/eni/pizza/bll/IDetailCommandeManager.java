@@ -10,13 +10,11 @@ public interface IDetailCommandeManager {
 
     List<DetailCommande> getAllDetailCommandeByIdCommande(Long id);
 
-    DetailCommande getDetailCommandeByIdCommande(Long id);
-
-    DetailCommande getSommePrixByIdCommande(Long id);
+    DetailCommande getDetailCommandeByIdCommandeAndIdProduit(Long idCommande, Long idProduit);
 
     void addDetailCommande(DetailCommande detailCommande);
 
     void updateDetailCommande(DetailCommande detailCommande);
 
-    void deleteDetailCommande(DetailCommande detailCommande);
+    void deleteDetailCommande(Long idCommande, Long idProduit);
 }

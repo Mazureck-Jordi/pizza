@@ -29,7 +29,7 @@ public class DAOProduitMock implements IDAOProduit {
     @Override
     public Produit findProduitById(Long id_produit) {
 
-    Produit produitTofound = produits.stream().filter(produit -> produit.getId_produit() == id_produit).findFirst().orElse(null);
+    Produit produitTofound = produits.stream().filter(produit -> produit.getIdProduit() == id_produit).findFirst().orElse(null);
 
     return produitTofound;
     }
