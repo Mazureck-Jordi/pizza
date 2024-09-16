@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr">
+<head>
+    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <!-- UIkit JS -->
+  <script th:src="@{/vendor/uikit/js/uikit.min.js}"></script>
+  <script th:src="@{/vendor/uikit/js/uikit-icons.min.js}"></script>
+  <!-- UIkit CSS -->
+  <link rel="stylesheet" th:href="@{/vendor/uikit/css/uikit.min.css}"/>
+  <!-- Fontamwesome CSS -->
+  <link rel="stylesheet" th:href="@{/vendor/fontawesome-free-5.15.4-web/css/all.min.css}">
+  <!--My theme CSS-->
+  <link rel="stylesheet" th:href="@{/css/eni-theme.css}">
+  <!-- favicon -->
+  <link rel="icon" th:href="@{/img/logo.png}">
+  <!-- Css supplementaire -->
+  <div layout:fragment="css-files"></div>
+  <title layout:fragment="title"> Title</title>
+</head>
+<body>
+<nav class="uk-navbar-container eni-navbat-gradient" uk-navbar>
+    <div class="uk_navbar-left eni-navbar-btn-padding">
+        <a class="uk-navbar-toggle" href="#" uk-toggle="target: #offcanvas-nav">
+<!--            <span uk-navbar-toggle-icon></span>-->
+        </a>
+    </div>
+    <div class="uk-navbar-center">
+        <sec:authorize=
+    </div>
+</nav>
+
+
+
+
+
+</body>
+</html>
