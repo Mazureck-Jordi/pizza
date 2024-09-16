@@ -73,6 +73,12 @@ public class SecurityConfig {
                         .requestMatchers("/show-client-form").permitAll()
                         .requestMatchers("/client-form").permitAll()
                         .requestMatchers("/delete-client/**").permitAll()
+                        .requestMatchers("/vendor/**").permitAll()
+                        .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/js/**").permitAll()
+                        .requestMatchers("/images/**").permitAll()
+                        .requestMatchers("/delete-produit-details-commande/**).permitAll()
+
                         .anyRequest().denyAll()
                 );
 

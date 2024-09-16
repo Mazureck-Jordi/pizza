@@ -1,31 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title>Accueil</title>
+<title layout:fragment="Accueil">Accueil</title>
 </head>
 <body>
 <h1>Accueil Pizzeria</h1>
 
-<a th:href="@{'/list-produits'}">Liste des produits</a><br>
-
-<a th:href="@{'/list-clients'}">Liste des clients</a><br>
-
-<a th:href="@{'/list-utilisateur'}">Liste des Utilisateurs</a><br>
-
-<a th:href="@{'/list-commandes'}">Liste des commandes</a><br>
-
-<a th:href="@{'/list-detail-commande'}">Liste des details commandes</a><br>
-
-<a th:href="@{'/show-produit-form'}">Ajouter un produit</a><br>
-
-<a th:href="@{'/show-client-form'}">Ajouter un client</a><br>
-
-<a th:href="@{'/show-utilisateur-form'}">Ajouter un utilisateur</a><br>
-
-<a th:href="@{'/show-commande-form'}">Ajouter une commande</a><br>
-
-<a th:href="@{'/etape1'}">Etape 1</a>
-
+</div>
 </body>
 </html>
