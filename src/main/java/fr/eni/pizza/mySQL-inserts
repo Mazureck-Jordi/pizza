@@ -56,3 +56,9 @@ UPDATE commande SET UTILISATEUR_id_utilisateur = 2 WHERE id_commande = 2;
 UPDATE commande SET UTILISATEUR_id_utilisateur = 3 WHERE id_commande = 3;
 UPDATE commande SET UTILISATEUR_id_utilisateur = 4 WHERE id_commande = 4;
 UPDATE commande SET UTILISATEUR_id_utilisateur = 5 WHERE id_commande = 5;
+
+INSERT INTO role_utilisateur (UTILISATEUR_id_utilisateur, ROLE_id_role) VALUES (1, 1);
+INSERT INTO role_utilisateur (UTILISATEUR_id_utilisateur, ROLE_id_role) VALUES (2, 2);
+INSERT INTO role_utilisateur (UTILISATEUR_id_utilisateur, ROLE_id_role) VALUES (3, 3);
+INSERT INTO role_utilisateur (UTILISATEUR_id_utilisateur, ROLE_id_role) VALUES (4, 1);
+INSERT INTO role_utilisateur (UTILISATEUR_id_utilisateur, ROLE_id_role) VALUES (5, 3);
