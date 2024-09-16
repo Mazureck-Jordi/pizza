@@ -15,7 +15,7 @@
         <li th:text="${'Description : ' + produit.description}"></li>
         <li th:text="${'Prix : ' + produit.prix + ' €'}"></li>
 <!--        <li th:text="${'Type de produit : ' + produit.id_type_produit.getLibelle()}"></li>-->
-        <a th:href="@{'/details-produit/' + ${produit.id_produit}}">Voir détails</a>
+        <a th:href="@{'/details-produit/' + ${produit.idProduit}}">Voir détails</a>
     </ul>
 </div>
 

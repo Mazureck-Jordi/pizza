@@ -34,7 +34,7 @@ public class DAOProduitMySQL implements IDAOProduit {
             //On instancie un Produit à mapper
             Produit produit = new Produit();
             //On détermine les colonnes de la table produit qui seront mapper
-            produit.setId_produit(rs.getLong("id_produit"));
+            produit.setIdProduit(rs.getLong("id_produit"));
             produit.setNom(rs.getString("nom"));
             produit.setDescription(rs.getString("description"));
             produit.setPrix(rs.getDouble("prix"));
@@ -57,7 +57,7 @@ public class DAOProduitMySQL implements IDAOProduit {
    private MapSqlParameterSource map (Produit produit) {
 
        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
-       mapSqlParameterSource.addValue("idProduit", produit.getId_produit());
+       mapSqlParameterSource.addValue("idProduit", produit.getIdProduit());
        mapSqlParameterSource.addValue("nomProduit", produit.getNom());
        mapSqlParameterSource.addValue("descriptionProduit", produit.getDescription());
        mapSqlParameterSource.addValue("prixProduit", produit.getPrix());

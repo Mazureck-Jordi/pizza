@@ -80,12 +80,12 @@ public class ProduitController {
     public String produitForm(@ModelAttribute Produit produit) {
 
         //Si le produit n'existe pas on l'ajoute
-        if (produit.getId_produit() == null) {
+        if (produit.getIdProduit() == null) {
             produitManager.addProduit(produit);
         }
 
         //Si le produit existe on le modifie
-        if (produit.getId_produit() != null) {
+        if (produit.getIdProduit() != null) {
             produitManager.updateProduit(produit);
         }
 

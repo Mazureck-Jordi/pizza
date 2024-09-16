@@ -15,7 +15,7 @@
 
     <h2> État de la commande </h2>
     <ul>
-<!--  faire un th:each pour afficher le prix de chaque article et les additionner et les enregistrer dans prix total      -->
+        <!--  faire un th:each pour afficher le prix de chaque article et les additionner et les enregistrer dans prix total      -->
         <li th:text="${'Prix de la commande : ' + commande.prix_total}"></li>
         <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
         <li th:if="${commande.est_paye} == 1">Commande réglées</li>
@@ -25,44 +25,43 @@
     </ul>
 
     <h2> Détails de la commande </h2>
-    <ul th:each="d: ${detailCommandes}">
+    <ul th:each="d: ${detailCommandeUpdate}">
         <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
         <li th:text="${'Quantité : ' + d.quantite}"></li>
         <li th:text="${'Prix cumulé : ' + d.quantite*d.id_produit.prix}"></li>
-        <li th:text="${'Prix total : ' + d.id_commande.prix_total}"></li>
+        <a th:href="@{'/delete-produit-details-commande/' + ${d.id_commande.id_commande} + '/' +  ${d.id_produit.idProduit}}">Supprimer</a>
     </ul>
 </div>
 
+<h2>Formulaire de la commande</h2>
 
-<form th:object="${detailCommande}" th:action="@{/creation-commande}" method="post">
+<form th:each="detail : ${detailCommandes}" th:object="${detail}" th:action="@{/creation-commande}" method="post">
 
-<!--    &lt;!&ndash; Champ Numero de commande&ndash;&gt;-->
-<!--    <div>-->
-<!--        <label for="commande">Numéro de la commande</label>-->
-<!--        <input th:field="*{id_commande}" th:value="${lastIdCommande}" th:text="${commande.id_commande}">-->
-<!--    </div>-->
+        <!-- Champ Numero de commande-->
+        <div>
+            <label for="commande"></label>
+            <input name="id_commande" th:value="${lastIdCommande}" type="hidden">
+        </div>
 
-    <!-- Champ etat -->
-    <div>
-        <label for="etat">Type de produit</label>
-        <select th:field="*{id_produit}">
-            <option th:each="produit: ${produits}" th:value="${produit.id_produit}"
-                    th:text="${produit.nom}"></option>
-        </select>
+    <!-- Boucle sur les produits -->
+    <div >
+        <!-- Checkbox pour sélectionner le produit -->
+        <label for="produit" th:text="*{id_produit.nom}"></label>
+            <input name="id_produit" th:value="*{id_produit.idProduit}"  type="hidden">
+
+
+        <!-- Champ quantité pour chaque produit -->
+        <div>
+            <label for="quantite">Quantité :</label>
+            <input name="quantite" type="number" placeholder="Saisir la quantité" >
+        </div>
+        <!-- Bouton submit -->
+        <div>
+            <input type="submit" value="Enregister">
+        </div>
     </div>
-
-    <!-- Champ quantité-->
-    <div>
-        <label for="quantite">Quantité :</label>
-        <input th:field="*{quantite}" type="number" value="30" placeholder="Saisir la quantité">
-    </div>
-
-    <!-- Bouton submit -->
-    <div>
-        <input type="submit" value="Enregister">
-    </div>
-
 </form>
+
 <a th:href="@{'/details-detail-commande/' + ${commande.id_commande}}">Etape final</a>
 </body>
 </html>

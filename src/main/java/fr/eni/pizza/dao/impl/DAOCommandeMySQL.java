@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -117,11 +119,16 @@ public class DAOCommandeMySQL implements IDAOCommande {
 
     @Override
     public void addCommandeToDB(Commande commande) {
-        namedParameterJdbcTemplate.update(sqlInsertCommande, map(commande));
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(sqlInsertCommande, map(commande), keyHolder);
+        if (keyHolder.getKey() != null) {
+            commande.setId_commande(keyHolder.getKey().longValue());
+        }
     }
 
     @Override
     public void updateCommandeToDB(Commande commande) {
+
         namedParameterJdbcTemplate.update(sqlUpdateCommande, map(commande));
     }
 
