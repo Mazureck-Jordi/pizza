@@ -77,7 +77,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
                         .requestMatchers("/images/**").permitAll()
-                        .requestMatchers("/delete-produit-details-commande/**).permitAll()
+                        .requestMatchers("/delete-produit-details-commande/**").permitAll()
 
                         .anyRequest().denyAll()
                 );
