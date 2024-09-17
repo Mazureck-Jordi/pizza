@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface IDAORole {
 
+    List<Role> findRolesByIdUtilisateur(long idUtilisateur);
+
     List<Role> findAllRoles();
 
     Role findRoleById(Long id_role);

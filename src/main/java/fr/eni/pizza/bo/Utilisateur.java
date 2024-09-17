@@ -1,5 +1,7 @@
 package fr.eni.pizza.bo;
 
+import java.util.List;
+
 public class Utilisateur {
 
     private Long id_utilisateur;
@@ -8,7 +10,7 @@ public class Utilisateur {
     private String email;
     private String mot_de_passe;
     private Commande id_commande;
-    private Role role;
+    private List<Role> roles;
 
     public Utilisateur() {
         super();
@@ -39,23 +41,23 @@ public class Utilisateur {
         this.id_commande = id_commande;
     }
 
-    public Utilisateur(Long id_utilisateur, String nom, String prenom, String email, String mot_de_passe, Commande id_commande, Role role) {
+    public Utilisateur(Long id_utilisateur, String nom, String prenom, String email, String mot_de_passe, List<Role> roles) {
+        this.id_utilisateur = id_utilisateur;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mot_de_passe = mot_de_passe;
+        this.roles = roles;
+    }
+
+    public Utilisateur(Long id_utilisateur, String nom, String prenom, String email, String mot_de_passe, Commande id_commande, List<Role> roles) {
         this.id_utilisateur = id_utilisateur;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.mot_de_passe = mot_de_passe;
         this.id_commande = id_commande;
-        this.role = role;
-    }
-
-    public Utilisateur(Long id_utilisateur, String nom, String prenom, String email, String mot_de_passe, Role role) {
-        this.id_utilisateur = id_utilisateur;
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.mot_de_passe = mot_de_passe;
-        this.role = role;
+        this.roles = roles;
     }
 
     public Long getId_utilisateur() {
@@ -106,12 +108,12 @@ public class Utilisateur {
         this.id_commande = id_commande;
     }
 
-    public Role getRole() {
-        return role;
+    public List<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -123,7 +125,7 @@ public class Utilisateur {
                 ", email='" + email + '\'' +
                 ", mot_de_passe='" + mot_de_passe + '\'' +
                 ", id_commande=" + id_commande +
-                ", role=" + role +
+                ", role=" + roles +
                 '}';
     }
 }

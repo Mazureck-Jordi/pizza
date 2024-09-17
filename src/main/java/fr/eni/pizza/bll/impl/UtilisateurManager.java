@@ -23,12 +23,24 @@ public class UtilisateurManager implements IUtilisateurManager {
 
     @Override
     public List<Utilisateur> getAll() {
-        return daoUtilisateur.findAll();
+
+        List<Utilisateur> users = daoUtilisateur.findAll();
+
+        for( Utilisateur user : users ) {
+            user.setRoles(daoRole.findRolesByIdUtilisateur(user.getId_utilisateur()));
+        }
+
+        return users;
     }
 
     @Override
     public Utilisateur getById(Long id) {
-        return daoUtilisateur.findById(id);
+
+        Utilisateur user = daoUtilisateur.findById(id);
+
+        user.setRoles(daoRole.findRolesByIdUtilisateur(id));
+
+        return user;
     }
 
     @Override
@@ -39,13 +51,23 @@ public class UtilisateurManager implements IUtilisateurManager {
     @Override
     public List<Utilisateur> getAllUtilisateurs() {
 
-        return daoUtilisateur.findAllUtilisateurs();
+        List<Utilisateur> users = daoUtilisateur.findAllUtilisateurs();
+
+        for( Utilisateur user : users ) {
+            user.setRoles(daoRole.findRolesByIdUtilisateur(user.getId_utilisateur()));
+        }
+
+        return users;
     }
 
     @Override
     public Utilisateur getUtilisateurById(Long id) {
 
-        return daoUtilisateur.findUtilisateurById(id);
+       Utilisateur user = daoUtilisateur.findUtilisateurById(id);
+
+       user.setRoles(daoRole.findRolesByIdUtilisateur(id));
+
+        return user;
     }
 
     @Override

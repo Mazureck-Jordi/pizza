@@ -19,6 +19,11 @@ public class DAORoleMock implements IDAORole {
             new Role(3L, "Livreur"));
 
     @Override
+    public List<Role> findRolesByIdUtilisateur(long idUtilisateur) {
+        return List.of();
+    }
+
+    @Override
     public List<Role> findAllRoles() {
 
         return roles;

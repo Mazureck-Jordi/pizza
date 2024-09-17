@@ -1,5 +1,6 @@
 package fr.eni.pizza.dao.impl;
 
+import fr.eni.pizza.bo.Role;
 import fr.eni.pizza.bo.Utilisateur;
 import fr.eni.pizza.dao.IDAOUtilisateur;
 import org.springframework.context.annotation.Profile;

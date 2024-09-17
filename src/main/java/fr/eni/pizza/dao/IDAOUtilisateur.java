@@ -1,5 +1,6 @@
 package fr.eni.pizza.dao;
 
+import fr.eni.pizza.bo.Role;
 import fr.eni.pizza.bo.Utilisateur;
 
 import java.util.List;

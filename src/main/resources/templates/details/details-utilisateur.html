@@ -9,10 +9,12 @@
 
 <ul>
     <li th:text="${'Identifiant : ' + utilisateur.id_utilisateur}"></li>
+    <li th:each="roleUtilisateur : ${utilisateur.getRoles()}" th:text="${'Role : ' + roleUtilisateur.libelle}"></li>
     <li th:text="${'Nom : ' + utilisateur.nom}"></li>
     <li th:text="${'Prénom : ' + utilisateur.prenom}"></li>
     <li th:text="${'Email : ' + utilisateur.getEmail()}"></li>
     <li th:text="${'Mot de passe : ' + utilisateur.getMot_de_passe()}"></li>
+
 </ul>
 <div>
     <a th:href="@{'/show-utilisateur-form/' +${utilisateur.id_utilisateur}}">Modifier</a>

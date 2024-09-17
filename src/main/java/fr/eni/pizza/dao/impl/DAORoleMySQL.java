@@ -24,8 +24,6 @@ public class DAORoleMySQL implements IDAORole {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     static final RowMapper<Role> ROLE_ROW_MAPPER = new RowMapper<Role>() {
-
-
         @Override
         public Role mapRow(ResultSet rs, int rowNum) throws SQLException {
             Role role = new Role();
@@ -44,11 +42,19 @@ public class DAORoleMySQL implements IDAORole {
         return mapSqlParameterSource;
     }
 
+    private String getSqlSelectRoleByIdUtilisateur = "SELECT r.id_role, r.libelle FROM role r JOIN role_utilisateur ru ON r.id_role = ru.ROLE_id_role WHERE ru.UTILISATEUR_id_utilisateur = :idUtilisateur";
     private String sqlSelectAllRoles = " SELECT r.id_role, r.libelle FROM role r";
     private String sqlSelectRoleById = "SELECT r.id_role, r.libelle FROM role r WHERE r.id_role = ?";
     private String sqlInsertRole = "INSERT INTO role (id_role,libelle) VALUES ( :id_role, :libelle ) ";
     private String sqlUpdateRole = "UPDATE role SET libelle = :libelle WHERE id_role = :id_role";
     private String sqlDeleteRole = "DELETE FROM role WHERE id_role = :id_role";
+
+    @Override
+    public List<Role> findRolesByIdUtilisateur(long idUtilisateur) {
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("idUtilisateur", idUtilisateur);
+        return namedParameterJdbcTemplate.query(getSqlSelectRoleByIdUtilisateur, map, ROLE_ROW_MAPPER);
+    }
 
     @Override
     public List<Role> findAllRoles() {

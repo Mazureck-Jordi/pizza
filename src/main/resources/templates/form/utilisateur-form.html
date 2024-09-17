@@ -36,19 +36,10 @@
         <input th:field="*{mot_de_passe}" type="text" placeholder="Saisir le mot de passe">
     </div>
 
-    <!-- Champ du Mot de passe de l'utilisateur -->
-    <div>
-        <label for="Motdepasse">Commande</label>
-        <input th:field="*{id_commande}" type="number" th:value="${commandes.get(1).id_commande}">
-    </div>
-
-
-
-
     <!-- Champ de l'idRole -->
     <div>
         <label for="Role"> Role</label>
-        <select type="hidden" th:field="*{role}">
+        <select type="hidden" th:field="*{roles}">
             <option th:each="r : ${roles}" th:value="${r.id_role}"
                     th:text="${r.libelle}"></option>
         </select>

@@ -9,10 +9,11 @@
 
 <div th:each="utilisateur: ${utilisateurs}">
     <ul>
+        <li th:text="${'Identifiant : ' + utilisateur.id_utilisateur}"></li>
         <li th:text="${'Nom : ' + utilisateur.nom}"></li>
         <li th:text="${'Prénom : ' + utilisateur.prenom}"></li>
         <li th:text="${'Email : ' + utilisateur.email}"></li>
-        <li th:text="${'Role : ' + utilisateur.role.libelle}"></li>
+        <li th:each="roleUtilisateur : ${utilisateur.getRoles()}" th:text="${'Role : ' + roleUtilisateur.libelle}"></li>
         <a th:href="@{'/details-utilisateur/' + ${utilisateur.id_utilisateur}}">Voir détails</a>
     </ul>
 </div>
