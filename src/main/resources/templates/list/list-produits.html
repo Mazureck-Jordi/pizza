@@ -1,22 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
     <title>Liste des produits</title>
 </head>
 <body>
+<div layout:fragment="content">
+    <h1 class="texte-blanc">Liste des produits</h1>
+    <div class="texte-blanc">
+        <div th:each="produit: ${produits}" >
 
-<h1>Liste des produits</h1>
-
-<div th:each="produit: ${produits}">
-    <ul>
-        <img th:src="${produit.image_url}" alt="image d'un produit"></img>
-        <li th:text="${'Nom : ' + produit.nom}"></li>
-        <li th:text="${'Description : ' + produit.description}"></li>
-        <li th:text="${'Prix : ' + produit.prix + ' €'}"></li>
-<!--        <li th:text="${'Type de produit : ' + produit.id_type_produit.getLibelle()}"></li>-->
-        <a th:href="@{'/details-produit/' + ${produit.idProduit}}">Voir détails</a>
-    </ul>
+            <ul class="uk-container">
+                <img th:src="${produit.image_url}" alt="image d'un produit">
+                <li th:text="${'Nom : ' + produit.nom}"></li>
+                <li th:text="${'Description : ' + produit.description}"></li>
+                <li th:text="${'Prix : ' + produit.prix + ' €'}"></li>
+                <!--        <li th:text="${'Type de produit : ' + produit.id_type_produit.getLibelle()}"></li>-->
+                <a th:href="@{'/details-produit/' + ${produit.idProduit}}">Voir détails</a>
+            </ul>
+        </div>
+    </div>
 </div>
 
 </body>

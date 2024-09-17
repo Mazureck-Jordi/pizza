@@ -1,29 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
     <title>Liste des commandes</title>
 </head>
 <body>
-
-<h1>Liste des commandes</h1>
-
-<div th:each="commande: ${commandes}">
-    <ul>
-        <li th:text="${'N° de la commande : ' + commande.id_commande}"></li>
-        <li th:text="${'Prix total de la commande : ' + commande.prix_total}"></li>
-        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
-        <!--        <li th:text="${'Client lié à la commande : ' + commande.id_client.nom + ' ' +commande.id_client.prenom}"></li>-->
-        <!--        <li th:text="${'Etat de la commande : ' +  commande.id_etat.libelle}"></li>-->
-        <!--        <li th:text="${'Utilisateur de la commande : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>-->
-        <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
-        <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
-        <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
-        <li th:if="${commande.livraison} == 0">Commande réglées</li>
-        <div>
-            <a th:href="@{'/details-commande/' + ${commande.id_commande}}">Voir détails</a>
+<div layout:fragment="content">
+    <h1 class="texte-blanc">Liste des commandes</h1>
+    <div class="texte-blanc">
+        <div th:each="commande: ${commandes}">
+            <ul>
+                <li th:text="${'N° de la commande : ' + commande.id_commande}"></li>
+                <li th:text="${'Prix total de la commande : ' + commande.prix_total}"></li>
+                <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
+                <!--        <li th:text="${'Client lié à la commande : ' + commande.id_client.nom + ' ' +commande.id_client.prenom}"></li>-->
+                <!--        <li th:text="${'Etat de la commande : ' +  commande.id_etat.libelle}"></li>-->
+                <!--        <li th:text="${'Utilisateur de la commande : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>-->
+                <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
+                <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
+                <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
+                <li th:if="${commande.livraison} == 0">Commande réglées</li>
+                <div>
+                    <a th:href="@{'/details-commande/' + ${commande.id_commande}}">Voir détails</a>
+                </div>
+            </ul>
         </div>
-    </ul>
+    </div>
 </div>
 </body>
 </html>

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
     <title>Liste des clients</title>
 </head>
 <body>
-
+<div layout:fragment="content">
 <h1>Liste des clients</h1>
 
 <div th:each="client: ${clients}">
