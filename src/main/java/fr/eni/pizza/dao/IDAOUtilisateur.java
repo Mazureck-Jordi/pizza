@@ -10,6 +10,8 @@ public interface IDAOUtilisateur {
 
     Utilisateur findById(Long id);
 
+    Utilisateur findByEmail(String email);
+
     List<Utilisateur> findAllUtilisateurs ();
 
     Utilisateur findUtilisateurById (Long id_utilisateur);

@@ -30,6 +30,11 @@ public class DAOUtilisateurMock implements IDAOUtilisateur {
     }
 
     @Override
+    public Utilisateur findByEmail(String email) {
+        return null;
+    }
+
+    @Override
     public List<Utilisateur> findAllUtilisateurs() {
 
         return utilisateurs;

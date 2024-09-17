@@ -32,6 +32,11 @@ public class UtilisateurManager implements IUtilisateurManager {
     }
 
     @Override
+    public Utilisateur getByEmail(String email) {
+        return daoUtilisateur.findByEmail(email);
+    }
+
+    @Override
     public List<Utilisateur> getAllUtilisateurs() {
 
         return daoUtilisateur.findAllUtilisateurs();

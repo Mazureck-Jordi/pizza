@@ -77,9 +77,9 @@ CREATE TABLE UTILISATEUR
      id_utilisateur INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
      nom NVARCHAR (50) ,
      prenom NVARCHAR (50) NOT NULL ,
-     email VARCHAR (50) NOT NULL ,
-     mot_de_passe NVARCHAR (50) NOT NULL ,
-     COMMANDE_id_commande INTEGER NOT NULL
+     email VARCHAR (255) NOT NULL ,
+     mot_de_passe VARCHAR (255) NOT NULL ,
+     COMMANDE_id_commande INTEGER
     );
 
 

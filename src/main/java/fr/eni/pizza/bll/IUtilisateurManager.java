@@ -11,6 +11,8 @@ public interface IUtilisateurManager {
 
     Utilisateur getById(Long id);
 
+    Utilisateur getByEmail(String email);
+
     List<Utilisateur> getAllUtilisateurs();
 
     Utilisateur getUtilisateurById(Long id);
