@@ -45,6 +45,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/login").permitAll()
+                        .requestMatchers("/logout").permitAll()
+                        .requestMatchers("/user-page").permitAll()
                         .requestMatchers("/list-utilisateur").permitAll()
                         .requestMatchers("/details-utilisateur/**").permitAll()
                         .requestMatchers("/show-utilisateur-form/**").permitAll()
@@ -88,23 +90,23 @@ public class SecurityConfig {
                 );
 
         //configure la page de login de Spring Security
-        http.formLogin(Customizer.withDefaults());
+       // http.formLogin(Customizer.withDefaults());
 
-//        http.formLogin(form ->
-//                form.loginPage("/login-page-security")
-//                        .defaultSuccessUrl("/user-page-security"));
-//
-//        HeaderWriterLogoutHandler clearSiteData = new HeaderWriterLogoutHandler(
-//                new ClearSiteDataHeaderWriter(ClearSiteDataHeaderWriter.Directive.ALL));
-//
-//        http
-//                .logout((logout) ->
-//                    logout
-//
-//                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "**"))
-//                        .logoutSuccessUrl("/login-page-security?logout")
-//                        .addLogoutHandler(clearSiteData)
-//                );
+        http.formLogin(form ->
+                form.loginPage("/login")
+                        .defaultSuccessUrl("/user-page"));
+
+        HeaderWriterLogoutHandler clearSiteData = new HeaderWriterLogoutHandler(
+                new ClearSiteDataHeaderWriter(ClearSiteDataHeaderWriter.Directive.ALL));
+
+        http
+                .logout((logout) ->
+                    logout
+
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "**"))
+                        .logoutSuccessUrl("/login?logout")
+                        .addLogoutHandler(clearSiteData)
+                );
 
         return http.build();
     }

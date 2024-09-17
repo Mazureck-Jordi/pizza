@@ -25,7 +25,7 @@ public class AuthController {
 
         if (loggedUser != null) {
             System.out.println("Utilisateur connecté : " + loggedUser.getUsername());
-        return "redirect:/";
+            return "redirect:/";
         }
 
         Utilisateur utilisateur = new Utilisateur();
@@ -35,21 +35,23 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public String Logout(@AuthenticationPrincipal UserDetails loggedUser, Model model, SessionStatus sessionStatus) {
+    public String Logout(SessionStatus sessionStatus) {
         sessionStatus.setComplete();
-        System.out.println("Utilisateur connecté : " + loggedUser.getUsername());
+        System.out.println("Vous êtes déconnecté");
         return "redirect:/";
     }
 
     @GetMapping("/user-page")
-    public String showRedirectPage (Principal principal) {
+    public String showRedirectPage(Principal principal, @AuthenticationPrincipal UserDetails loggedUser, Model model) {
 
         String email = principal.getName();
 
         Utilisateur loggedUtilisateurFoundedByEmail = utilisateurManager.getByEmail(email);
 
+        model.addAttribute("loggedUser", loggedUser);
+
         System.out.println("Voici les données du profil connecté : " + loggedUtilisateurFoundedByEmail);
 
-        return "redirect:/";
+        return "auth/user-page";
     }
 }

@@ -94,9 +94,7 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
     private String sqlSelectUtilisateurById = "SELECT u.id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe, u.COMMANDE_id_commande,\n" +
             "c.id_commande, c.date_heure_livraison, c.CLIENT_id_client, c.livraison, c.ETAT_id_etat, c.UTILISATEUR_id_utilisateur, c.prix_total, c.est_paye\n" +
             "FROM utilisateur u JOIN commande c ON u.COMMANDE_id_commande = c.id_commande WHERE u.id_utilisateur = ?";
-    private String sqlSelectUtilisateurByEmail = "SELECT u.id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe, u.COMMANDE_id_commande,\n" +
-            "c.id_commande, c.date_heure_livraison, c.CLIENT_id_client, c.livraison, c.ETAT_id_etat, c.UTILISATEUR_id_utilisateur, c.prix_total, c.est_paye\n" +
-            "FROM utilisateur u JOIN commande c ON u.COMMANDE_id_commande = c.id_commande WHERE u.email = ?";
+    private String sqlSelectUtilisateurByEmail = "SELECT u.id_utilisateur AS UTILISATEUR_id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe, r.id_role AS ROLE_id_role, r.libelle FROM role_utilisateur ru JOIN utilisateur u ON ru.UTILISATEUR_id_utilisateur = u.id_utilisateur JOIN role r ON ru.ROLE_id_role = r.id_role WHERE u.email = ?";
     private String sqlInsertUtilisateur = "INSERT INTO utilisateur(id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) " +
             "VALUES ( :idUtilisateur, :nomUtilisateur, :prenomUtilisateur, :emailUtilisateur, :motdepasseUtilisateur, null)";
     private String sqlUpdateUtilisateur = "UPDATE utilisateur SET nom = :nomUtilisateur, prenom = :prenomUtilisateur, email = :emailUtilisateur, mot_de_passe = :motdepasseUtilisateur, COMMANDE_id_commande = :commandeUtilisateur WHERE id_utilisateur = :idUtilisateur";

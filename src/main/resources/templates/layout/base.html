@@ -45,13 +45,10 @@
 <div id="offcanvas-nav" uk-offcanvas="mode: reveal; overlay: true">
     <div class="uk-offcanvas-bar">
         <ul class="uk-nav uk-nav-default">
-            <div >
-                Logged user: <span></span>
-                Roles: <span ></span>
+            <div>
+                Logged user: <span sec:authentication="name"></span>
+<!--                Roles: <span sec:authentication="principal.authorities"></span>-->
             </div>
-            <li>
-                <a th:if="${loggedUser}" th:text="${loggedUser.email}" href="show-user-page"></a>
-            </li>
             <li class="uk-active">
                 <a th:href="@{'/list-produits'}">Liste des produits</a>
             </li>
@@ -86,7 +83,12 @@
             <li>
                 <a th:href="@{'/etape1'}">Etape 1</a>
             </li>
-
+            <li>
+                <a th:href="@{'/login'}">Connexion</a>
+            </li>
+            <li>
+                <a th:href="@{'/logout'}">Déconnexion</a>
+            </li>
         </ul>
     </div>
 </div>

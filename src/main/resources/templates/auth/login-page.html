@@ -13,8 +13,6 @@
 
 <body>
 
-
-
   <div class="uk-container">
 
     <h1 class="uk-heading-divider uk-text-center">Se Connecter avec Spring Security</h1>
@@ -22,7 +20,7 @@
     <div th:if="${param.logout}">Déconnexion réalisée avec succès</div>
     <div th:if="${param.error}">Votre login ou votre mot de passe est incorrect</div>
 
-    <form th:action="@{/login-page-security}" method="post">
+    <form th:action="@{/login}" method="post">
 
       <!--champs email-->
       <div class="uk-margin">

@@ -3,6 +3,8 @@ package fr.eni.pizza.ihm;
 import fr.eni.pizza.bll.*;
 import fr.eni.pizza.bo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@SessionAttributes("")
+@SessionAttributes({"loggedUser"})
 @Controller
 public class PizzaController {
 
@@ -31,7 +33,7 @@ public class PizzaController {
 
 
     @GetMapping("")
-    public String showAccueil() {
+    public String showAccueil(@AuthenticationPrincipal UserDetails loggedUser) {
 
         return "accueil";
     }
