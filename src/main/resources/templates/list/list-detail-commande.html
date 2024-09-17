@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
     <title>Détails commandes (j)</title>
 </head>
 <body>
+<div layout:fragment="content">
+    <h1 class="texte-blanc"> Liste des détails commandes</h1>
+    <div class="texte-blanc">
+        <div th:each="detailCommande : ${detailCommandes}">
 
-<h1> Liste des détails commandes</h1>
+            <ul>
+                <li th:text="${'Utilisateur : ' + detailCommande.id_commande.id_utilisateur.id_utilisateur}"></li>
+                <li th:text="${' Nom du client : ' + detailCommande.id_commande.id_client.nom + ' ' + detailCommande.id_commande.id_client.prenom}"></li>
+                <li th:text="${'Livraison ou à emporter : ' + detailCommande.id_commande.livraison}"></li>
+                <li th:text="${'Prix total de la commande : ' + detailCommande.id_commande.prix_total}"></li>
+                <li th:text="${'Réglé / à régler : ' + detailCommande.id_commande.est_paye}"></li>
+                <div>
+                    <a th:href="@{'/details-detail-commande/' + ${detailCommande.getId_commande().getId_commande()}}">Voir
+                        détails</a>
+                </div>
 
-<div th:each="detailCommande : ${detailCommandes}">
-
-  <ul>
-     <li th:text="${'Utilisateur : ' + detailCommande.id_commande.id_utilisateur.id_utilisateur}"></li>
-      <li th:text="${' Nom du client : ' + detailCommande.id_commande.id_client.nom + ' ' + detailCommande.id_commande.id_client.prenom}"></li>
-      <li th:text="${'Livraison ou à emporter : ' + detailCommande.id_commande.livraison}"></li>
-      <li th:text="${'Prix total de la commande : ' + detailCommande.id_commande.prix_total}"></li>
-      <li th:text="${'Réglé / à régler : ' + detailCommande.id_commande.est_paye}"></li>
-      <div>
-          <a th:href="@{'/details-detail-commande/' + ${detailCommande.getId_commande().getId_commande()}}">Voir détails</a>
-      </div>
-  </ul>
-
+            </ul>
+        </div>
+    </div>
 </div>
-
 </body>
 </html>
