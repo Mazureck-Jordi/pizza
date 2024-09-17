@@ -9,10 +9,12 @@
     <script th:src="@{/vendor/uikit/js/uikit-icons.min.js}"></script>
     <!-- UIkit CSS -->
     <link rel="stylesheet" th:href="@{/vendor/uikit/css/uikit.min.css}"/>
+    <!-- Fontamwesome CSS -->
+    <link rel="stylesheet" th:href="@{/vendor/fontawesome-free-5.15.4-web/css/all.min.css}">
     <!--My theme CSS-->
     <link rel="stylesheet" th:href="@{/css/pizza-theme.css}">
     <!-- favicon -->
-    <link rel="icon" th:href="@{/images/pizzaiolo.png}">
+    <link rel="icon" th:href="@{/images/pizza2.jpg}">
     <!-- Css supplementaire -->
     <div layout:fragment="css-files"></div>
     <title layout:fragment="title">Title</title>
@@ -34,10 +36,10 @@
 
     <div class="uk-navbar-right eni-navbar-btn-padding">
         <!--affichage d'un bouton si loggedUser == null => c'est à dire si pas connécté-->
-        <a th:if="${loggedUser == null}" class="uk-icon-button" href="/login"><i class="fas fa-sign-in-alt"></i></a>
-
-        <!--affichage d'un bouton si loggedUser != null => c'est à dire si déjà connécté-->
-        <a th:if="${loggedUser}" class="uk-icon-button" href="/logout-page"><i class="fas fa-door-open"></i></a>
+        <a class="uk-icon-button" href="/login" ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg></a>
+        <i class="fa-regular fa-right-to-bracket"></i>
+<!--        affichage d'un bouton si loggedUser != null => c'est à dire si déjà connécté-->
+<!--        <a th:if="${loggedUser}" class="uk-icon-button" href="/logout-page"><i class="fas fa-door-open"></i></a>-->
     </div>
 </nav>
 <div id="offcanvas-nav" uk-offcanvas="mode: reveal; overlay: true">
@@ -106,7 +108,7 @@
 <footer class="uk-section uk-section-small uk-section-muted">
     <div class="uk-container">
         <p class="uk-text-small uk-text-center">Copyright 2024 - <a
-                href="https://github.com/zzseba78/Kick-Off">Created by Mehdi ROCHEREAU et Jordi MAZURECK</a> | Built with <a
+                href="https://github.com/Mazureck-Jordi/pizza">Created by Mehdi ROCHEREAU et Jordi MAZURECK</a> | Built with <a
                 href="http://getuikit.com" title="Visit UIkit 3 site" target="_blank" data-uk-tooltip><span
                 data-uk-icon="uikit"></span></a></p>
     </div>
