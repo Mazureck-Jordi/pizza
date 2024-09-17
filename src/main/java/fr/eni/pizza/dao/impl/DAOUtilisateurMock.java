@@ -20,6 +20,16 @@ public class DAOUtilisateurMock implements IDAOUtilisateur {
 
 
     @Override
+    public List<Utilisateur> findAll() {
+        return List.of();
+    }
+
+    @Override
+    public Utilisateur findById(Long id) {
+        return null;
+    }
+
+    @Override
     public List<Utilisateur> findAllUtilisateurs() {
 
         return utilisateurs;

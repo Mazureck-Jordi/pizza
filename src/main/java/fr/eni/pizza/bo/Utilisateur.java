@@ -8,6 +8,7 @@ public class Utilisateur {
     private String email;
     private String mot_de_passe;
     private Commande id_commande;
+    private Role role;
 
     public Utilisateur() {
         super();
@@ -38,7 +39,24 @@ public class Utilisateur {
         this.id_commande = id_commande;
     }
 
+    public Utilisateur(Long id_utilisateur, String nom, String prenom, String email, String mot_de_passe, Commande id_commande, Role role) {
+        this.id_utilisateur = id_utilisateur;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mot_de_passe = mot_de_passe;
+        this.id_commande = id_commande;
+        this.role = role;
+    }
 
+    public Utilisateur(Long id_utilisateur, String nom, String prenom, String email, String mot_de_passe, Role role) {
+        this.id_utilisateur = id_utilisateur;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mot_de_passe = mot_de_passe;
+        this.role = role;
+    }
 
     public Long getId_utilisateur() {
         return id_utilisateur;
@@ -88,15 +106,24 @@ public class Utilisateur {
         this.id_commande = id_commande;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
-        return "com.example.demoGit.bo.Utilisateur{" +
+        return "Utilisateur{" +
                 "id_utilisateur=" + id_utilisateur +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +
                 ", email='" + email + '\'' +
                 ", mot_de_passe='" + mot_de_passe + '\'' +
                 ", id_commande=" + id_commande +
+                ", role=" + role +
                 '}';
     }
 }

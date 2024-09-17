@@ -45,11 +45,11 @@ INSERT INTO detail_commande (quantite, COMMANDE_id_commande, PRODUIT_id_produit)
 INSERT INTO detail_commande (quantite, COMMANDE_id_commande, PRODUIT_id_produit) VALUES (1, 5, 3);
 INSERT INTO detail_commande (quantite, COMMANDE_id_commande, PRODUIT_id_produit) VALUES (1, 5, 6);
 
-INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (1, 'Cutraro', 'Giuseppe', 'gcutraro@gmail.com', 'pepe', 1);
-INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (2, 'Bradley', 'Andrew', 'abradley@gmail.com', 'drewdrew', 2);
-INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (3, 'Hubert', 'hubert', 'hubert@gmail.com', 'bebert', 3);
-INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (4, 'Peperoni', 'Johny', 'jpeperoni@gmail.com', 'jojo', 4);
-INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (5, 'Tricycle', 'Jean', 'jtricycle@gmail.com', 'tritroi', 5);
+INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (1, 'Cutraro', 'Giuseppe', 'gcutraro@gmail.com', '{bcrypt}$2a$10$qTWQ4H3BYPYGG6MO7XmocO8fH8TLKvdk7IHtzG6WDw7FAp6l2r1Xu', 1);/*Mot de Passe = pepe*/
+INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (2, 'Bradley', 'Andrew', 'abradley@gmail.com', '{bcrypt}$2a$10$x9C7ybXzu8OjQckV0AXSJe5D7HTJWEd.acOb2PJIxkgv7u8T7cAF.', 2); /*Mot de Passe = drewdrew*/
+INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (3, 'Hubert', 'hubert', 'hubert@gmail.com', '{bcrypt}$2a$10$TDdeLFYekVtBFBJfrHFV2OHFyqsvW5J31HU9bjwo2.7foLDIGr4He', 3);/*Mot de Passe = bebert*/
+INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (4, 'Peperoni', 'Johny', 'jpeperoni@gmail.com', '{bcrypt}$2a$10$eCboLXAWSybkDsT2RhTMIOegBk41q0dM6A6S03Z.vhW0lMNBuzz5C', 4);/*Mot de Passe = jojo*/
+INSERT INTO utilisateur (id_utilisateur, nom, prenom, email, mot_de_passe, COMMANDE_id_commande) VALUES (5, 'Tricycle', 'Jean', 'jtricycle@gmail.com', '{bcrypt}$2a$10$ElZ/nATefKV7iNvKEezmteQnFLpTdz/VrJnllvg2TTT3mJAt77eZ6', 5);/*Mot de Passe = tritri*/
 
 UPDATE commande SET UTILISATEUR_id_utilisateur = 1 WHERE id_commande = 1;
 UPDATE commande SET UTILISATEUR_id_utilisateur = 2 WHERE id_commande = 2;

@@ -12,7 +12,7 @@
         <li th:text="${'Nom : ' + utilisateur.nom}"></li>
         <li th:text="${'Prénom : ' + utilisateur.prenom}"></li>
         <li th:text="${'Email : ' + utilisateur.email}"></li>
-
+        <li th:text="${'Role : ' + utilisateur.role.libelle}"></li>
         <a th:href="@{'/details-utilisateur/' + ${utilisateur.id_utilisateur}}">Voir détails</a>
     </ul>
 </div>

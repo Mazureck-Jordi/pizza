@@ -6,6 +6,8 @@ import fr.eni.pizza.bo.Utilisateur;
 import fr.eni.pizza.dao.IDAORole;
 import fr.eni.pizza.dao.IDAOUtilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,16 @@ public class UtilisateurManager implements IUtilisateurManager {
 
     @Autowired
     private IDAORole daoRole;
+
+    @Override
+    public List<Utilisateur> getAll() {
+        return daoUtilisateur.findAll();
+    }
+
+    @Override
+    public Utilisateur getById(Long id) {
+        return daoUtilisateur.findById(id);
+    }
 
     @Override
     public List<Utilisateur> getAllUtilisateurs() {
@@ -45,12 +57,19 @@ public class UtilisateurManager implements IUtilisateurManager {
 
     @Override
     public void addUtilisateur(Utilisateur utilisateur) {
+
+        utilisateur.setMot_de_passe(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(utilisateur.getMot_de_passe()));
+
         daoUtilisateur.addUtilisateurToDB(utilisateur);
-       // daoRole.addRoleUtilisateur();
+        // daoRole.addRoleUtilisateur();
     }
 
     @Override
     public void updateUtilisateur(Utilisateur utilisateur) {
+
+        utilisateur.setMot_de_passe(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(utilisateur.getMot_de_passe()));
+
+
         daoUtilisateur.updateUtilisateurToDB(utilisateur);
     }
 

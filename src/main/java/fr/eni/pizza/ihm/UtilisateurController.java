@@ -27,7 +27,7 @@ public class UtilisateurController {
     @GetMapping("/list-utilisateur")
     public String showListUtilisateur(Model model) {
 
-        List<Utilisateur> utilisateurs = utilisateurManager.getAllUtilisateurs();
+        List<Utilisateur> utilisateurs = utilisateurManager.getAll();
         model.addAttribute("utilisateurs", utilisateurs);
 
         return "list/list-utilisateur";
@@ -36,7 +36,7 @@ public class UtilisateurController {
     @GetMapping("/details-utilisateur/{id}")
     public String showDetailUtilisateur(@PathVariable Long id, Model model) {
 
-        Utilisateur utilisateur = utilisateurManager.getUtilisateurById(id);
+        Utilisateur utilisateur = utilisateurManager.getById(id);
         if (utilisateur == null) {
             return "redirect:/";
         }
@@ -54,9 +54,9 @@ public class UtilisateurController {
         }
         model.addAttribute("utilisateur", utilisateur);
 
-        List<Role> Roles = utilisateurManager.getAllRoles();
+        List<Role> roles = utilisateurManager.getAllRoles();
 
-        model.addAttribute("Roles", Roles);
+        model.addAttribute("roles", roles);
 
         List<Commande> commandes = commandeManager.getAllCommandes();
 
@@ -71,11 +71,13 @@ public class UtilisateurController {
 
         if (utilisateur.getId_utilisateur() == null) {
             utilisateurManager.addUtilisateur(utilisateur);
+            return "redirect:/list-utilisateur";
         }
         if (utilisateur.getId_utilisateur() != null) {
             utilisateurManager.updateUtilisateur(utilisateur);
         }
-        return "redirect:/list-utilisateur";
+            return "redirect:/list-utilisateur";
+
     }
 
     @GetMapping("/delete-utilisateur/{id}")

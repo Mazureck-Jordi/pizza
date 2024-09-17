@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface IDAOUtilisateur {
 
+    List<Utilisateur> findAll();
+
+    Utilisateur findById(Long id);
+
     List<Utilisateur> findAllUtilisateurs ();
 
     Utilisateur findUtilisateurById (Long id_utilisateur);

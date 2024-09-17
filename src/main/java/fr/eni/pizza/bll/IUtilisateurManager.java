@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface IUtilisateurManager {
 
+    List<Utilisateur> getAll();
+
+    Utilisateur getById(Long id);
+
     List<Utilisateur> getAllUtilisateurs();
 
     Utilisateur getUtilisateurById(Long id);
