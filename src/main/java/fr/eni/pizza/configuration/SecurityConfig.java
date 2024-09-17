@@ -103,7 +103,7 @@ public class SecurityConfig {
                 .logout((logout) ->
                     logout
 
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "**"))
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
                         .logoutSuccessUrl("/login?logout")
                         .addLogoutHandler(clearSiteData)
                 );
