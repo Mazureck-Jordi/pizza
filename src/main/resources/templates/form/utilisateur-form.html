@@ -1,55 +1,59 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title>Formulaire</title>
+    <title layout:fragment="Formulaire">Formulaire produit </title>
 </head>
 <body>
-<h1>Formulaire de l'utilisateur</h1>
-
+<div layout:fragment="content">
+<h1 class="texte-blanc centrer souligner police" >Formulaire de l'utilisateur</h1>
+<div class="texte-blanc centrer"
 <form th:object="${utilisateur}" th:action="@{/utilisateur-form}" method="post">
 
     <!-- Champ id utilisateur -->
-    <input th:field="*{id_utilisateur}" type="hidden">
+    <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{id_utilisateur}" type="hidden">
    <div>
 
        <!-- Champ nom utilisateur -->
-    <label for="nom"> Nom</label>
-    <input th:field="*{nom}" type="text" placeholder="Saisir le nom">
+    <label for="nom"> Nom</label><br>
+    <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{nom}" type="text" placeholder="Saisir le nom">
    </div>
 
     <!-- Champ prénom utilisateur -->
     <div>
-        <label for="penom">Prénom </label>
-        <input th:field="*{prenom}" type="text" placeholder="Saisir le prénom">
+        <label for="penom">Prénom </label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{prenom}" type="text" placeholder="Saisir le prénom">
     </div>
 
     <!-- Champ email de l'utilisateur -->
     <div>
-        <label for="email">Email</label>
-        <input th:field="*{email}" type="text" placeholder="Saisir l'email">
+        <label for="email">Email</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{email}" type="text" placeholder="Saisir l'email">
     </div>
 
     <!-- Champ du Mot de passe de l'utilisateur -->
     <div>
-        <label for="Motdepasse">Mot de passe</label>
-        <input th:field="*{mot_de_passe}" type="text" placeholder="Saisir le mot de passe">
+        <label for="Motdepasse">Mot de passe</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{mot_de_passe}" type="text" placeholder="Saisir le mot de passe">
     </div>
 
     <!-- Champ de l'idRole -->
     <div>
-        <label for="Role"> Role</label>
-        <select type="hidden" th:field="*{roles}">
+        <label for="Role"> Role</label><br>
+        <select class="semi-transparent essai longueur-input centrer" type="hidden" th:field="*{roles}">
             <option th:each="r : ${roles}" th:value="${r.id_role}"
                     th:text="${r.libelle}"></option>
-        </select>
-    </div>
+        </select><br>
+    </div><br>
 
     <!-- Champ Submit -->
     <div>
-        <input type="submit" value="Enregistrer">
+        <input class="semi-transparent essai" type="submit" value="Enregistrer">
     </div>
 
 </form>
+</div>
 </body>
 </html>

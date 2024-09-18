@@ -1,50 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title>Formulaire</title>
+    <title layout:fragment="Formulaire">Formulaire Client </title>
 </head>
 <body>
-<h1> Formulaire Client</h1>
-<form th:object="${client}" th:action="@{/client-form}" method="post">
+<div layout:fragment="content">
+    <h1 class="texte-blanc centrer souligner police"> Formulaire Client</h1>
+    <div class="texte-blanc centrer">
+    <form th:object="${client}" th:action="@{/client-form}" method="post">
 
-    <!-- champ id -->
-    <input th:field="*{id_client}" type="hidden">
+        <!-- champ id -->
+        <input th:field="*{id_client}" type="hidden">
 
-    <!-- champ prenom -->
-    <div>
-        <label for="prenom">Prenom</label>
-        <input th:field="*{prenom}" type="text" placeholder="Saisir le Prénom">
-    </div>
+        <!-- champ prenom -->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="prenom">Prenom</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{prenom}" type="text" placeholder="Saisir le Prénom">
+            </div>
+        </div>
 
-    <!-- champ nom -->
-    <div>
-        <label for="nom">Nom</label>
-        <input th:field="*{nom}" type="text" placeholder="Saisir le Nom de famille">
-    </div>
+        <!-- champ nom -->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="nom">Nom</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{nom}" type="text" placeholder="Saisir le Nom de famille">
+            </div>
+        </div>
 
-    <!-- champ rue -->
-    <div>
-        <label for="rue">Rue</label>
-        <input th:field="*{rue}" type="text" placeholder="Saisir le nom de la rue">
-    </div>
+        <!-- champ rue -->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="rue">Rue</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{rue}" type="text" placeholder="Saisir le nom de la rue">
+            </div>
+        </div>
 
-    <!-- champ code_postal -->
-    <div>
-        <label for="code_postal">Code postal</label>
-        <input th:field="*{code_postal}" type="text" placeholder="Saisir le Code Postal">
-    </div>
+        <!-- champ code_postal -->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="code_postal">Code postal</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{code_postal}" type="text" placeholder="Saisir le Code Postal">
+            </div>
+        </div>
 
-    <!-- champ ville -->
-    <div>
-        <label for="ville">Ville</label>
-        <input th:field="*{ville}" type="text" placeholder="Saisir le nom de la ville">
-    </div>
-
-<!-- Bouton submit -->
-    <div>
-        <input type="submit" value="Save">
-    </div>
-</form>
+        <!-- champ ville -->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="ville">Ville</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{ville}" type="text" placeholder="Saisir le nom de la ville">
+            </div>
+        </div>
+        <!-- Bouton submit -->
+        <div>
+            <input class="semi-transparent essai texte-blanc" type="submit" value="Enregistrer">
+        </div>
+    </form>
+</div>
+</div>
 </body>
 </html>

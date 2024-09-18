@@ -7,8 +7,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="texte-blanc centrer">Liste des clients</h1>
-    <div class="texte-blanc ">
+    <h1 class="texte-blanc centrer souligner police">Liste des clients</h1>
+    <div class="texte-blanc centrer li">
         <div th:each="client: ${clients}">
             <ul>
                 <li th:text="${'Prénom : ' + client.prenom}"></li>

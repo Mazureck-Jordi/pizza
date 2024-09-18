@@ -66,3 +66,14 @@ html, body {
     border-radius: 25px;
     padding: 10px 20px;
 }
+
+.li{
+    list-style-position: inside;
+}
+.police{
+    font-style: oblique;
+}
+.select-large{
+    border-radius: 25px;
+    padding: 0px 0px;
+}
