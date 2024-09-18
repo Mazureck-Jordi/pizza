@@ -11,7 +11,7 @@
 <div>
 
   <h2>Information de la commande</h2>
-  <li th:text="${' Commande Numéro : ' + commande.id_commande}"></li>
+  <li th:text="${'Commande N°' + commande.id_commande}"></li>
   <h2> Clients </h2>
   <ul>
     <li th:text="${'Identifiant du client : ' + commande.id_client.id_client + ' ' + commande.id_client.prenom}"></li>
@@ -36,7 +36,7 @@
     <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
     <li th:if="${commande.est_paye} == 1">Commande réglées</li>
   </ul>
-
+  <a th:href="@{'/change-etat/' + ${commande.id_commande}}">Commande prête à livrer</a>
 </div>
 
 </body>

@@ -20,7 +20,7 @@
         <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
         <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
         <div>
-          <a th:href="@{'/details-commande-pizzaiolo'}">Voir détails</a>
+          <a th:href="@{'/detail-commande-pizzaiolo/' + ${commande.id_commande}}" >Voir détails</a>
         </div>
 
       </ul>

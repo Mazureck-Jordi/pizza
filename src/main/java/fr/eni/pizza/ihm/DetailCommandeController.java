@@ -3,6 +3,7 @@ package fr.eni.pizza.ihm;
 import fr.eni.pizza.bll.ICommandeManager;
 import fr.eni.pizza.bll.IDetailCommandeManager;
 import fr.eni.pizza.bll.IProduitManager;
+import fr.eni.pizza.bll.impl.CommandeManager;
 import fr.eni.pizza.bo.Commande;
 import fr.eni.pizza.bo.DetailCommande;
 import fr.eni.pizza.bo.Produit;
@@ -123,6 +124,15 @@ public class DetailCommandeController {
 //        }
         return "redirect:/list-detail-commande";
     }
+
+    @GetMapping("/change-etat/{idCommande}")
+    public String changeEtatCommande (@PathVariable Long idCommande){
+        Commande commandeToChange = commandeManager.getCommandeById(idCommande);
+        commandeToChange.getId_etat().setId_etat(2L);
+        commandeManager.updateCommande(commandeToChange);
+        return "redirect:/list-commande-by-etat";
+    }
+
 }
 
 
