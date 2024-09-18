@@ -7,8 +7,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="texte-blanc"> Liste des détails commandes</h1>
-    <div class="texte-blanc">
+    <h1 class="texte-blanc centrer souligner police"> Liste des détails commandes</h1>
+    <div class="texte-blanc centrer li">
         <div th:each="detailCommande : ${detailCommandes}">
 
             <ul>
@@ -18,7 +18,7 @@
                 <li th:text="${'Prix total de la commande : ' + detailCommande.id_commande.prix_total}"></li>
                 <li th:text="${'Réglé / à régler : ' + detailCommande.id_commande.est_paye}"></li>
                 <div>
-                    <a th:href="@{'/details-detail-commande/' + ${detailCommande.getId_commande().getId_commande()}}">Voir
+                    <a class="souligner" th:href="@{'/details-detail-commande/' + ${detailCommande.getId_commande().getId_commande()}}">Voir
                         détails</a>
                 </div>
 

@@ -1,74 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title>Formulaire</title>
+    <title layout:fragment="Formulaire">Formulaire de commande</title>
 </head>
 <body>
-
-<h1>Formulaire de commande</h1>
-
+<div layout:fragment="content">
+<h1 class="texte-blanc centrer souligner police">Formulaire de commande</h1>
+<div class="texte-blanc centrer">
 <form th:object="${commande}" th:action="@{/commande-form}" method="post">
 
     <!-- Champ id -->
     <input th:field="*{id_commande}" type="hidden">
 
     <!-- Champ date -->
-    <div>
-        <label for="date">Date et heure de livraison</label>
-        <input th:field="*{date_heure_livraison}" type="datetime-local" placeholder="Saisir la date de la commande">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="date">Date et heure de livraison</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input texte-blanc " th:field="*{date_heure_livraison}" type="datetime-local" placeholder="Saisir la date de la commande">
+    </div>
     </div>
 
     <!-- Champ livraison ou à emporter ?-->
-    <div>
-        <label for="livraison">Livraison ou à emporter ?</label>
-        <input th:field="*{livraison}" type="number" placeholder="Saisir 1 pour une livraison ou 0 pour A emporter ">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="livraison">Livraison ou à emporter ?</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input texte-blanc " th:field="*{livraison}" type="number" placeholder="Saisir 1 pour une livraison ou 0 pour A emporter ">
+    </div>
     </div>
 
     <!-- Champ prix totale -->
-    <div>
-        <label for="prix totale">Prix totale</label>
-        <input th:field="*{prix_total}" type="number" step="0.01" min="0" max="1000" placeholder="Saisir le prix total ">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="prix totale">Prix totale</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input texte-blanc " th:field="*{prix_total}" type="number" step="0.01" min="0" max="1000" placeholder="Saisir le prix total ">
+    </div>
     </div>
 
     <!-- Champ est payé ?-->
-    <div>
-        <label for="est payé">La commande est payé ?</label>
-        <input th:field="*{est_paye}" type="number"
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="est payé">La commande est payé ?</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input texte-blanc " th:field="*{est_paye}" type="number"
                placeholder="Saisir 1 si la commande est réglée ou 0 si elle ne l'est pas">
+    </div>
     </div>
 
     <!-- Champ client -->
-    <div>
-        <label for="client">Client de la commande</label>
-        <select th:field="*{id_client}">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="client">Client de la commande</label><br>
+        <select class="uk-input uk-width-1-1 select-large centrer semi-transparent longueur-input texte-blanc " th:field="*{id_client}">
             <option th:each="client: ${clients}" th:value="${client.id_client}"
                     th:text="${client.nom + ' ' + client.prenom}"></option>
         </select>
     </div>
+    </div>
 
     <!-- Champ utilisateur -->
-    <div>
-        <label for="utilisateur">Utilisateur de la commande</label>
-        <select th:field="*{id_utilisateur}">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="utilisateur">Utilisateur de la commande</label><br>
+        <select class="uk-input uk-width-1-1 select-large centrer semi-transparent longueur-input texte-blanc " th:field="*{id_utilisateur}">
             <option th:each="utilisateur: ${utilisateurs}" th:value="${utilisateur.id_utilisateur}"
                     th:text="${utilisateur.nom + ' ' + utilisateur.prenom}"></option>
         </select>
     </div>
+    </div>
 
     <!-- Champ etat -->
-    <div>
-        <label for="etat">Etat de la commande</label>
-        <select th:field="*{id_etat}">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="etat">Etat de la commande</label><br>
+        <select class="uk-input uk-width-1-1 select-large centrer semi-transparent longueur-input texte-blanc " th:field="*{id_etat}">
             <option th:each="etat: ${etats}" th:value="${etat.id_etat}"
                     th:text="${etat.libelle}"></option>
         </select>
     </div>
+    </div>
 
     <!-- Bouton submit -->
     <div>
-        <input type="submit" value="Enregister">
+        <input class="semi-transparent essai" type="submit" value="Enregister">
     </div>
 </form>
+</div>
+</div>
 </body>
 </html>

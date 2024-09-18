@@ -7,8 +7,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="texte-blanc">Liste des commandes</h1>
-    <div class="texte-blanc">
+    <h1 class="texte-blanc centrer souligner police">Liste des commandes</h1>
+    <div class="texte-blanc centrer li">
         <div th:each="commande: ${commandes}">
             <ul>
                 <li th:text="${'N° de la commande : ' + commande.id_commande}"></li>
@@ -22,7 +22,7 @@
                 <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
                 <li th:if="${commande.livraison} == 0">Commande réglées</li>
                 <div>
-                    <a th:href="@{'/details-commande/' + ${commande.id_commande}}">Voir détails</a>
+                    <a class="souligner" th:href="@{'/details-commande/' + ${commande.id_commande}}">Voir détails</a>
                 </div>
             </ul>
         </div>

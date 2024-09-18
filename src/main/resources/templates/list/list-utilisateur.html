@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title>Liste d'utilisateur</title>
+    <title>Liste des produits</title>
 </head>
 <body>
-<h1> Liste des utilisateurs</h1>
+<div layout:fragment="content">
+<h1 class="texte-blanc centrer souligner police"> Liste des utilisateurs</h1>
+    <div class="texte-blanc centrer li ">
 
 <div th:each="utilisateur: ${utilisateurs}">
     <ul>
@@ -14,8 +17,10 @@
         <li th:text="${'Prénom : ' + utilisateur.prenom}"></li>
         <li th:text="${'Email : ' + utilisateur.email}"></li>
         <li th:each="roleUtilisateur : ${utilisateur.getRoles()}" th:text="${'Role : ' + roleUtilisateur.libelle}"></li>
-        <a th:href="@{'/details-utilisateur/' + ${utilisateur.id_utilisateur}}">Voir détails</a>
+        <a class="souligner" th:href="@{'/details-utilisateur/' + ${utilisateur.id_utilisateur}}">Voir détails</a>
     </ul>
+</div>
+</div>
 </div>
 
 
