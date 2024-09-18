@@ -18,5 +18,7 @@ public interface IDAORole {
     void updateRoleToDB(Role role);
 
     void deleteRoleToDB(Role role);
+
+    public void deleteRoleUtilisateurToDB (Long idUtilisateur, Long idRole);
 }
 

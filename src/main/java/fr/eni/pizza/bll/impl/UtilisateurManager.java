@@ -24,7 +24,7 @@ public class UtilisateurManager implements IUtilisateurManager {
     @Override
     public List<Utilisateur> getAll() {
 
-        List<Utilisateur> users = daoUtilisateur.findAll();
+        List<Utilisateur> users = daoUtilisateur.findAllSimple();
 
         for( Utilisateur user : users ) {
             user.setRoles(daoRole.findRolesByIdUtilisateur(user.getId_utilisateur()));
@@ -36,7 +36,7 @@ public class UtilisateurManager implements IUtilisateurManager {
     @Override
     public Utilisateur getById(Long id) {
 
-        Utilisateur user = daoUtilisateur.findById(id);
+        Utilisateur user = daoUtilisateur.findUtilisateurByIdSimple(id);
 
         user.setRoles(daoRole.findRolesByIdUtilisateur(id));
 
@@ -96,8 +96,21 @@ public class UtilisateurManager implements IUtilisateurManager {
 
         utilisateur.setMot_de_passe(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(utilisateur.getMot_de_passe()));
 
-
         daoUtilisateur.updateUtilisateurToDB(utilisateur);
+
+        if(utilisateur.getRoles() != null) {
+            boolean SameRoleFound = false;
+            for (Role role2 : utilisateur.getRoles()) {
+                for (Role role1 : daoRole.findRolesByIdUtilisateur(utilisateur.getId_utilisateur())) {
+                    if (role1.getId_role() == role2.getId_role()) {
+                        SameRoleFound = true;
+                    }
+                }
+            }
+            if (!SameRoleFound) {
+                daoUtilisateur.updateRoleUtilisateursToDB(utilisateur);
+            }
+        }
     }
 
     @Override
@@ -118,5 +131,10 @@ public class UtilisateurManager implements IUtilisateurManager {
     @Override
     public void deleteRole(Role role) {
     daoRole.deleteRoleToDB(role);
+    }
+
+    @Override
+    public void deteteRoleUtilisateur (Long idUtilisateur, Long idRole) {
+        daoRole.deleteRoleUtilisateurToDB(idUtilisateur, idRole);
     }
 }

@@ -53,7 +53,6 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
         }
     };
 
-
     static final RowMapper<Utilisateur> SIMPLE_UTILISATEUR_ROW_MAPPER = new RowMapper<Utilisateur>() {
         @Override
         public Utilisateur mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -80,6 +79,10 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
         return mapSqlParameterSource;
     }
 
+    private String sqlSelectAllSimple = "SELECT id_utilisateur AS UTILISATEUR_id_utilisateur, nom, prenom, email, mot_de_passe FROM utilisateur";
+
+    private String sqlSelectByIdSimple = "SELECT id_utilisateur AS UTILISATEUR_id_utilisateur, nom, prenom, email, mot_de_passe FROM utilisateur WHERE id_utilisateur = ?";
+
     private String sqlSelectAll = "SELECT u.id_utilisateur AS UTILISATEUR_id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe, r.id_role AS ROLE_id_role, r.libelle FROM role_utilisateur ru JOIN utilisateur u ON ru.UTILISATEUR_id_utilisateur = u.id_utilisateur JOIN role r ON ru.ROLE_id_role = r.id_role";
 
     private String sqlSelectByIdUtilisateur = "SELECT u.id_utilisateur AS UTILISATEUR_id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe, r.id_role AS ROLE_id_role, r.libelle FROM role_utilisateur ru JOIN utilisateur u ON ru.UTILISATEUR_id_utilisateur = u.id_utilisateur JOIN role r ON ru.ROLE_id_role = r.id_role WHERE ru.UTILISATEUR_id_utilisateur = ?";
@@ -104,6 +107,16 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
 
     private String sqlDeleteUtilisateur = "DELETE FROM utilisateur WHERE id_utilisateur = :idUtilisateur";
 
+
+    @Override
+    public List<Utilisateur> findAllSimple(){
+        return jdbcTemplate.query(sqlSelectAllSimple, SIMPLE_UTILISATEUR_ROW_MAPPER);
+    }
+
+    @Override
+    public Utilisateur findUtilisateurByIdSimple(Long id) {
+        return jdbcTemplate.queryForObject(sqlSelectByIdSimple, SIMPLE_UTILISATEUR_ROW_MAPPER, id);
+    }
 
     @Override
     public List<Utilisateur> findAll() {
@@ -136,13 +149,13 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
         namedParameterJdbcTemplate.update(sqlInsertUtilisateur, map(utilisateur));
         Long utilisateurId = namedParameterJdbcTemplate.queryForObject("SELECT LAST_INSERT_ID()", new MapSqlParameterSource(), Long.class);
         utilisateur.setId_utilisateur(utilisateurId);
-        updateRoleUtilisateurs(utilisateur);
+        updateRoleUtilisateursToDB(utilisateur);
     }
 
     @Override
     public void updateUtilisateurToDB(Utilisateur utilisateur) {
         namedParameterJdbcTemplate.update(sqlUpdateUtilisateur, map(utilisateur));
-        updateRoleUtilisateurs(utilisateur);
+
     }
 
     @Override
@@ -151,7 +164,8 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
 
     }
 
-    private void updateRoleUtilisateurs(Utilisateur utilisateur) {
+    @Override
+    public void updateRoleUtilisateursToDB(Utilisateur utilisateur) {
         String sqlInsertRoleUtilisateur = "INSERT INTO role_utilisateur (UTILISATEUR_id_utilisateur, ROLE_id_role) VALUES ( :idUtilisateur, :idRole)";
         for (Role role : utilisateur.getRoles()) {
             MapSqlParameterSource map = new MapSqlParameterSource();

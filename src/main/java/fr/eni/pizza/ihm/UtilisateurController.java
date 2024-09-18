@@ -6,12 +6,11 @@ import fr.eni.pizza.bo.Commande;
 import fr.eni.pizza.bo.Role;
 import fr.eni.pizza.bo.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -66,7 +65,6 @@ public class UtilisateurController {
     }
 
     @PostMapping("/utilisateur-form")
-
     public String utilisateurForm(@ModelAttribute (name = "utilisateur") Utilisateur utilisateur) {
 
         if (utilisateur.getId_utilisateur() == null) {
@@ -76,7 +74,7 @@ public class UtilisateurController {
         if (utilisateur.getId_utilisateur() != null) {
             utilisateurManager.updateUtilisateur(utilisateur);
         }
-            return "redirect:/list-utilisateur";
+            return "redirect:/details-utilisateur/" + utilisateur.getId_utilisateur();
 
     }
 
@@ -90,6 +88,49 @@ public class UtilisateurController {
             utilisateurManager.deleteUtilisateur(utilisateurManager.getUtilisateurById(id));
         }
         return "redirect:/list-utilisateur";
+    }
+
+    @GetMapping("/delete-role-utilisateur/{idUtilisateur}/{idRole}")
+    public String deleteRoleUtilisateur(@PathVariable Long idUtilisateur , @PathVariable Long idRole) {
+        utilisateurManager.deteteRoleUtilisateur(idUtilisateur, idRole);
+        return "redirect:/details-utilisateur/" + idUtilisateur;
+    }
+
+
+    @GetMapping("/profil-utilisateur")
+    public String showProfilUtilisateur(@AuthenticationPrincipal UserDetails loggedUser, Model model) {
+
+        Utilisateur utilisateur = utilisateurManager.getById(utilisateurManager.getByEmail(loggedUser.getUsername()).getId_utilisateur());
+        if (utilisateur == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("utilisateur", utilisateur);
+
+        return "profil/profil-utilisateur";
+    }
+
+    @GetMapping("/show-simple-utilisateur-form")
+
+    public String showFormUtilisateurSimple(@AuthenticationPrincipal UserDetails loggedUser, Model model) {
+
+        Utilisateur utilisateur = utilisateurManager.getUtilisateurById(utilisateurManager.getByEmail(loggedUser.getUsername()).getId_utilisateur());
+
+        model.addAttribute("utilisateur", utilisateur);
+
+        List<Commande> commandes = commandeManager.getAllCommandes();
+
+        model.addAttribute("commandes", commandes);
+
+        return "form/simple-utilisateur-form";
+    }
+
+    @PostMapping("/simple-utilisateur-form")
+    public String utilisateurFormSimple(@ModelAttribute (name = "utilisateur") Utilisateur utilisateur) {
+
+            utilisateurManager.updateUtilisateur(utilisateur);
+
+        return "redirect:/logout";
+
     }
 
 }

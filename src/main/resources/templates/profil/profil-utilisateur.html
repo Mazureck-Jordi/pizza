@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="${utilisateur.nom}"></title>
+</head>
+<body>
+<h1>Mon profil</h1>
+
+<ul>
+  <li th:text="${'Identifiant : ' + utilisateur.id_utilisateur}"></li>
+  <li th:text="${'Nom : ' + utilisateur.nom}"></li>
+  <li th:text="${'Prénom : ' + utilisateur.prenom}"></li>
+  <li th:text="${'Email : ' + utilisateur.getEmail()}"></li>
+  <li th:each="roleUtilisateur : ${utilisateur.getRoles()}">
+    <span th:text="${'Role : ' + roleUtilisateur.libelle}"></span>
+  </li>
+</ul>
+<div>
+  <a th:href="@{'/show-simple-utilisateur-form'}">Modifier</a>
+</div>
+</body>
+</html>

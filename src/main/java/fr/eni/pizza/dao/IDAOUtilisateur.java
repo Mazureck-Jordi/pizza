@@ -7,6 +7,10 @@ import java.util.List;
 
 public interface IDAOUtilisateur {
 
+    public List<Utilisateur> findAllSimple();
+
+    public Utilisateur findUtilisateurByIdSimple(Long id);
+
     List<Utilisateur> findAll();
 
     Utilisateur findById(Long id);
@@ -23,4 +27,5 @@ public interface IDAOUtilisateur {
 
     void deleteUtilisateurToDB (Utilisateur utilisateur);
 
+    void updateRoleUtilisateursToDB(Utilisateur utilisateur);
 }
