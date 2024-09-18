@@ -33,8 +33,8 @@ public class PizzaController {
 
 
     @GetMapping("")
-    public String showAccueil(@AuthenticationPrincipal UserDetails loggedUser) {
-
+    public String showAccueil(@AuthenticationPrincipal UserDetails loggedUser, Model model) {
+model.addAttribute("loggedUser", loggedUser);
         return "accueil";
     }
 

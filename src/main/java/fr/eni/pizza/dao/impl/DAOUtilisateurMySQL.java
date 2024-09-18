@@ -47,8 +47,8 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
                 commande.setEst_paye(rs.getInt("est_paye"));
 
                 utilisateur.setId_commande(commande);
-
             }
+
             return utilisateur;
         }
     };

@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface IDAODetailCommande {
 
+    List<DetailCommande> findAllDetailCommandeByIdEtat(Long idEtat);
+
     List<DetailCommande>findAllDetailCommandes();
 
     List<DetailCommande> findAllDetailCommandeByIdCommande(Long id);
 
-    public DetailCommande findDetailCommandeByIdCommande(Long idCommande, Long idProduit);
+    DetailCommande findDetailCommandeByIdCommande(Long idCommande, Long idProduit);
 
     void addDetailCommandeToDB(DetailCommande detailCommande);
 

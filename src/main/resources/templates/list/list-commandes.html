@@ -19,7 +19,7 @@
                 <!--        <li th:text="${'Utilisateur de la commande : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>-->
                 <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
                 <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
-                <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
+                <li th:if="${commande.est_paye} == 1">Commande non réglées</li>
                 <li th:if="${commande.livraison} == 0">Commande réglées</li>
                 <div>
                     <a th:href="@{'/details-commande/' + ${commande.id_commande}}">Voir détails</a>

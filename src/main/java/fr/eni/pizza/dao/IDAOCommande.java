@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface IDAOCommande {
 
+    List<Commande> findCommandesByIdEtat(Long idEtat);
+
     List<Commande> findAllCommandes();
 
     Commande findCommandeById(Long id);

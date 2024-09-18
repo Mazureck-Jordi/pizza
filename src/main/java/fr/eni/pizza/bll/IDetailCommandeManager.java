@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface IDetailCommandeManager {
 
+    List<DetailCommande> getAllDetailCommandeByIdEtat(Long idEtat);
+
     List<DetailCommande> getAllDetailCommandes();
 
     List<DetailCommande> getAllDetailCommandeByIdCommande(Long id);

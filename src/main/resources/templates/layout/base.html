@@ -46,10 +46,13 @@
 <div id="offcanvas-nav" uk-offcanvas="mode: reveal; overlay: true">
     <div class="uk-offcanvas-bar">
         <ul class="uk-nav uk-nav-default">
-            <div>
+            <div sec:authorize="isAuthenticated()">
                 Logged user: <span sec:authentication="name"></span>
 <!--                Roles: <span sec:authentication="principal.authorities"></span>-->
             </div>
+            <li sec:authorize="isAuthenticated()" class="uk-active">
+                <a th:href="@{'/profil-utilisateur'}">Mon profil</a>
+            </li>
             <li class="uk-active">
                 <a th:href="@{'/list-produits'}">Liste des produits</a>
             </li>

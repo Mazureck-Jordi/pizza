@@ -61,6 +61,29 @@ public class DetailCommandeController {
         return "details/details-detail-commande";
     }
 
+    @GetMapping("/detail-commande-pizzaiolo/{id}")
+    public String ShowDetailCommandePizzaiolo(@PathVariable Long id, Model model) {
+
+        List<DetailCommande> detailCommandes = detailCommandeManager.getAllDetailCommandeByIdCommande(id);
+        if (detailCommandes == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("detailCommandes", detailCommandes);
+
+        Commande commande = commandeManager.getCommandeById(id);
+        model.addAttribute("commande", commande);
+
+        double prixTotal = 0.0;
+        for (DetailCommande d : detailCommandeManager.getAllDetailCommandeByIdCommande(id)) {
+            prixTotal += d.getQuantite() * d.getId_produit().getPrix();
+        }
+        commande.setPrix_total(prixTotal);
+        commandeManager.updteCommandeById(commande);
+
+
+        return "details/details-commande-pizzaiolo";
+    }
+
 
     @GetMapping({"/show-detail-commande-form/{id}", "/show-detail-commande-form"})
     public String ShowDetailCommandeForm(@PathVariable(required = false) Long id, Model model) {

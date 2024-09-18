@@ -22,6 +22,11 @@ public class CommandeManager implements ICommandeManager {
 
 
     @Override
+    public List<Commande> getCommandesByIdEtat(Long idEtat) {
+        return commandeDAO.findCommandesByIdEtat(idEtat);
+    }
+
+    @Override
     public List<Commande> getAllCommandes() {
         return commandeDAO.findAllCommandes();
     }

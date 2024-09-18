@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ICommandeManager {
 
+    List<Commande> getCommandesByIdEtat(Long idEtat);
+
     List<Commande> getAllCommandes() ;
 
     Commande getCommandeById(Long id) ;

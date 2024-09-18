@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--    <title th:text="${'Détail-commande' + detailcommande.id_detail_commande}"></title>-->
+</head>
+<body>
+<h1> Details de la détails commande</h1>
+
+<div>
+
+  <h2>Information de la commande</h2>
+  <li th:text="${' Commande Numéro : ' + commande.id_commande}"></li>
+  <h2> Clients </h2>
+  <ul>
+    <li th:text="${'Identifiant du client : ' + commande.id_client.id_client + ' ' + commande.id_client.prenom}"></li>
+    <li th:text="${'Nom du client : ' + commande.id_client.nom + ' ' + commande.id_client.prenom}"></li>
+  </ul>
+  <h2> Utilisateurs </h2>
+  <ul>
+    <li th:text="${'id Utilisateur : ' + commande.id_utilisateur.id_utilisateur}"></li>
+    <li th:text="${'Nom Utilisateur : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>
+  </ul>
+  <h2> Détails de la commande </h2>
+  <ul th:each="d: ${detailCommandes}">
+    <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
+    <li th:text="${'Quantité : ' + d.quantite}"></li>
+  </ul>
+  <h2> État de la commande </h2>
+  <ul>
+    <li th:text="${'Prix de la commande : ' + commande.prix_total}"></li>
+    <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
+    <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
+    <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
+    <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
+    <li th:if="${commande.est_paye} == 1">Commande réglées</li>
+  </ul>
+
+</div>
+
+</body>
+</html>

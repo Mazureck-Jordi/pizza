@@ -15,6 +15,11 @@ public class DetailCommandeManager implements IDetailCommandeManager {
 
 
     @Override
+    public List<DetailCommande> getAllDetailCommandeByIdEtat(Long idEtat) {
+        return detailCommandeDAO.findAllDetailCommandeByIdEtat(idEtat);
+    }
+
+    @Override
     public List<DetailCommande> getAllDetailCommandes() {
         return detailCommandeDAO.findAllDetailCommandes();
     }

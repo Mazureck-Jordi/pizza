@@ -41,30 +41,38 @@ public class DAOCommandeMySQL implements IDAOCommande {
             commande.setEst_paye(rs.getInt("est_paye"));
             commande.setPrix_total(rs.getDouble("prix_total"));
 
-            Etat etat = new Etat();
-            etat.setId_etat(rs.getLong("ETAT_id_etat"));
-            etat.setLibelle(rs.getString("libelle"));
+            if (rs.getLong("ETAT_id_etat") != 0) {
+                Etat etat = new Etat();
+                etat.setId_etat(rs.getLong("ETAT_id_etat"));
+                etat.setLibelle(rs.getString("libelle"));
 
-            commande.setId_etat(etat);
+                commande.setId_etat(etat);
 
-            Utilisateur utilisateur = new Utilisateur();
-            utilisateur.setId_utilisateur(rs.getLong("UTILISATEUR_id_utilisateur"));
-            utilisateur.setNom(rs.getString("utilisateur_nom"));
-            utilisateur.setPrenom(rs.getString("utilisateur_prenom"));
-            utilisateur.setEmail(rs.getString("email"));
-            utilisateur.setMot_de_passe("mot_de_passe");
+            }
 
-            commande.setId_utilisateur(utilisateur);
+            if (rs.getLong("UTILISATEUR_id_utilisateur") != 0) {
+                Utilisateur utilisateur = new Utilisateur();
+                utilisateur.setId_utilisateur(rs.getLong("UTILISATEUR_id_utilisateur"));
+                utilisateur.setNom(rs.getString("utilisateur_nom"));
+                utilisateur.setPrenom(rs.getString("utilisateur_prenom"));
+                utilisateur.setEmail(rs.getString("email"));
+                utilisateur.setMot_de_passe("mot_de_passe");
 
-            Client client = new Client();
-            client.setId_client(rs.getLong("CLIENT_id_client"));
-            client.setPrenom(rs.getString("client_prenom"));
-            client.setNom(rs.getString("client_nom"));
-            client.setRue(rs.getString("rue"));
-            client.setCode_postal(rs.getString("code_postal"));
-            client.setVille(rs.getString("ville"));
+                commande.setId_utilisateur(utilisateur);
+            }
 
-            commande.setId_client(client);
+            if (rs.getLong("CLIENT_id_client") != 0) {
+                Client client = new Client();
+                client.setId_client(rs.getLong("CLIENT_id_client"));
+                client.setPrenom(rs.getString("client_prenom"));
+                client.setNom(rs.getString("client_nom"));
+                client.setRue(rs.getString("rue"));
+                client.setCode_postal(rs.getString("code_postal"));
+                client.setVille(rs.getString("ville"));
+
+                commande.setId_client(client);
+
+            }
 
             return commande;
         }
@@ -93,13 +101,21 @@ public class DAOCommandeMySQL implements IDAOCommande {
         return mapSqlParameterSource;
     }
 
+    private String sqlSelectCommandesByIdEtat ="SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, co.CLIENT_id_client, cl.id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, co.ETAT_id_etat, e.id_etat, e.libelle, co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe FROM commande co JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur WHERE co.ETAT_id_etat = :idEtat";
     private String sqlSelectAllCommande = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, co.CLIENT_id_client, cl.id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, co.ETAT_id_etat, e.id_etat, e.libelle, co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe FROM commande co JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur";
     private String sqlSelectCommandeById = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, co.CLIENT_id_client, cl.id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, co.ETAT_id_etat, e.id_etat, e.libelle, co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe FROM commande co JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur WHERE co.id_commande = ?";
     private String sqlInsertCommande = "INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (:idCommande, :dateCommande, :clientCommande, :livraisonCommande, :etatCommande, :utilisateurCommande, :prixTotalCommande, :estPayeCommande)";
-    private String sqlUpdateCommande = "UPDATE commande SET date_heure_livraison = :dateCommande, CLIENT_id_client = :clientCommande, livraison = :livraisonCommande, ETAT_id_etat =:etatCommande, UTILISATEUR_id_utilisateur = :utilisateurCommande, prix_total = :prixTotalCommande, est_paye = :estPayeCommande";
+    private String sqlUpdateCommande = "UPDATE commande SET date_heure_livraison = :dateCommande, CLIENT_id_client = :clientCommande, livraison = :livraisonCommande, ETAT_id_etat =:etatCommande, UTILISATEUR_id_utilisateur = :utilisateurCommande, prix_total = :prixTotalCommande, est_paye = :estPayeCommande WHERE id_commande = :idCommande";
     private String sqlUpdateCommandeById = "UPDATE commande SET date_heure_livraison = :dateCommande, CLIENT_id_client = :clientCommande, livraison = :livraisonCommande, ETAT_id_etat =:etatCommande, UTILISATEUR_id_utilisateur = :utilisateurCommande, prix_total = :prixTotalCommande, est_paye = :estPayeCommande WHERE id_commande = :idCommande";
     private String sqlDeleteCommande = "DELETE FROM commande WHERE id_commande = :idCommande";
     private String sqlSelectByLastId = "SELECT id_commande FROM commande ORDER BY id_commande DESC LIMIT 1";
+
+    @Override
+    public List<Commande> findCommandesByIdEtat(Long idEtat) {
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("idEtat", idEtat);
+        return namedParameterJdbcTemplate.query(sqlSelectCommandesByIdEtat, map , COMMANDE_ROW_MAPPER);
+    }
 
     @Override
     public List<Commande> findAllCommandes() {
@@ -128,7 +144,6 @@ public class DAOCommandeMySQL implements IDAOCommande {
 
     @Override
     public void updateCommandeToDB(Commande commande) {
-
         namedParameterJdbcTemplate.update(sqlUpdateCommande, map(commande));
     }
 
