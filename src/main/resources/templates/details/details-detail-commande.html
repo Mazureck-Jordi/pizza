@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!--    <title th:text="${'Détail-commande' + detailcommande.id_detail_commande}"></title>-->
+    <!--    <title th:text="${'Détail-commande' + detailcommande.id_detail_commande}"></title>-->
 </head>
 <body>
 <h1> Details de la détails commande</h1>
@@ -11,37 +11,49 @@
 <div>
 
     <h2>Information de la commande</h2>
+    <ul>
         <li th:text="${' Commande Numéro : ' + commande.id_commande}"></li>
-    <h2> Clients </h2>
-    <ul>
-        <li th:text="${'Nom du client : ' + commande.id_client.nom + ' ' + commande.id_client.prenom}"></li>
-        <li th:text="${'Adresse : ' + commande.id_client.rue}"></li>
-        <li th:text="${' CP/Ville : ' + commande.id_client.code_postal + ' ' + commande.id_client.ville}"></li>
-    </ul>
-    <h2> Utilisateurs </h2>
-    <ul>
-        <li th:text="${'id Utilisateur : ' + commande.id_utilisateur.id_utilisateur}"></li>
-        <li th:text="${'Nom Utilisateur : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>
-        <li th:text="${'Email : ' + commande.id_utilisateur.email}"></li>
-        <li th:text="${'Mot de passe : ' + commande.id_utilisateur.mot_de_passe}"></li>
-    </ul>
-    <h2> Détails de la commande </h2>
-    <ul th:each="d: ${detailCommandes}">
-        <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
-        <li th:text="${'Quantité : ' + d.quantite}"></li>
-        <li th:text="${'Prix cumulé : ' + d.quantite*d.id_produit.prix}"></li>
-    </ul>
-    <h2> État de la commande </h2>
-    <ul>
-        <li th:text="${'Prix de la commande : ' + commande.prix_total}"></li>
+        <li th:text="${'Prix de la commande : ' + commande.prix_total + ' €'}"></li>
+        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
         <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
         <li th:if="${commande.est_paye} == 1">Commande réglées</li>
-        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
         <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
         <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
     </ul>
 
-</div>
+    <h2> Clients </h2>
+    <ul>
+        <li th:text="${'Nom du client : ' + commande.id_client.nom + ' ' + commande.id_client.prenom}"></li>
+        <li th:if="${commande.livraison} == 1" th:text="${'Adresse : ' + commande.id_client.rue}"></li>
+        <li th:if="${commande.livraison} == 1"
+            th:text="${' CP/Ville : ' + commande.id_client.code_postal + ' ' + commande.id_client.ville}"></li>
+    </ul>
 
+    <h2> Détails de la commande </h2>
+    <ul th:each="d: ${detailCommandes}">
+        <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
+        <li th:text="${'Quantité : ' + d.quantite}"></li>
+        <li th:text="${'Prix cumulé : ' + d.quantite*d.id_produit.prix + ' €'}"></li>
+    </ul>
+
+    <h2> Utilisateur </h2>
+    <ul>
+        <li th:text="${'Préparateur de la commande : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>
+        <li th:text="${'Etat de la commande : ' + commande.id_etat.libelle}"></li>
+        <li>
+            <input type="button" value="Modifier Commande"
+                   th:onclick="'window.location.href=\'/show-creation-commande/' + ${commande.id_commande} + '\''">
+        </li>
+        <li>
+            <form th:action="@{'/enregistrer/' + ${commande.id_commande}}" method="post">
+                <input class="semi-transparent essai" type="submit" value="Enregister la commande">
+            </form>
+        </li>
+        <li>
+            <input type="button" value="Accueil"
+                   th:onclick="'window.location.href=\'/\''">
+        </li>
+    </ul>
+</div>
 </body>
 </html>

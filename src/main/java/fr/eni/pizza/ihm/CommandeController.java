@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -48,6 +49,7 @@ public class CommandeController {
     public String ShowListCommandesCondition(@AuthenticationPrincipal UserDetails loggedUser, Model model) {
 
         boolean isLivreur = false;
+        boolean isGerant = false;
         boolean isPazzaiolo = false;
         Utilisateur user = utilisateurManager.getByEmail(loggedUser.getUsername());
         Utilisateur userWithRoles = utilisateurManager.getUtilisateurById(user.getId_utilisateur());
@@ -55,32 +57,45 @@ public class CommandeController {
             if (role.getId_role() == 1) {
                 isPazzaiolo = true;
             }
+            if (role.getId_role() == 2) {
+                isGerant = true;
+            }
             if (role.getId_role() == 3) {
                 isLivreur = true;
             }
         }
 
-        if (isPazzaiolo) {
-            List<Commande> commandes = commandeManager.getCommandesByIdEtat(1L);
+        if (isGerant) {
+            List<Commande> commandes = commandeManager.getAllCommandes();
             List<Commande> commandesTriees = commandes.stream()
                     .sorted(Comparator.comparing(Commande::getDate_heure_livraison))
                     .toList();
             model.addAttribute("commandes", commandesTriees);
-        }
 
-        if (isLivreur) {
+        } else if (!isGerant && isPazzaiolo) {
+
             List<Commande> commandes = commandeManager.getCommandesByIdEtat(2L);
+            commandes.addAll(commandeManager.getCommandesByIdEtat(3L));
+
             List<Commande> commandesTriees = commandes.stream()
                     .sorted(Comparator.comparing(Commande::getDate_heure_livraison))
                     .toList();
+
+            model.addAttribute("commandes", commandesTriees);
+
+        } else if (!isGerant && isLivreur) {
+
+            List<Commande> commandes = commandeManager.getCommandesByIdEtat(4L);
+            commandes.addAll(commandeManager.getCommandesByIdEtat(5L));
+
+            List<Commande> commandesTriees = commandes.stream()
+                    .sorted(Comparator.comparing(Commande::getDate_heure_livraison))
+                    .toList();
+
             model.addAttribute("commandes", commandesTriees);
         }
-
-
-
         return "list/list-commande-by-etat";
     }
-
 
     @GetMapping("/details-commande/{id}")
     public String ShowDetailCommande(@PathVariable Long id, Model model) {
@@ -94,7 +109,6 @@ public class CommandeController {
 
         return "details/details-commande";
     }
-
 
     @GetMapping({"/show-commande-form/{id}", "/show-commande-form"})
     public String ShowFormCommande(@PathVariable(required = false) Long id, Model model) {
@@ -134,7 +148,11 @@ public class CommandeController {
     @PostMapping("/commande-form")
     public String commandeForm(@ModelAttribute Commande commande) {
 
-        Long lastIdCommande = commandeManager.getLastCommande().getId_commande() + 1;
+        commande.setDate_heure_livraison(LocalDateTime.now());
+        commande.setLivraison(0);
+        commande.setPrix_total(0);
+        commande.setEst_paye(0);
+        commande.setId_etat(commandeManager.getEtatById(1L));
 
         if (commande.getId_commande() != null) {
             commandeManager.updateCommande(commande);
@@ -142,10 +160,65 @@ public class CommandeController {
         if (commande.getId_commande() == null) {
             commandeManager.addCommande(commande);
         }
-
-
         return "redirect:/show-creation-commande/" + commande.getId_commande();
     }
+
+    @PostMapping("/date-form/{idCommande}")
+    public String dateForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+        Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
+        commandeToUpdate.setDate_heure_livraison(commande.getDate_heure_livraison());
+        commandeManager.updateCommande(commandeToUpdate);
+        return "redirect:/show-creation-commande/" + commandeToUpdate.getId_commande();
+    }
+
+    @PostMapping("/livraison-form/{idCommande}")
+    public String livraisonForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+        Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
+        commandeToUpdate.setLivraison(commande.getLivraison());
+        commandeManager.updateCommande(commandeToUpdate);
+        return "redirect:/show-creation-commande/" + commandeToUpdate.getId_commande();
+    }
+
+    @PostMapping("/enregistrer/{idCommande}")
+    public String enregistrerForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+        Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
+        commandeToUpdate.setId_etat(commandeManager.getEtatById(2L));
+        commandeManager.updateCommande(commandeToUpdate);
+        return "redirect:/details-detail-commande/" + commandeToUpdate.getId_commande();
+    }
+
+    @PostMapping("/en-preparation-form/{idCommande}")
+    public String enPreparationForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+        Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
+        commandeToUpdate.setId_etat(commandeManager.getEtatById(3L));
+        commandeManager.updateCommande(commandeToUpdate);
+        return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
+    }
+
+    @PostMapping("/fin de-preparation-form/{idCommande}")
+    public String finDePrerationForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+        Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
+        commandeToUpdate.setId_etat(commandeManager.getEtatById(4L));
+        commandeManager.updateCommande(commandeToUpdate);
+        return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
+    }
+
+    @PostMapping("/en-livraison-form/{idCommande}")
+    public String enLivraison(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+        Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
+        commandeToUpdate.setId_etat(commandeManager.getEtatById(5L));
+        commandeManager.updateCommande(commandeToUpdate);
+        return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
+    }
+
+    @PostMapping("/fin de-livraison-form/{idCommande}")
+    public String finDeLivraison(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+        Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
+        commandeToUpdate.setId_etat(commandeManager.getEtatById(6L));
+        commandeManager.updateCommande(commandeToUpdate);
+        return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
+    }
+
 
     @GetMapping("/delete-commande/{id}")
     public String deleteCommande(@PathVariable Long id) {

@@ -17,6 +17,7 @@
                 <li th:text="${'Livraison ou à emporter : ' + detailCommande.id_commande.livraison}"></li>
                 <li th:text="${'Prix total de la commande : ' + detailCommande.id_commande.prix_total}"></li>
                 <li th:text="${'Réglé / à régler : ' + detailCommande.id_commande.est_paye}"></li>
+                <li th:text="${'Etat : ' + detailCommande.id_commande.id_etat.libelle}"></li>
                 <div>
                     <a class="souligner" th:href="@{'/details-detail-commande/' + ${detailCommande.getId_commande().getId_commande()}}">Voir
                         détails</a>

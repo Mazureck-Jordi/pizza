@@ -53,6 +53,10 @@
             <li sec:authorize="isAuthenticated()" class="uk-active">
                 <a th:href="@{'/profil-utilisateur'}">Mon profil</a>
             </li>
+            <li sec:authorize="isAuthenticated()" class="uk-active">
+                <a th:href="@{'/list-commande-by-etat'}">Mes Commandes</a>
+
+            </li>
             <li class="uk-active">
                 <a th:href="@{'/list-produits'}">Liste des produits</a>
             </li>
@@ -82,12 +86,12 @@
                 <a th:href="@{'/show-commande-form'}">Ajouter une commande</a>
             </li>
             <li>
-                <a th:href="@{'/etape1'}">Etape 1</a>
+                <a th:href="@{'/show-commande-form'}">Création de commande</a>
             </li>
-            <li>
+            <li class="uk-active">
                 <a th:href="@{'/login'}">Connexion</a>
             </li>
-            <li>
+            <li class="uk-active">
                 <a th:href="@{'/logout'}">Déconnexion</a>
             </li>
         </ul>

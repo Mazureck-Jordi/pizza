@@ -9,7 +9,7 @@
 <body>
 <div layout:fragment="content">
 <h1 class="texte-blanc centrer souligner police" >Formulaire de l'utilisateur</h1>
-<div class="texte-blanc centrer"
+<div class="texte-blanc centrer">
 <form th:object="${utilisateur}" th:action="@{/utilisateur-form}" method="post">
 
     <!-- Champ id utilisateur -->
@@ -54,6 +54,7 @@
     </div>
 
 </form>
+</div>
 </div>
 </body>
 </html>

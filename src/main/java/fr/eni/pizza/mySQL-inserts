@@ -18,17 +18,19 @@ INSERT INTO role (id_role, libelle) VALUES (1, 'Pizzaiolo');
 INSERT INTO role (id_role, libelle) VALUES (2, 'Gérant');
 INSERT INTO role (id_role, libelle) VALUES (3, 'Livreur');
 
-INSERT INTO etat (id_etat, libelle) VALUES (1, 'Créée');
-INSERT INTO etat (id_etat, libelle) VALUES (2, 'Préparée');
-INSERT INTO etat (id_etat, libelle) VALUES (3, 'En livraison');
-INSERT INTO etat (id_etat, libelle) VALUES (4, 'Livrée');
-INSERT INTO etat (id_etat, libelle) VALUES (5, 'Payée');
+INSERT INTO etat (id_etat, libelle) VALUES (1, 'En cours de création');
+INSERT INTO etat (id_etat, libelle) VALUES (2, 'Créée');
+INSERT INTO etat (id_etat, libelle) VALUES (3, 'En cours de préparation');
+INSERT INTO etat (id_etat, libelle) VALUES (4, 'Préparée');
+INSERT INTO etat (id_etat, libelle) VALUES (5, 'En cours de livraison');
+INSERT INTO etat (id_etat, libelle) VALUES (6, 'Livrée');
 
-INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (1, '2024-09-10 14:30:00', 1, b'1', 1, null, 40.50, b'0');  
-INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (2, '2024-09-10 14:31:00', 1, b'0', 1, null, 25.00, b'1');  
-INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (3, '2024-09-10 14:32:00', 2, b'1', 1, null, 29.00, b'0');  
-INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (4, '2024-09-10 14:33:00', 2, b'0', 1, null, 14.50, b'1');  
-INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (5, '2024-09-10 14:34:00', 3, b'1', 1, null, 13.50, b'0');  
+INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (1, '2024-09-10 14:30:00', 1, b'0', 1, null, 40.50, b'0');
+INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (2, '2024-09-10 14:31:00', 1, b'0', 2, null, 25.00, b'0');
+INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (3, '2024-09-10 14:32:00', 2, b'1', 3, null, 29.00, b'0');
+INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (4, '2024-09-10 14:33:00', 2, b'0', 4, null, 14.50, b'0');
+INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (5, '2024-09-10 14:34:00', 3, b'1', 5, null, 13.50, b'0');
+INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (6, '2024-09-10 14:35:00', 3, b'1', 6, null, 13.50, b'1');
 
 INSERT INTO detail_commande (quantite, COMMANDE_id_commande, PRODUIT_id_produit) VALUES (1, 1, 1);
 INSERT INTO detail_commande (quantite, COMMANDE_id_commande, PRODUIT_id_produit) VALUES (1, 1, 4);

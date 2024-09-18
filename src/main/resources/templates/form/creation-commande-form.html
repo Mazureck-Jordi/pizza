@@ -10,32 +10,12 @@
 
 <div>
 
-    <h2>Information de la commande</h2>
     <li th:text="${' Commande Numéro : ' + commande.id_commande}"></li>
 
-    <h2> État de la commande </h2>
-    <ul>
-        <!--  faire un th:each pour afficher le prix de chaque article et les additionner et les enregistrer dans prix total      -->
-        <li th:text="${'Prix de la commande : ' + commande.prix_total}"></li>
-        <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
-        <li th:if="${commande.est_paye} == 1">Commande réglées</li>
-        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
-        <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
-        <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
-    </ul>
+    <h2>Formulaire de la commande</h2>
 
-    <h2> Détails de la commande </h2>
-    <ul th:each="d: ${detailCommandeUpdate}">
-        <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
-        <li th:text="${'Quantité : ' + d.quantite}"></li>
-        <li th:text="${'Prix cumulé : ' + d.quantite*d.id_produit.prix}"></li>
-        <a th:href="@{'/delete-produit-details-commande/' + ${d.id_commande.id_commande} + '/' +  ${d.id_produit.idProduit}}">Supprimer</a>
-    </ul>
-</div>
 
-<h2>Formulaire de la commande</h2>
-
-<form th:each="detail : ${detailCommandes}" th:object="${detail}" th:action="@{/creation-commande}" method="post">
+    <form th:each="detail : ${detailCommandes}" th:object="${detail}" th:action="@{/creation-commande}" method="post">
 
         <!-- Champ Numero de commande-->
         <div>
@@ -43,25 +23,107 @@
             <input name="id_commande" th:value="${lastIdCommande}" type="hidden">
         </div>
 
-    <!-- Boucle sur les produits -->
-    <div >
-        <!-- Checkbox pour sélectionner le produit -->
-        <label for="produit" th:text="*{id_produit.nom}"></label>
-            <input name="id_produit" th:value="*{id_produit.idProduit}"  type="hidden">
-
-
-        <!-- Champ quantité pour chaque produit -->
+        <!-- Boucle sur les produits -->
         <div>
-            <label for="quantite">Quantité :</label>
-            <input name="quantite" type="number" placeholder="Saisir la quantité" >
+            <!-- Checkbox pour sélectionner le produit -->
+            <div>
+                <a th:href="@{'/details-produit/' + *{id_produit.idProduit}}" th:text="*{id_produit.nom}"></a>
+                -
+                <span th:text="*{id_produit.prix + ' €'}"></span>
+            </div>
+            <input name="id_produit" th:value="*{id_produit.idProduit}" type="hidden">
+
+
+            <!-- Champ quantité pour chaque produit -->
+            <div>
+                <label for="quantite">Quantité :</label>
+                <input name="quantite" type="number" placeholder="Saisir la quantité">
+            </div>
+            <!-- Bouton submit -->
+            <div>
+                <input type="submit" value="Enregister">
+            </div>
+        </div>
+    </form>
+
+    <h2> Détails de la commande </h2>
+    <ul th:each="d: ${detailCommandeUpdate}">
+        <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
+        <li th:text="${'Quantité : ' + d.quantite}"></li>
+        <li th:text="${'Prix cumulé : ' + d.quantite*d.id_produit.prix + ' €'}"></li>
+        <a th:href="@{'/delete-produit-details-commande/' + ${d.id_commande.id_commande} + '/' +  ${d.id_produit.idProduit}}">Supprimer</a>
+    </ul>
+    <li th:text="${'Prix total de la commande : ' + commande.prix_total + ' €'}"></li>
+
+    <h2>Information de la commande</h2>
+
+    <form th:object="${commande}" th:action="@{'/date-form/' + ${commande.getId_commande()}}" method="post">
+        <!-- Champ date -->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="date">Date et heure de livraison</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input texte-blanc "
+                       th:field="*{date_heure_livraison}" type="datetime-local">
+                <input class="semi-transparent essai" type="submit" value="Enregister">
+            </div>
+        </div>
+    </form>
+
+    <form th:object="${commande}" th:action="@{'/livraison-form/' + ${commande.getId_commande()}}" method="post">
+        <!-- Champ livraison ou à emporter ?-->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="livraison">En livraison ou à emporter ?</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input texte-blanc "
+                       th:field="*{livraison}" type="number"
+                       placeholder="Saisir 1 pour une livraison ou 0 pour A emporter ">
+                <input class="semi-transparent essai" type="submit" value="Enregister">
+            </div>
+        </div>
+    </form>
+
+    <form th:if="${commande.livraison} == 1" th:object="${commande.id_client}" th:action="@{'/client-form/' + ${commande.getId_commande()}}" method="post">
+        <!-- champ rue -->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="rue">Rue</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{rue}" type="text" placeholder="Saisir le nom de la rue">
+            </div>
+        </div>
+
+        <!-- champ code_postal -->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="code_postal">Code postal</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{code_postal}" type="text" placeholder="Saisir le Code Postal">
+            </div>
+        </div>
+
+        <!-- champ ville -->
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
+                <label for="ville">Ville</label><br>
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{ville}" type="text" placeholder="Saisir le nom de la ville">
+            </div>
         </div>
         <!-- Bouton submit -->
         <div>
-            <input type="submit" value="Enregister">
+            <input class="semi-transparent essai texte-blanc" type="submit" value="Enregistrer">
         </div>
-    </div>
-</form>
+    </form>
 
-<a th:href="@{'/details-detail-commande/' + ${commande.id_commande}}">Etape final</a>
+    <h2> État de la commande </h2>
+    <ul>
+        <!--  faire un th:each pour afficher le prix de chaque article et les additionner et les enregistrer dans prix total      -->
+        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
+        <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
+        <li th:if="${commande.est_paye} == 1">Commande réglées</li>
+        <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
+        <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
+        <li th:if="${commande.livraison} == 1" th:text="${'Adresse du client : ' + commande.id_client.getRue() + ', ' + commande.id_client.ville + ' ' + commande.id_client.code_postal}"></li>
+    </ul>
+    <input type="button" value="Etape final"
+           th:onclick="'window.location.href=\'/details-detail-commande/' + ${commande.id_commande} + '\''">
+</div>
 </body>
 </html>

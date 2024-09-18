@@ -97,7 +97,7 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
 
     private String sqlSelectUtilisateurByIdWithoutCommande = "SELECT * FROM utilisateur WHERE id_utilisateur = ?";
 
-    private String sqlSelectUtilisateurByEmail = "SELECT u.id_utilisateur AS UTILISATEUR_id_utilisateur, u.nom, u.prenom, u.email, u.mot_de_passe, r.id_role AS ROLE_id_role, r.libelle FROM role_utilisateur ru JOIN utilisateur u ON ru.UTILISATEUR_id_utilisateur = u.id_utilisateur JOIN role r ON ru.ROLE_id_role = r.id_role WHERE u.email = ?";
+    private String sqlSelectUtilisateurByEmail = "SELECT id_utilisateur AS UTILISATEUR_id_utilisateur , nom, prenom, email, mot_de_passe FROM utilisateur WHERE email = ?";
 
     private String sqlInsertUtilisateur = "INSERT INTO utilisateur(id_utilisateur, nom, prenom, email, mot_de_passe) " +
 

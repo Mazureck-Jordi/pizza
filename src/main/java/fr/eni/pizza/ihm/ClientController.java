@@ -66,7 +66,7 @@ public String clientForm(Client client) {
         if (client.getId_client() != null) {
             clientManager.updateClient(client);
         }
-        return "redirect:/etape1";
+        return "redirect:/show-commande-form";
     }
     @GetMapping("/delete-client/{id}")
     public String deleteClient(@PathVariable Long id) {

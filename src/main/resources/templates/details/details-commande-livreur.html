@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--    <title th:text="${'Détail-commande' + detailcommande.id_detail_commande}"></title>-->
+</head>
+<body>
+<h1> Details de la détails commande</h1>
+
+<div>
+
+  <li th:text="${'Commande N°' + commande.id_commande}"></li>
+
+  <h2> Détails de la commande </h2>
+  <ul th:each="d: ${detailCommandes}">
+    <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
+    <li th:text="${'Quantité : ' + d.quantite}"></li>
+  </ul>
+
+  <h2>Information de la commande</h2>
+  <ul>
+    <li th:text="${'Prix de la commande : ' + commande.prix_total + ' €'}"></li>
+    <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
+    <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
+    <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
+    <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
+    <li th:if="${commande.est_paye} == 1">Commande réglées</li>
+    <li th:text="${'Etat de la commande : ' + commande.id_etat.libelle}"></li>
+    <li th:text="${'Nom du client : ' + commande.id_client.nom + ' ' + commande.id_client.prenom}"></li>
+    <li th:text="${'Pizzaiolo : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>
+    <li>
+      <form th:object="${commande}" th:action="@{'/en-livraison-form/' + ${commande.id_commande}}"
+            method="post">
+        <input type="submit" value="Commande en cours de livraison">
+      </form>
+    </li>
+    <li>
+      <form th:object="${commande}" th:action="@{'/fin de-livraison-form/' + ${commande.id_commande}}"
+            method="post">
+        <input type="submit" value="Commande livrée">
+      </form>
+    </li>
+    <li>
+      <input type="button" value="Accueil"
+             th:onclick="'window.location.href=\'/\''">
+    </li>
+  </ul>
+</div>
+
+</body>
+</html>

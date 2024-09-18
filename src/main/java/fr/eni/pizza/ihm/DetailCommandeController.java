@@ -4,10 +4,11 @@ import fr.eni.pizza.bll.ICommandeManager;
 import fr.eni.pizza.bll.IDetailCommandeManager;
 import fr.eni.pizza.bll.IProduitManager;
 import fr.eni.pizza.bll.impl.CommandeManager;
-import fr.eni.pizza.bo.Commande;
-import fr.eni.pizza.bo.DetailCommande;
-import fr.eni.pizza.bo.Produit;
+import fr.eni.pizza.bll.impl.UtilisateurManager;
+import fr.eni.pizza.bo.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +29,8 @@ public class DetailCommandeController {
 
     @Autowired
     private ICommandeManager commandeManager;
+    @Autowired
+    private UtilisateurManager utilisateurManager;
 
     @GetMapping("/list-detail-commande")
     public String ShowListDetailCommande(Model model) {
@@ -63,7 +66,7 @@ public class DetailCommandeController {
     }
 
     @GetMapping("/detail-commande-pizzaiolo/{id}")
-    public String ShowDetailCommandePizzaiolo(@PathVariable Long id, Model model) {
+    public String ShowDetailCommandePizzaiolo(@AuthenticationPrincipal UserDetails loggedUser, @PathVariable Long id, Model model) {
 
         List<DetailCommande> detailCommandes = detailCommandeManager.getAllDetailCommandeByIdCommande(id);
         if (detailCommandes == null) {
@@ -81,10 +84,26 @@ public class DetailCommandeController {
         commande.setPrix_total(prixTotal);
         commandeManager.updteCommandeById(commande);
 
-
-        return "details/details-commande-pizzaiolo";
+        Utilisateur user = utilisateurManager.getByEmail(loggedUser.getUsername());
+        Utilisateur userWithRole = utilisateurManager.getUtilisateurById(user.getId_utilisateur());
+        boolean isPizzaiolo = false;
+        boolean isLivreur = false;
+        for (Role role : userWithRole.getRoles()) {
+            if (role.getId_role() == 1){
+                isPizzaiolo = true;
+            }
+            if (role.getId_role() == 3){
+                isLivreur = true;
+            }
+        }
+        if(isPizzaiolo) {
+            return "details/details-commande-pizzaiolo";
+        }
+        if(isLivreur) {
+            return "details/details-commande-livreur";
+        }
+        return "redirect:/";
     }
-
 
     @GetMapping({"/show-detail-commande-form/{id}", "/show-detail-commande-form"})
     public String ShowDetailCommandeForm(@PathVariable(required = false) Long id, Model model) {
