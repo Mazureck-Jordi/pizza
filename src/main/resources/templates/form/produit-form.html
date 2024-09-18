@@ -1,56 +1,71 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title>Formulaire</title>
+    <title layout:fragment="Formulaire">Formulaire produit </title>
 </head>
 <body>
+<div layout:fragment="content">
 
-<h1>Formulaire de produit</h1>
-
+<h1 class="texte-blanc centrer">Formulaire de produit</h1>
+    <div th:class="centrer" >
+        <div class="texte-blanc">
 <form th:object="${produit}" th:action="@{/produit-form}" method="post">
 
     <!-- Champ id -->
     <input th:field="*{idProduit}" type="hidden">
 
     <!-- Champ nom -->
-    <div>
-        <label for="nom">Nom</label>
-        <input th:field="*{nom}" type="text" placeholder="Saisir le nom">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="nom">Nom</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input "  th:field="*{nom}" type="text" placeholder="Saisir le nom">
+        </div>
     </div>
 
     <!-- Champ description -->
-    <div>
-        <label for="description">Description</label>
-        <input th:field="*{description}" type="text" placeholder="Saisir la description">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="description">Description</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input "  th:field="*{description}" type="text" placeholder="Saisir la description">
+        </div>
     </div>
 
     <!-- Champ prix -->
-    <div>
-        <label for="prix">Prix</label>
-        <input th:field="*{prix}" type="number" placeholder="Saisir le prix">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="prix">Prix</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input"  th:field="*{prix}" type="number" placeholder="Saisir le prix">
+        </div>
     </div>
 
     <!-- Champ image -->
-    <div>
-        <label for="image">Image</label>
-        <input th:field="*{image_url}" type="text" placeholder="Saisir l' url de l'image">
+    <div class="uk-margin">
+        <div class="uk-inline uk-width-1-1">
+        <label for="image">Image</label><br>
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input" th:field="*{image_url}" type="text" placeholder="Saisir l' url de l'image">
+    </div>
     </div>
 
     <!-- Champ typeProduit -->
     <div>
-        <label for="typeProduit">Type de Produit</label>
-        <select th:field="*{id_type_produit}">
+        <label for="typeProduit">Type de Produit</label><br>
+        <select class="essai semi-transparent longueur-input centrer" th:field="*{id_type_produit}">
             <option th:each="typeProduit : ${typeProduits}" th:value="${typeProduit.id_type_produit}"
                     th:text="${typeProduit.libelle}"></option>
-        </select>
-    </div>
+        </select><br>
+    </div><br>
 
     <!-- Bouton submit -->
     <div>
-        <input type="submit" value="Enregister">
+        <input class="semi-transparent essai" type="submit" value="Enregister">
     </div>
 
 </form>
+</div>
+</div>
+</div>
 </body>
 </html>

@@ -7,17 +7,18 @@
 </head>
 <body>
 <div layout:fragment="content">
-<h1>Liste des clients</h1>
-
-<div th:each="client: ${clients}">
-  <ul>
-    <li th:text="${'Prénom : ' + client.prenom}"></li>
-    <li th:text="${'Nom : ' + client.nom}"></li>
-    <li th:text="${'Rue : ' + client.rue}"></li>
-    <li th:text="${'Code Postal : ' +  client.code_postal}"></li>
-    <li th:text="${' Ville : ' + client.ville}"></li>
-    <a th:href="@{'/details-client/' +${client.id_client}}">Détails clients</a>
-  </ul>
-</div>
+    <h1 class="texte-blanc centrer">Liste des clients</h1>
+    <div class="texte-blanc ">
+        <div th:each="client: ${clients}">
+            <ul>
+                <li th:text="${'Prénom : ' + client.prenom}"></li>
+                <li th:text="${'Nom : ' + client.nom}"></li>
+                <li th:text="${'Rue : ' + client.rue}"></li>
+                <li th:text="${'Code Postal : ' +  client.code_postal}"></li>
+                <li th:text="${' Ville : ' + client.ville}"></li>
+                <a th:class="souligner" th:href="@{'/details-client/' +${client.id_client}}">Détails clients</a>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
