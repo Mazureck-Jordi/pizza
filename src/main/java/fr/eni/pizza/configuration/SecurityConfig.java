@@ -47,12 +47,17 @@ public class SecurityConfig {
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/logout").permitAll()
                         .requestMatchers("/user-page").permitAll()
+                        .requestMatchers("/delete-role-utilisateur/**").permitAll()
+                        .requestMatchers("/profil-utilisateur").permitAll()
+                        .requestMatchers("/show-simple-utilisateur-form").permitAll()
+                        .requestMatchers("/simple-utilisateur-form").permitAll()
                         .requestMatchers("/list-utilisateur").hasAnyAuthority("2")
                         .requestMatchers("/details-utilisateur/**").hasAnyAuthority("2")
                         .requestMatchers("/show-utilisateur-form/**").permitAll()
                         .requestMatchers("/show-utilisateur-form").permitAll()
                         .requestMatchers("/utilisateur-form").permitAll()
                         .requestMatchers("/delete-utilisateur/**").permitAll()
+                        .requestMatchers("/delete-role-utilisateur/**").hasAnyAuthority("2")
                         .requestMatchers("/etape1").hasAnyAuthority("2", "1")
                         .requestMatchers("/list-produits").permitAll()
                         .requestMatchers("/details-produit/**").permitAll()
@@ -94,7 +99,7 @@ public class SecurityConfig {
 
         http.formLogin(form ->
                 form.loginPage("/login")
-                        .defaultSuccessUrl("/user-page"));
+                        .defaultSuccessUrl("/profil-utilisateur"));
 
         HeaderWriterLogoutHandler clearSiteData = new HeaderWriterLogoutHandler(
                 new ClearSiteDataHeaderWriter(ClearSiteDataHeaderWriter.Directive.ALL));

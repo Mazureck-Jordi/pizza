@@ -48,6 +48,7 @@ public class DAORoleMySQL implements IDAORole {
     private String sqlInsertRole = "INSERT INTO role (id_role,libelle) VALUES ( :id_role, :libelle ) ";
     private String sqlUpdateRole = "UPDATE role SET libelle = :libelle WHERE id_role = :id_role";
     private String sqlDeleteRole = "DELETE FROM role WHERE id_role = :id_role";
+    private String sqlDeleteRoleUtilisateurByIdRoleAndIdUtilisateur = "DELETE FROM role_utilisateur WHERE UTILISATEUR_id_utilisateur = :idUtilisateur AND ROLE_id_role = :idRole";
 
     @Override
     public List<Role> findRolesByIdUtilisateur(long idUtilisateur) {
@@ -81,5 +82,13 @@ public class DAORoleMySQL implements IDAORole {
     public void deleteRoleToDB(Role role) {
         namedParameterJdbcTemplate.update(sqlDeleteRole, map(role));
 
+    }
+
+    @Override
+    public void deleteRoleUtilisateurToDB (Long idUtilisateur, Long idRole){
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("idUtilisateur", idUtilisateur);
+        map.addValue("idRole", idRole);
+        namedParameterJdbcTemplate.update(sqlDeleteRoleUtilisateurByIdRoleAndIdUtilisateur, map);
     }
 }

@@ -69,7 +69,7 @@ public class CommandeController {
 
         model.addAttribute("etats", etats);
 
-        List<Utilisateur> utilisateurs = utilisateurManager.getAllUtilisateurs();
+        List<Utilisateur> utilisateurs = utilisateurManager.getAll();
 
         model.addAttribute("utilisateurs", utilisateurs);
 

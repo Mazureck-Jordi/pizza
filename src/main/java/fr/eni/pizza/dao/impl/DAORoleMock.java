@@ -50,4 +50,9 @@ public class DAORoleMock implements IDAORole {
     public void deleteRoleToDB(Role role) {
 
     }
+
+    @Override
+    public void deleteRoleUtilisateurToDB(Long idUtilisateur, Long idRole) {
+
+    }
 }

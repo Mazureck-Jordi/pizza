@@ -28,7 +28,10 @@ public interface IUtilisateurManager {
     void deleteUtilisateur(Utilisateur utilisateur);
 
    void  addRole(Role role);
+
    void updateRole(Role role);
 
    void deleteRole(Role role);
+
+    public void deteteRoleUtilisateur (Long idUtilisateur, Long idRole);
 }

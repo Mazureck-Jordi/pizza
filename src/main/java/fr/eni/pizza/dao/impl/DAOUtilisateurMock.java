@@ -21,6 +21,16 @@ public class DAOUtilisateurMock implements IDAOUtilisateur {
 
 
     @Override
+    public List<Utilisateur> findAllSimple() {
+        return List.of();
+    }
+
+    @Override
+    public Utilisateur findUtilisateurByIdSimple(Long id) {
+        return null;
+    }
+
+    @Override
     public List<Utilisateur> findAll() {
         return List.of();
     }
@@ -61,6 +71,11 @@ public class DAOUtilisateurMock implements IDAOUtilisateur {
 
     @Override
     public void deleteUtilisateurToDB(Utilisateur utilisateur) {
+
+    }
+
+    @Override
+    public void updateRoleUtilisateursToDB(Utilisateur utilisateur) {
 
     }
 }
