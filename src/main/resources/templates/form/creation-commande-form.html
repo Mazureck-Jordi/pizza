@@ -15,7 +15,7 @@
     <h2>Formulaire de la commande</h2>
 
 
-    <form th:each="detail : ${detailCommandes}" th:object="${detail}" th:action="@{/creation-commande}" method="post">
+    <form th:each="detail : ${detailCommandes}" th:object="${detail}" th:action="@{'/creation-commande'}" method="post">
 
         <!-- Champ Numero de commande-->
         <div>
