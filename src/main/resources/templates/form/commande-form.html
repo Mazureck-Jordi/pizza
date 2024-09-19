@@ -8,8 +8,8 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="texte-blanc centrer souligner police">Formulaire de commande</h1>
-    <div class="texte-blanc centrer">
+    <h1 class="black centrer souligner police">Formulaire de commande</h1>
+    <div class="black centrer">
         <form th:object="${commande}" th:action="@{/commande-form}" method="post">
 
             <!-- Champ id -->
@@ -22,7 +22,7 @@
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
                     <label for="client">Client de la commande</label><br>
-                    <select class="uk-input uk-width-1-1 select-large centrer semi-transparent longueur-input texte-blanc "
+                    <select class="uk-input uk-width-1-1 select-large centrer semi-transparent longueur-input blacks "
                             th:field="*{id_client}">
                         <option th:each="client: ${clients}" th:value="${client.id_client}"
                                 th:text="${client.nom + ' ' + client.prenom}"></option>
@@ -34,7 +34,7 @@
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
                     <label for="utilisateur">Utilisateur de la commande</label><br>
-                    <select class="uk-input uk-width-1-1 select-large centrer semi-transparent longueur-input texte-blanc "
+                    <select class="uk-input uk-width-1-1 select-large centrer semi-transparent longueur-input blacks "
                             th:field="*{id_utilisateur}">
                         <option th:each="utilisateur: ${utilisateurs}" th:value="${utilisateur.id_utilisateur}"
                                 th:text="${utilisateur.nom + ' ' + utilisateur.prenom}"></option>

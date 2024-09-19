@@ -17,10 +17,10 @@
 <div layout:fragment="content">
   <div class="uk-container">
 
-    <h1 class="uk-heading-divider uk-text-center texte-blanc souligner police">Se Connecter</h1>
+    <h1 class="uk-heading-divider uk-text-center blacks souligner police">Se Connecter</h1>
 
-    <div class="centrer texte-blanc" th:if="${param.logout}">Déconnexion réalisée avec succès</div>
-    <div class="centrer texte-blanc" th:if="${param.error}">Votre login ou votre mot de passe est incorrect</div>
+    <div class="centrer blacks" th:if="${param.logout}">Déconnexion réalisée avec succès</div>
+    <div class="mdp blacks" th:if="${param.error}">Votre login ou votre mot de passe est incorrect</div>
 
     <form th:action="@{/login}" method="post">
 

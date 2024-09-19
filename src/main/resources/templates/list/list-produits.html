@@ -7,14 +7,14 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="texte-blanc centrer souligner police" >Liste des produits </h1>
-    <div class="texte-blanc li">
+    <h1 class="black centrer souligner police" >Liste des produits </h1>
+    <div class="black li">
         <div class="centrer">
         <div th:each="produit: ${produits}" >
 
-            <ul class="uk-container">
                 <img th:src="${produit.image_url}" th:class="arrondir" alt="image d'un produit">
-                <li class="centrer" th:text="${'Nom : ' + produit.nom}"></li>
+            <ul class="uk-container opacité ">
+                <li th:text="${'Nom : ' + produit.nom}"></li>
                 <li th:text="${'Description : ' + produit.description}"></li>
                 <li th:text="${'Prix : ' + produit.prix + ' €'}"></li>
                 <!--        <li th:text="${'Type de produit : ' + produit.id_type_produit.getLibelle()}"></li>-->

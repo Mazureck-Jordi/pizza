@@ -7,10 +7,10 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="texte-blanc centrer souligner police">Liste des commandes</h1>
-    <div class="texte-blanc centrer li">
+    <h1 class="black centrer souligner police">Liste des commandes</h1>
+    <div class="black centrer li">
         <div th:each="commande: ${commandes}">
-            <ul>
+            <ul class="opacité">
                 <li th:text="${'N° de la commande : ' + commande.id_commande}"></li>
                 <li th:text="${'Prix total de la commande : ' + commande.prix_total + ' €'}"></li>
                 <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison}"></li>
