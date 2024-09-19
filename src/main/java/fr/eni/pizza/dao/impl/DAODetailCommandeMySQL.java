@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -56,7 +57,12 @@ public class DAODetailCommandeMySQL implements IDAODetailCommande {
 
             Commande commande = new Commande();
             commande.setId_commande(rs.getLong("COMMANDE_id_commande"));
-            commande.setDate_heure_livraison(rs.getTimestamp("date_heure_livraison").toLocalDateTime());
+            // Convertir DATETIME en LocalDate
+            LocalDateTime dateTime;
+            dateTime = rs.getObject("date_heure_livraison", LocalDateTime.class);
+            if (dateTime != null) {
+                commande.setDate_heure_livraison(dateTime);
+            }
             commande.setLivraison(rs.getInt("livraison"));
             commande.setEst_paye(rs.getInt("est_paye"));
             commande.setPrix_total(rs.getDouble("prix_total"));

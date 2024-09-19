@@ -9,7 +9,6 @@
 <h1> Details de la détails commande</h1>
 
 <div>
-
     <li th:text="${'Commande N°' + commande.id_commande}"></li>
 
     <h2> Détails de la commande </h2>
@@ -21,7 +20,7 @@
     <h2>Information de la commande</h2>
     <ul>
         <li th:text="${'Prix de la commande : ' + commande.prix_total + ' €'}"></li>
-        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
+        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison}"></li>
         <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
         <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
         <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
@@ -29,6 +28,12 @@
         <li th:text="${'Etat de la commande : ' + commande.id_etat.libelle}"></li>
         <li th:text="${'Nom du client : ' + commande.id_client.nom + ' ' + commande.id_client.prenom}"></li>
         <li th:text="${'Pizzaiolo : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>
+
+        <li>
+            <input type="button" value="Modifier Commande"
+                   th:onclick="'window.location.href=\'/show-creation-commande/' + ${commande.id_commande} + '\''">
+        </li>
+
         <li>
             <form th:object="${commande}" th:action="@{'/en-preparation-form/' + ${commande.id_commande}}"
                   method="post">
@@ -41,6 +46,21 @@
                 <input type="submit" value="Commande préparée">
             </form>
         </li>
+
+        <li>
+            <form th:object="${commande}" th:action="@{'/non-paye/' + ${commande.id_commande}}"
+                  method="post">
+                <input type="submit" value="Commande non payée">
+            </form>
+        </li>
+
+        <li>
+            <form th:object="${commande}" th:action="@{'/est-paye/' + ${commande.id_commande}}"
+                  method="post">
+                <input type="submit" value="Commande payée">
+            </form>
+        </li>
+
         <li>
             <input type="button" value="Accueil"
                    th:onclick="'window.location.href=\'/\''">

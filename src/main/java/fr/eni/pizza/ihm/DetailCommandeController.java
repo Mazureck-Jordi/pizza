@@ -61,7 +61,6 @@ public class DetailCommandeController {
         commande.setPrix_total(prixTotal);
         commandeManager.updteCommandeById(commande);
 
-
         return "details/details-detail-commande";
     }
 
@@ -69,12 +68,15 @@ public class DetailCommandeController {
     public String ShowDetailCommandePizzaiolo(@AuthenticationPrincipal UserDetails loggedUser, @PathVariable Long id, Model model) {
 
         List<DetailCommande> detailCommandes = detailCommandeManager.getAllDetailCommandeByIdCommande(id);
+
         if (detailCommandes == null) {
             return "redirect:/";
         }
         model.addAttribute("detailCommandes", detailCommandes);
 
+
         Commande commande = commandeManager.getCommandeById(id);
+
         model.addAttribute("commande", commande);
 
         double prixTotal = 0.0;
@@ -86,21 +88,37 @@ public class DetailCommandeController {
 
         Utilisateur user = utilisateurManager.getByEmail(loggedUser.getUsername());
         Utilisateur userWithRole = utilisateurManager.getUtilisateurById(user.getId_utilisateur());
+        boolean isGerant = false;
         boolean isPizzaiolo = false;
         boolean isLivreur = false;
         for (Role role : userWithRole.getRoles()) {
-            if (role.getId_role() == 1){
+            if (role.getId_role() == 1) {
                 isPizzaiolo = true;
             }
-            if (role.getId_role() == 3){
+            if (role.getId_role() == 2) {
+                isGerant = true;
+            }
+            if (role.getId_role() == 3) {
                 isLivreur = true;
             }
         }
-        if(isPizzaiolo) {
-            return "details/details-commande-pizzaiolo";
+        if (isPizzaiolo) {
+            if (commande.getId_etat().getId_etat() == 1) {
+                return "redirect:/details-detail-commande/" + commande.getId_commande();
+            }
+            else {
+                return "details/details-commande-pizzaiolo";
+            }
         }
-        if(isLivreur) {
+        if (isLivreur) {
             return "details/details-commande-livreur";
+        }
+        if (isGerant) {
+            if (commande.getId_etat().getId_etat() == 1) {
+                return "redirect:/details-detail-commande/" + commande.getId_commande();
+            } else {
+                return "details/details-commande-gerant";
+            }
         }
         return "redirect:/";
     }
@@ -122,6 +140,7 @@ public class DetailCommandeController {
 
         return "form/details-commande-form";
     }
+
     @PostMapping("detail-commande-form")
     public String detailCommandeForm(@ModelAttribute DetailCommande detailCommande) {
         if (detailCommande.getId_commande() == null) {
@@ -145,7 +164,7 @@ public class DetailCommandeController {
     }
 
     @GetMapping("/change-etat/{idCommande}")
-    public String changeEtatCommande (@PathVariable Long idCommande){
+    public String changeEtatCommande(@PathVariable Long idCommande) {
         Commande commandeToChange = commandeManager.getCommandeById(idCommande);
         commandeToChange.getId_etat().setId_etat(2L);
         commandeManager.updateCommande(commandeToChange);

@@ -14,7 +14,7 @@
     <ul>
         <li th:text="${' Commande Numéro : ' + commande.id_commande}"></li>
         <li th:text="${'Prix de la commande : ' + commande.prix_total + ' €'}"></li>
-        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
+        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison}"></li>
         <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
         <li th:if="${commande.est_paye} == 1">Commande réglées</li>
         <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
@@ -43,6 +43,11 @@
         <li>
             <input type="button" value="Modifier Commande"
                    th:onclick="'window.location.href=\'/show-creation-commande/' + ${commande.id_commande} + '\''">
+        </li>
+        <li>
+            <form th:action="@{'/en-cours-creation/' + ${commande.id_commande}}" method="post">
+                <input class="semi-transparent essai" type="submit" value="Commande en cours de création">
+            </form>
         </li>
         <li>
             <form th:action="@{'/enregistrer/' + ${commande.id_commande}}" method="post">

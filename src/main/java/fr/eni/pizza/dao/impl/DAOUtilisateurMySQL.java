@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -41,7 +42,12 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
             if (rs.getLong("id_commande") != 0) {
                 Commande commande = new Commande();
                 commande.setId_commande(rs.getLong("id_commande"));
-                commande.setDate_heure_livraison(rs.getTimestamp("date_heure_livraison").toLocalDateTime());
+// Convertir DATETIME en LocalDate
+                LocalDateTime dateTime;
+                dateTime = rs.getObject("date_heure_livraison", LocalDateTime.class);
+                if (dateTime != null) {
+                    commande.setDate_heure_livraison(dateTime);
+                }
                 commande.setLivraison(rs.getInt("livraison"));
                 commande.setPrix_total(rs.getDouble("prix_total"));
                 commande.setEst_paye(rs.getInt("est_paye"));
@@ -75,7 +81,7 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
         mapSqlParameterSource.addValue("prenomUtilisateur", utilisateur.getPrenom());
         mapSqlParameterSource.addValue("emailUtilisateur", utilisateur.getEmail());
         mapSqlParameterSource.addValue("motdepasseUtilisateur", utilisateur.getMot_de_passe());
-        mapSqlParameterSource.addValue("commandeUtilisateur", utilisateur.getId_commande()!=null ? utilisateur.getId_commande().getId_commande() : null);
+        mapSqlParameterSource.addValue("commandeUtilisateur", utilisateur.getId_commande() != null ? utilisateur.getId_commande().getId_commande() : null);
         return mapSqlParameterSource;
     }
 
@@ -109,7 +115,7 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
 
 
     @Override
-    public List<Utilisateur> findAllSimple(){
+    public List<Utilisateur> findAllSimple() {
         return jdbcTemplate.query(sqlSelectAllSimple, SIMPLE_UTILISATEUR_ROW_MAPPER);
     }
 

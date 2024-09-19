@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Profile("mysql")
@@ -36,7 +37,13 @@ public class DAOCommandeMySQL implements IDAOCommande {
         public Commande mapRow(ResultSet rs, int rowNum) throws SQLException {
             Commande commande = new Commande();
             commande.setId_commande(rs.getLong("id_commande"));
-            commande.setDate_heure_livraison(rs.getTimestamp("date_heure_livraison").toLocalDateTime());
+            // Convertir DATETIME en LocalDate
+            LocalDateTime dateTime;
+            dateTime = rs.getObject("date_heure_livraison", LocalDateTime.class);
+            if (dateTime != null) {
+                commande.setDate_heure_livraison(dateTime);
+            }
+
             commande.setLivraison(rs.getInt("livraison"));
             commande.setEst_paye(rs.getInt("est_paye"));
             commande.setPrix_total(rs.getDouble("prix_total"));
@@ -101,7 +108,7 @@ public class DAOCommandeMySQL implements IDAOCommande {
         return mapSqlParameterSource;
     }
 
-    private String sqlSelectCommandesByIdEtat ="SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, co.CLIENT_id_client, cl.id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, co.ETAT_id_etat, e.id_etat, e.libelle, co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe FROM commande co JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur WHERE co.ETAT_id_etat = :idEtat";
+    private String sqlSelectCommandesByIdEtat = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, co.CLIENT_id_client, cl.id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, co.ETAT_id_etat, e.id_etat, e.libelle, co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe FROM commande co JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur WHERE co.ETAT_id_etat = :idEtat";
     private String sqlSelectAllCommande = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, co.CLIENT_id_client, cl.id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, co.ETAT_id_etat, e.id_etat, e.libelle, co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe FROM commande co JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur";
     private String sqlSelectCommandeById = "SELECT co.id_commande, co.date_heure_livraison, co.livraison, co.prix_total, co.est_paye, co.CLIENT_id_client, cl.id_client, cl.prenom AS client_prenom, cl.nom AS client_nom, cl.rue, cl.code_postal, cl.ville, co.ETAT_id_etat, e.id_etat, e.libelle, co.UTILISATEUR_id_utilisateur, u.id_utilisateur, u.nom AS utilisateur_nom, u.prenom AS utilisateur_prenom, u.email, u.mot_de_passe FROM commande co JOIN client cl ON co.CLIENT_id_client = cl.id_client JOIN etat e ON co.ETAT_id_etat = e.id_etat JOIN utilisateur u ON co.UTILISATEUR_id_utilisateur = u.id_utilisateur WHERE co.id_commande = ?";
     private String sqlInsertCommande = "INSERT INTO commande (id_commande, date_heure_livraison, CLIENT_id_client, livraison, ETAT_id_etat, UTILISATEUR_id_utilisateur, prix_total, est_paye) VALUES (:idCommande, :dateCommande, :clientCommande, :livraisonCommande, :etatCommande, :utilisateurCommande, :prixTotalCommande, :estPayeCommande)";
@@ -114,7 +121,7 @@ public class DAOCommandeMySQL implements IDAOCommande {
     public List<Commande> findCommandesByIdEtat(Long idEtat) {
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("idEtat", idEtat);
-        return namedParameterJdbcTemplate.query(sqlSelectCommandesByIdEtat, map , COMMANDE_ROW_MAPPER);
+        return namedParameterJdbcTemplate.query(sqlSelectCommandesByIdEtat, map, COMMANDE_ROW_MAPPER);
     }
 
     @Override
@@ -158,7 +165,7 @@ public class DAOCommandeMySQL implements IDAOCommande {
         namedParameterJdbcTemplate.update(sqlDeleteCommande, map(commande));
     }
 
-    private void updateDetailCommandeByComande (Commande commmande) {
+    private void updateDetailCommandeByComande(Commande commmande) {
         String sqlInsertDetailsCommande = "INSERT INTO detail_commande (quantite, COMMANDE_id_commande, PRODUIT_id_produit) VALUES (:quantiteDetails, :idCommandeDetails, :idProduitDetails)";
         for (DetailCommande detailCommande : commmande.getDetail_commandes()) {
             MapSqlParameterSource mapParticipantSource = new MapSqlParameterSource();
