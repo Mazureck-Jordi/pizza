@@ -152,14 +152,14 @@ public class DetailCommandeController {
         return "redirect:/list-detail-commande";
     }
 
-    @GetMapping("/delete-detail-commande/{id}")
-    public String deleteDetailCommande(@PathVariable Long id) {
-//        if (detailCommandeManager.getDetailCommandeByIdCommande(id) == null){
-//            System.out.println("Erreur");
-//        }
-//        if (detailCommandeManager.getDetailCommandeByIdCommande(id) != null){
-//            detailCommandeManager.deleteDetailCommande(detailCommandeManager.getDetailCommandeByIdCommande(id));
-//        }
+    @PostMapping("/delete-detail-commande/{idCommande}/{idProduit}")
+    public String deleteDetailCommande(@PathVariable Long idCommande, @PathVariable Long idProduit) {
+        if (detailCommandeManager.getDetailCommandeByIdCommandeAndIdProduit(idCommande, idProduit) == null){
+            System.out.println("Erreur");
+        }
+        if (detailCommandeManager.getDetailCommandeByIdCommandeAndIdProduit(idCommande, idProduit) != null){
+            detailCommandeManager.deleteDetailCommande(idCommande, idProduit);
+        }
         return "redirect:/list-detail-commande";
     }
 

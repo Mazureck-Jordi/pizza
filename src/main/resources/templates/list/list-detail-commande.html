@@ -12,6 +12,7 @@
         <div th:each="detailCommande : ${detailCommandes}">
 
             <ul th:class="opacité">
+                <li th:text="${'Commande N° ' + detailCommande.id_commande.id_commande}"></li>
                 <li th:text="${'Utilisateur : ' + detailCommande.id_commande.id_utilisateur.id_utilisateur}"></li>
                 <li th:text="${' Nom du client : ' + detailCommande.id_commande.id_client.nom + ' ' + detailCommande.id_commande.id_client.prenom}"></li>
                 <li th:text="${'Livraison ou à emporter : ' + detailCommande.id_commande.livraison}"></li>
@@ -22,6 +23,9 @@
                     <a class="souligner" th:href="@{'/details-detail-commande/' + ${detailCommande.getId_commande().getId_commande()}}">Voir
                         détails</a>
                 </div>
+                <form th:action="@{'/delete-detail-commande/' + ${detailCommande.id_commande.id_commande} + '/' + ${detailCommande.id_produit.idProduit}}" method="post">
+                    <input type="submit" value="Supprimer ce detail commande">
+                </form>
 
             </ul>
         </div>

@@ -43,44 +43,62 @@ public class SecurityConfig {
     public SecurityFilterChain web(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        //Modification par le gérant
+                        //Visible par le gérant uniquement
+                        .requestMatchers("/list-utilisateur").hasAnyAuthority("2")
+                        .requestMatchers("/details-utilisateur/**").hasAnyAuthority("2")
                         .requestMatchers("/show-produit-form/**").hasAnyAuthority("2")
                         .requestMatchers("/show-produit-form").hasAnyAuthority("2")
-                        .requestMatchers("/produit-form").permitAll()
+                        .requestMatchers("/produit-form").hasAnyAuthority("2")
                         .requestMatchers("/delete-produit/**").hasAnyAuthority("2")
-                        .requestMatchers("/delete-commande/{id}").permitAll()
-                        .requestMatchers("/list-commandes").permitAll()
-                        .requestMatchers("/details-commande/**").permitAll()
+                        .requestMatchers("/list-commandes").hasAnyAuthority("2")
+                        .requestMatchers("/details-commande/**").hasAnyAuthority("2")
+                        .requestMatchers("/delete-commande/{id}").hasAnyAuthority("2")
+                        .requestMatchers("/show-utilisateur-form/**").hasAnyAuthority("2")
+                        .requestMatchers("/show-utilisateur-form").hasAnyAuthority("2")
+                        .requestMatchers("/utilisateur-form").hasAnyAuthority("2")
+                        .requestMatchers("/delete-utilisateur/**").hasAnyAuthority("2")
+                        .requestMatchers("/delete-role-utilisateur/**").hasAnyAuthority("2")
+                        .requestMatchers("/show-simple-utilisateur-form").hasAnyAuthority("2")
+                        .requestMatchers("/simple-utilisateur-form").hasAnyAuthority("2")
+                        .requestMatchers("/delete-role-utilisateur/**").hasAnyAuthority("2")
+                        .requestMatchers("/delete-detail-commande/**").hasAnyAuthority("2")
 
-                        // Creation de commande
-                        .requestMatchers("/show-commande-form").permitAll()
-                        .requestMatchers("/show-commande-form/**").permitAll()
-                        .requestMatchers("/commande-form").permitAll()
-                        .requestMatchers("/show-creation-commande/**").permitAll()
+                        //Visible par le gérant et le pizzaiolo
+                        .requestMatchers("/show-commande-form").hasAnyAuthority("2", "1")
+                        .requestMatchers("/show-commande-form/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/commande-form").hasAnyAuthority("2", "1")
+                        .requestMatchers("/show-creation-commande/**").hasAnyAuthority("2", "1")
                         .requestMatchers("/creation-commande").hasAnyAuthority("2", "1")
-                        .requestMatchers("/delete-produit-details-commande/**").permitAll()
-                        .requestMatchers("/date-form/**").permitAll()
-                        .requestMatchers("/livraison-form/**").permitAll()
-                        .requestMatchers("/est-paye/**").permitAll()
-                        .requestMatchers("/non-paye/**").permitAll()
-
-                        //Modification de commande par le Pizzaiolo et le Gérant
-                        .requestMatchers("/en-cours-creation/**").permitAll()
-                        .requestMatchers("/en-preparation-form/**").permitAll()
-                        .requestMatchers("/fin de-preparation-form/**").permitAll()
-                        .requestMatchers("/enregistrer/**").permitAll()
-                        .requestMatchers("/details-detail-commande/**").permitAll()
+                        .requestMatchers("/delete-produit-details-commande/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/date-form/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/livraison-form/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/est-paye/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/non-paye/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/en-cours-creation/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/en-preparation-form/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/fin de-preparation-form/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/enregistrer/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/details-detail-commande/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/show-client-form/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/show-client-form").hasAnyAuthority("2", "1")
+                        .requestMatchers("/client-form").hasAnyAuthority("2", "1")
+                        .requestMatchers("/delete-client/**").hasAnyAuthority("2", "1")
+                        .requestMatchers("/list-clients").hasAnyAuthority("2", "1")
+                        .requestMatchers("/details-client/**").hasAnyAuthority("2", "1")
 
                         //Modification de commande par le livreur et le Gérant
-                        .requestMatchers("/en-livraison-form/**").permitAll()
-                        .requestMatchers("/fin de-livraison-form/**").permitAll()
+                        .requestMatchers("/en-livraison-form/**").hasAnyAuthority("2", "3")
+                        .requestMatchers("/fin de-livraison-form/**").hasAnyAuthority("2", "3")
 
                         //Visible touts les utilisateurs
-                        .requestMatchers("/list-commandes-by-etat").permitAll()
-                        .requestMatchers("/detail-commande-pizzaiolo/**").permitAll()
+                        .requestMatchers("/list-commande-by-etat").hasAnyAuthority("3", "2", "1")
+                        .requestMatchers("/detail-commande-pizzaiolo/**").hasAnyAuthority("3", "2", "1")
 
+                        //Visible par les personnes connectées
+                        .requestMatchers("/logout").authenticated()
+                        .requestMatchers("/profil-utilisateur").authenticated()
 
-                        //VIsible par tous
+                                //VIsible par tous
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/login").permitAll()
                         .requestMatchers("/vendor/**").permitAll()
@@ -90,43 +108,20 @@ public class SecurityConfig {
                         .requestMatchers("/list-produits").permitAll()
                         .requestMatchers("/details-produit/**").permitAll()
 
-                        //Visible par les personnes connectées
-                        .requestMatchers("/logout").permitAll()
-                        .requestMatchers("/profil-utilisateur").permitAll()
-
-                        //Modificiation des clients
-                        .requestMatchers("/show-client-form/**").permitAll()
-                        .requestMatchers("/show-client-form").permitAll()
-                        .requestMatchers("/client-form").permitAll()
-                        .requestMatchers("/delete-client/**").permitAll()
-
-                        //Modification des utilisateur
-                        .requestMatchers("/show-utilisateur-form/**").permitAll()
-                        .requestMatchers("/show-utilisateur-form").permitAll()
-                        .requestMatchers("/utilisateur-form").permitAll()
-                        .requestMatchers("/delete-utilisateur/**").permitAll()
-                        .requestMatchers("/delete-role-utilisateur/**").permitAll()
-                        .requestMatchers("/show-simple-utilisateur-form").permitAll()
-                        .requestMatchers("/simple-utilisateur-form").permitAll()
-                        .requestMatchers("/delete-role-utilisateur/**").hasAnyAuthority("2")
-
-                        //Infos visible par le gérant
-                        .requestMatchers("/list-clients").permitAll()
-                        .requestMatchers("/details-client/**").permitAll()
-                        .requestMatchers("/list-utilisateur").hasAnyAuthority("2")
-                        .requestMatchers("/details-utilisateur/**").hasAnyAuthority("2")
 
                         //Poubelle
                         .requestMatchers("/user-page").permitAll()
-                        .requestMatchers("/etape1").hasAnyAuthority("2", "1")
+                        .requestMatchers("/etape1").permitAll()
                         .requestMatchers("/show-detail-commande-form/**").permitAll()
                         .requestMatchers("/show-detail-commande-form").permitAll()
                         .requestMatchers("/list-detail-commande").permitAll()
-                        .requestMatchers("/delete-detail-commande/**").permitAll()
                         .requestMatchers("detail-commande-form").permitAll()
-                        
+                        //rejette toutes les requêtes non configurées
+                        .anyRequest().denyAll()
+                        //rejette toutes les requêtes non configurée aux utilisateurs non connectés
                         //.anyRequest().authenticated()
-                        .anyRequest().permitAll()
+                        //accepte toutes les requêtes non configurée à tous les utilisateurs
+                        //.anyRequest().permitAll()
                 );
 
         //configure la page de login de Spring Security
