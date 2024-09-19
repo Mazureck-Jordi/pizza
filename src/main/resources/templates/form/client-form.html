@@ -20,7 +20,11 @@
             <div class="uk-inline uk-width-1-1">
                 <label for="prenom">Prenom</label><br>
                 <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{prenom}" type="text" placeholder="Saisir le Prénom">
-            </div>
+          <ul th:if="${#fields.hasErrors('prenom')}">
+              <li class="uk-form-danger" th:each="error:${#fields.errors('prenom')}" th:text="${error}">
+              </li>
+          </ul>
+           </div>
         </div>
 
         <!-- champ nom -->
@@ -28,6 +32,11 @@
             <div class="uk-inline uk-width-1-1">
                 <label for="nom">Nom</label><br>
                 <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{nom}" type="text" placeholder="Saisir le Nom de famille">
+            <ul th:if="${#fields.hasErrors('nom')}">
+                <li class="uk-form-danger" th:each="error:${#fields.errors('nom')}" th:text="${error}">
+                </li>
+            </ul>
+
             </div>
         </div>
 

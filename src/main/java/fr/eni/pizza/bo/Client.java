@@ -1,9 +1,13 @@
 package fr.eni.pizza.bo;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class Client {
 
     private Long id_client;
+    @NotBlank(message = "Le prénom doit être renseigné")
     private String prenom;
+    @NotBlank(message = "Le nom doit être renseigné")
     private String nom;
     private String rue;
     private String code_postal;

@@ -1,13 +1,28 @@
 package fr.eni.pizza.bo;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 public class Utilisateur {
 
     private Long id_utilisateur;
+    @NotBlank(message="Le nom doit être renseigné")
     private String nom;
+    @NotBlank(message="le prenom doit être renseigné")
     private String prenom;
+    @NotBlank(message="l\'email doit être renseigné")
+    @Email(message= "l\'email doit être valide")
     private String email;
+    @NotBlank(message = "Le mot de passe est obligatoire")
+    @Size(min = 8, max = 20, message = "Le mot de passe doit contenir entre 8 et 20 caractères")
+    @Pattern(
+            regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?=\\S+$).{8,}$",
+            message = "Le mot de passe doit contenir au moins un chiffre, une lettre majuscule, une lettre minuscule et un caractère spécial"
+    )
     private String mot_de_passe;
     private Commande id_commande;
     private List<Role> roles;

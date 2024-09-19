@@ -5,11 +5,13 @@ import fr.eni.pizza.bll.IUtilisateurManager;
 import fr.eni.pizza.bo.Commande;
 import fr.eni.pizza.bo.Role;
 import fr.eni.pizza.bo.Utilisateur;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -66,7 +68,17 @@ public class UtilisateurController {
     }
 
     @PostMapping("/utilisateur-form")
-    public String utilisateurForm(@ModelAttribute (name = "utilisateur") Utilisateur utilisateur) {
+    public String utilisateurForm(@Valid @ModelAttribute ("utilisateur") Utilisateur utilisateur, BindingResult bindingResult, Model model) {
+
+
+        List<Role> roles = utilisateurManager.getAllRoles();
+
+        model.addAttribute("roles", roles);
+
+
+        if(bindingResult.hasErrors()) {
+            return "form/utilisateur-form";
+        }
 
         if (utilisateur.getId_utilisateur() == null) {
             utilisateurManager.addUtilisateur(utilisateur);

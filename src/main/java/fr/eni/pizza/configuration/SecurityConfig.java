@@ -58,8 +58,6 @@ public class SecurityConfig {
                         .requestMatchers("/utilisateur-form").hasAnyAuthority("2")
                         .requestMatchers("/delete-utilisateur/**").hasAnyAuthority("2")
                         .requestMatchers("/delete-role-utilisateur/**").hasAnyAuthority("2")
-                        .requestMatchers("/show-simple-utilisateur-form").hasAnyAuthority("2")
-                        .requestMatchers("/simple-utilisateur-form").hasAnyAuthority("2")
                         .requestMatchers("/delete-role-utilisateur/**").hasAnyAuthority("2")
                         .requestMatchers("/delete-detail-commande/**").hasAnyAuthority("2")
 
@@ -93,6 +91,8 @@ public class SecurityConfig {
                         //Visible touts les utilisateurs
                         .requestMatchers("/list-commande-by-etat").hasAnyAuthority("3", "2", "1")
                         .requestMatchers("/detail-commande-pizzaiolo/**").hasAnyAuthority("3", "2", "1")
+                        .requestMatchers("/show-simple-utilisateur-form").hasAnyAuthority("3", "2", "1")
+                        .requestMatchers("/simple-utilisateur-form").hasAnyAuthority("3", "2", "1")
 
                         //Visible par les personnes connectées
                         .requestMatchers("/logout").authenticated()

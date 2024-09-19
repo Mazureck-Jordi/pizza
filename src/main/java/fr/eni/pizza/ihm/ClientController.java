@@ -3,13 +3,13 @@ package fr.eni.pizza.ihm;
 import fr.eni.pizza.bll.IClientManager;
 import fr.eni.pizza.bll.impl.ProduitManager;
 import fr.eni.pizza.bo.Client;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -60,7 +60,11 @@ public String showClientForm(@PathVariable(required = false) Long id, Model mode
     }
 
     @PostMapping ("/client-form")
-public String clientForm(Client client) {
+public String clientForm(@Valid @ModelAttribute Client client, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+
+        if(bindingResult.hasErrors()) {
+            return "form/client-form";
+        }
 
         if (client.getId_client() == null) {
             clientManager.addClient(client);
@@ -68,6 +72,9 @@ public String clientForm(Client client) {
         if (client.getId_client() != null) {
             clientManager.updateClient(client);
         }
+
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le client a été ajouté à la liste des clients"));
+
         return "redirect:/show-commande-form";
     }
     @GetMapping("/delete-client/{id}")
