@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
   <meta charset="UTF-8">
-  <title th:text="${utilisateur.nom}"></title>
+  <title>Liste des produits</title>
 </head>
 <body>
-<h1>Mon profil</h1>
+<div layout:fragment="content">
+<h1 class="black centrer souligner police">Mon profil</h1>
 
-<ul>
+<ul class="uk-container opacité ">
   <li th:text="${'Identifiant : ' + utilisateur.id_utilisateur}"></li>
   <li th:text="${'Nom : ' + utilisateur.nom}"></li>
   <li th:text="${'Prénom : ' + utilisateur.prenom}"></li>
@@ -16,10 +18,10 @@
     <span th:text="${'Role : ' + roleUtilisateur.libelle}"></span>
   </li>
 </ul>
-<div>
+<div class="semi-transparent essai black" >
   <a th:href="@{'/show-simple-utilisateur-form'}">Modifier</a>
 </div>
-<div>
+<div class="semi-transparent essai black" >
   <a th:href="@{'/list-commande-by-etat'}">Voir Commande disponible</a>
 </div>
 </body>
