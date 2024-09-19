@@ -1,49 +1,58 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title>Formulaire</title>
+    <title layout:fragment="Formulaire">Formulaire création de commande </title>
 </head>
 <body>
-
-<h1>Formulaire de création de commande</h1>
-
+<div layout:fragment="content">
+<h1 class="black centrer souligner police">Formulaire de création de commande</h1>
+<div class="milieu colonne">
 <div>
 
-    <li th:text="${' Commande Numéro : ' + commande.id_commande}"></li>
+    <li class="black centrer souligner " th:text="${' Commande Numéro : ' + commande.id_commande}"></li>
 
-    <h2>Formulaire de la commande</h2>
+    <h2 class="black centrer souligner police">Formulaire de la commande</h2>
 
 
     <form th:each="detail : ${detailCommandes}" th:object="${detail}" th:action="@{'/creation-commande'}" method="post">
 
         <!-- Champ Numero de commande-->
-        <div>
+        <div class="uk-margin">
+            <div class="uk-inline uk-width-1-1">
             <label for="commande"></label>
             <input name="id_commande" th:value="${lastIdCommande}" type="hidden">
         </div>
-
-        <!-- Boucle sur les produits -->
+        </div>
         <div>
+        <!-- Boucle sur les produits -->
+        <div >
             <!-- Checkbox pour sélectionner le produit -->
-            <div>
+            <div class="uk-margin">
+                <div class="uk-inline uk-width-1-1">
                 <a th:href="@{'/details-produit/' + *{id_produit.idProduit}}" th:text="*{id_produit.nom}"></a>
                 -
                 <span th:text="*{id_produit.prix + ' €'}"></span>
             </div>
             <input name="id_produit" th:value="*{id_produit.idProduit}" type="hidden">
-
+            </div>
 
             <!-- Champ quantité pour chaque produit -->
-            <div>
+            <div class="uk-margin opacité black colonne">
+                <div class="uk-inline uk-width-1-1">
                 <label for="quantite">Quantité :</label>
-                <input name="quantite" type="number" placeholder="Saisir la quantité">
+                <input name="quantite" type="number" placeholder="Saisir la quantité"><br>
+                <input type="submit" value="Enregister">
+            </div>
             </div>
             <!-- Bouton submit -->
             <div>
-                <input type="submit" value="Enregister">
             </div>
         </div>
+        </div>
+
     </form>
 
     <h2> Détails de la commande </h2>
@@ -62,7 +71,7 @@
         <div class="uk-margin">
             <div class="uk-inline uk-width-1-1">
                 <label for="date">Date et heure de livraison</label><br>
-                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input texte-blanc "
+                <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input black "
                        th:field="*{date_heure_livraison}" type="datetime-local">
                 <input class="semi-transparent essai" type="submit" value="Enregister">
             </div>
@@ -76,7 +85,7 @@
                 <label for="livraison">En livraison ou à emporter ?</label><br>
                 <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input texte-blanc "
                        th:field="*{livraison}" type="number"
-                       placeholder="Saisir 1 pour une livraison ou 0 pour A emporter ">
+                       placeholder="Saisir 1 pour une livraison ou 0 pour A emporter "><br>
                 <input class="semi-transparent essai" type="submit" value="Enregister">
             </div>
         </div>
@@ -108,7 +117,7 @@
         </div>
         <!-- Bouton submit -->
         <div>
-            <input class="semi-transparent essai texte-blanc" type="submit" value="Enregistrer">
+            <input class="semi-transparent essai black" type="submit" value="Enregistrer">
         </div>
     </form>
 
@@ -122,8 +131,10 @@
         <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
         <li th:if="${commande.livraison} == 1" th:text="${'Adresse du client : ' + commande.id_client.getRue() + ', ' + commande.id_client.ville + ' ' + commande.id_client.code_postal}"></li>
     </ul>
-    <input type="button" value="Etape final"
+    <input class="semi-transparent essai black" type="button" value="Etape final"
            th:onclick="'window.location.href=\'/details-detail-commande/' + ${commande.id_commande} + '\''">
+</div>
+</div>
 </div>
 </body>
 </html>

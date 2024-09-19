@@ -9,6 +9,8 @@ INSERT INTO produit (id_produit, nom, description, prix, image_url, TYPE_PRODUIT
 INSERT INTO produit (id_produit, nom, description, prix, image_url, TYPE_PRODUIT_id_type_produit) VALUES (4, 'Coca-Cola', 'Canette 33cl', 1.50, '../images/coca-cola-boite-33cl.jpg', 2);
 INSERT INTO produit (id_produit, nom, description, prix, image_url, TYPE_PRODUIT_id_type_produit) VALUES (5, 'Ice-Tea', 'Canette 33cl', 1.50, '../images/icetea.jpg', 2);
 INSERT INTO produit (id_produit, nom, description, prix, image_url, TYPE_PRODUIT_id_type_produit) VALUES (6, 'Perrier', 'Canette 33cl', 1.50, '../images/perrier.jpg', 2);
+INSERT INTO produit (id_produit, nom, description, prix, image_url, TYPE_PRODUIT_id_type_produit) VALUES (7, 'La pizza 4 fromages', 'mozzarella, bleu, chèvre et fromage râpé', 13.00, '../images/pizza-4-fromages.jpg', 1);
+INSERT INTO produit (id_produit, nom, description, prix, image_url, TYPE_PRODUIT_id_type_produit) VALUES (8, 'La savoyarde', 'mozzarella, crème fraiche ,pommes de terre, reblochon, dés de jambon, gruyère', 13.00, '../images/savoyarde.jpg', 1);
 
 INSERT INTO client (id_client, prenom, nom, rue, code_postal, ville) VALUES (1, 'Mehdi', 'Rochereau', 'Rue de l\'avenir', '85000', 'La Roche-sur-Yon');
 INSERT INTO client (id_client, prenom, nom, rue, code_postal, ville) VALUES (2, 'Jordi', 'Mazureck', 'Rue de la galère', '85500', 'Les Herbiers');
