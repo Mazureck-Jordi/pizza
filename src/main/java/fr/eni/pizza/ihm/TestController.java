@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
+@SessionAttributes({"loggedUser"})
 @SessionAttributes("commande")
 @Controller
 public class TestController {
