@@ -12,7 +12,6 @@
     <li th:text="${'Nom : ' + utilisateur.nom}"></li>
     <li th:text="${'Prénom : ' + utilisateur.prenom}"></li>
     <li th:text="${'Email : ' + utilisateur.getEmail()}"></li>
-    <li th:text="${'Mot de passe : ' + utilisateur.getMot_de_passe()}"></li>
     <li th:each="roleUtilisateur : ${utilisateur.getRoles()}">
         <span th:text="${'Role : ' + roleUtilisateur.libelle}"></span>
         <a th:href="@{'/delete-role-utilisateur/' + ${utilisateur.id_utilisateur} + '/' + ${roleUtilisateur.id_role}}">Supprimer</a>

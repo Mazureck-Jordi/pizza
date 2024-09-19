@@ -53,6 +53,7 @@ public class UtilisateurController {
         Utilisateur utilisateur = new Utilisateur();
         if (id != null) {
             utilisateur = utilisateurManager.getUtilisateurById(id);
+            utilisateur.setMot_de_passe(null);
         }
         model.addAttribute("utilisateur", utilisateur);
 
@@ -127,7 +128,7 @@ public class UtilisateurController {
     public String showFormUtilisateurSimple(@AuthenticationPrincipal UserDetails loggedUser, Model model) {
 
         Utilisateur utilisateur = utilisateurManager.getUtilisateurById(utilisateurManager.getByEmail(loggedUser.getUsername()).getId_utilisateur());
-
+        utilisateur.setMot_de_passe(null);
         model.addAttribute("utilisateur", utilisateur);
 
         List<Commande> commandes = commandeManager.getAllCommandes();

@@ -53,7 +53,7 @@
             <div>
                 <label for="Motdepasse">Mot de passe</label><br>
                 <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input "
-                       th:field="*{mot_de_passe}" type="text" placeholder="Saisir le mot de passe">
+                       th:field="*{mot_de_passe}" type="password" placeholder="Saisir le mot de passe">
                 <ul th:if="${#fields.hasErrors('mot_de_passe')}">
                     <li class="uk-form-danger" th:each="error : ${#fields.errors('mot_de_passe')}" th:text="${error}">
                     </li>
