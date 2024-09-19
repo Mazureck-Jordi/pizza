@@ -7,11 +7,11 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1 class="texte-blanc centrer souligner police"> Liste des détails commandes</h1>
-    <div class="texte-blanc centrer li">
+    <h1 class="black centrer souligner police"> Liste des détails commandes</h1>
+    <div class="black centrer li">
         <div th:each="detailCommande : ${detailCommandes}">
 
-            <ul>
+            <ul th:class="opacité">
                 <li th:text="${'Utilisateur : ' + detailCommande.id_commande.id_utilisateur.id_utilisateur}"></li>
                 <li th:text="${' Nom du client : ' + detailCommande.id_commande.id_client.nom + ' ' + detailCommande.id_commande.id_client.prenom}"></li>
                 <li th:text="${'Livraison ou à emporter : ' + detailCommande.id_commande.livraison}"></li>
