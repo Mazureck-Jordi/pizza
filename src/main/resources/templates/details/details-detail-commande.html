@@ -1,17 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    <title th:text="${'Détail-commande' + detailcommande.id_detail_commande}"></title>-->
+    <title layout:fragment="Formulaire">Formulaire création de commande </title>
 </head>
 <body>
-<h1> Details de la détails commande</h1>
+<div layout:fragment="content">
+<h1 class="black centrer souligner police"> Details de la détails commande</h1>
 
 <div>
 
-    <h2>Information de la commande</h2>
-    <ul>
+    <h2 class="black centrer souligner police">Information de la commande</h2>
+    <ul class="uk-container opacité ">
         <li th:text="${' Commande Numéro : ' + commande.id_commande}"></li>
         <li th:text="${'Prix de la commande : ' + commande.prix_total + ' €'}"></li>
         <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison}"></li>
@@ -21,44 +23,45 @@
         <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
     </ul>
 
-    <h2> Clients </h2>
-    <ul>
+    <h2 class="black centrer souligner police"> Clients </h2>
+    <ul class="uk-container opacité ">
         <li th:text="${'Nom du client : ' + commande.id_client.nom + ' ' + commande.id_client.prenom}"></li>
         <li th:if="${commande.livraison} == 1" th:text="${'Adresse : ' + commande.id_client.rue}"></li>
         <li th:if="${commande.livraison} == 1"
             th:text="${' CP/Ville : ' + commande.id_client.code_postal + ' ' + commande.id_client.ville}"></li>
     </ul>
 
-    <h2> Détails de la commande </h2>
-    <ul th:each="d: ${detailCommandes}">
+    <h2 class="black centrer souligner police"> Détails de la commande </h2>
+    <ul class="uk-container opacité " th:each="d: ${detailCommandes}">
         <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
         <li th:text="${'Quantité : ' + d.quantite}"></li>
         <li th:text="${'Prix cumulé : ' + d.quantite*d.id_produit.prix + ' €'}"></li>
     </ul>
 
-    <h2> Utilisateur </h2>
-    <ul>
-        <li th:text="${'Préparateur de la commande : ' + commande.id_utilisateur.nom + ' ' + commande.id_utilisateur.prenom}"></li>
+    <h2 class="black centrer souligner police"> Utilisateur </h2>
+    <ul class="uk-container opacité ">
+        <li th:text="${'Préparateur de la commande : ' + commande.id_utilisateur.nom + ' '+ commande.id_utilisateur.prenom}"></li>
         <li th:text="${'Etat de la commande : ' + commande.id_etat.libelle}"></li>
         <li>
-            <input type="button" value="Modifier Commande"
+            <input class="semi-transparent essai black"  type="button" value="Modifier Commande"
                    th:onclick="'window.location.href=\'/show-creation-commande/' + ${commande.id_commande} + '\''">
         </li>
         <li>
             <form th:action="@{'/en-cours-creation/' + ${commande.id_commande}}" method="post">
-                <input class="semi-transparent essai" type="submit" value="Commande en cours de création">
+                <input class="semi-transparent essai black" type="submit" value="Commande en cours de création">
             </form>
         </li>
         <li>
             <form th:action="@{'/enregistrer/' + ${commande.id_commande}}" method="post">
-                <input class="semi-transparent essai" type="submit" value="Enregister la commande">
+                <input class="semi-transparent essai black" type="submit" value="Enregister la commande">
             </form>
         </li>
         <li>
-            <input type="button" value="Accueil"
+            <input class="semi-transparent essai black"  type="button" value="Accueil"
                    th:onclick="'window.location.href=\'/\''">
         </li>
     </ul>
+</div>
 </div>
 </body>
 </html>
