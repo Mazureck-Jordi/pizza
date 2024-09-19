@@ -25,11 +25,12 @@
     <form th:action="@{/login}" method="post">
 
       <!--champs email-->
-      <div class="uk-margin">
-        <div class="uk-inline uk-width-1-1">
+      <div class="uk-margin ">
+        <div class="uk-inline uk-width-1-1 ">
           <span class="uk-form-icon" uk-icon="icon: user"></span>
-          <input class="uk-input uk-width-1-1 centrer" type="text" placeholder="Saisir l'email" name="username"/>
+          <input class="uk-input uk-width-1-1 centrer " type="text" placeholder="Saisir l'email" name="username" style="border-radius: 50px">
         </div>
+
       </div>
 
 
@@ -38,18 +39,18 @@
         <div class="uk-inline uk-width-1-1">
           <span class="uk-form-icon " uk-icon="icon: lock"></span>
           <input class="uk-input uk-width-1-1 centrer" type="text" placeholder="Saisir le mot de passe"
-                 name="password"/>
+                 name="password" style="border-radius: 50px"/>
         </div>
       </div>
 
       <!--lien oublié-->
-      <div>
-        <a href="#" class="uk-link-muted uk-width-1-1 eni-link-click ">Mot de passe oublié ?</a>
+      <div th:class="mdp">
+        <a href="#" class="uk-link-muted uk-width-1-1 eni-link-click " >Mot de passe oublié ?</a>
       </div>
 
       <!--Bouton submit-->
       <div class="uk-margin ">
-        <input type="submit" value="Se Connecter" class=" uk-button uk-button-primary uk-width-1-1 "/>
+        <input type="submit" value="Se Connecter" class=" uk-button uk-button-primary uk-width-1-1 " style="border-radius: 50px"/>
       </div>
     </form>
   </div>
