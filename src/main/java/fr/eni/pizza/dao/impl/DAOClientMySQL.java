@@ -26,7 +26,7 @@ public class DAOClientMySQL implements IDAOClient {
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    static final RowMapper<Client>CLIENT_ROW_MAPPER = new RowMapper<Client>() {
+    static final RowMapper<Client> CLIENT_ROW_MAPPER = new RowMapper<Client>() {
 
         @Override
         public Client mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -41,7 +41,8 @@ public class DAOClientMySQL implements IDAOClient {
             return client;
         }
     };
-    private MapSqlParameterSource map (Client client) {
+
+    private MapSqlParameterSource map(Client client) {
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("id_client", client.getId_client());
@@ -55,13 +56,11 @@ public class DAOClientMySQL implements IDAOClient {
     }
 
 
-
-
-
     private String sqlSelectAllClients = "SELECT c.id_client, c.prenom, c.nom,c.rue, c.code_postal, c.ville FROM client c";
     private String sqlSelectClientById = "SELECT c.id_client, c.prenom, c.nom,c.rue, c.code_postal, c.ville FROM client c WHERE c.id_client = ?";
     private String sqlInsertClient = "INSERT INTO client(id_client, prenom, nom, rue, code_postal, ville) VALUES (:id_client, :prenomClient, :nomClient, :rueClient, :code_postalClient, :villeClient) ";
     private String sqlUpdateClient = "UPDATE client SET prenom = :prenomClient, nom = :nomClient, rue = :rueClient, code_postal = :code_postalClient, ville = :villeClient WHERE id_client = :id_client";
+    private String sqlUpdateAdresseClient = "UPDATE client SET rue = :rueClient, code_postal = :code_postalClient, ville = :villeClient WHERE id_client = :id_client";
     private String sqlDeleteClient = "DELETE FROM client WHERE id_client = :id_client";
 
 
@@ -85,12 +84,16 @@ public class DAOClientMySQL implements IDAOClient {
 
     @Override
     public void updateClientToDB(Client client) {
-    namedParameterJdbcTemplate.update(sqlUpdateClient, map(client));
+        if (client.getNom() == null && client.getPrenom() == null) {
+            namedParameterJdbcTemplate.update(sqlUpdateAdresseClient, map(client));
+        } else {
+            namedParameterJdbcTemplate.update(sqlUpdateClient, map(client));
+        }
     }
 
     @Override
     public void deleteClientToDB(Client client) {
-        namedParameterJdbcTemplate.update(sqlDeleteClient, map (client));
+        namedParameterJdbcTemplate.update(sqlDeleteClient, map(client));
 
     }
 }

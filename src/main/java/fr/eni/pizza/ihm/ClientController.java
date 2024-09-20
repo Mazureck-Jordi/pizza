@@ -40,15 +40,16 @@ public class ClientController {
     public String showDetailClient(@PathVariable Long id, Model model) {
 
         Client client = clientManager.getClientByID(id);
-        if(client == null) {
+        if (client == null) {
             return "redirect:/";
         }
         model.addAttribute("client", client);
 
         return "details/details-client";
     }
+
     @GetMapping({"/show-client-form/{id}", "/show-client-form"})
-public String showClientForm(@PathVariable(required = false) Long id, Model model) {
+    public String showClientForm(@PathVariable(required = false) Long id, Model model) {
 
         Client client = new Client();
         if (id != null) {
@@ -59,16 +60,16 @@ public String showClientForm(@PathVariable(required = false) Long id, Model mode
         return "form/client-form";
     }
 
-    @PostMapping ("/client-form")
-public String clientForm(@Valid @ModelAttribute Client client, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    @PostMapping("/client-form")
+    public String clientForm(@Valid @ModelAttribute Client client, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-        if(bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "form/client-form";
         }
 
         if (client.getId_client() == null) {
             clientManager.addClient(client);
-        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le client a été ajouté à la liste des clients"));
+            redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le client a été ajouté à la liste des clients"));
             return "redirect:/list-clients";
 
         }
@@ -79,6 +80,14 @@ public String clientForm(@Valid @ModelAttribute Client client, BindingResult bin
         }
         return "redirect:/list-clients";
     }
+
+    @PostMapping("/client-form/{idCommande}")
+    public String clientFormByidCommande(@ModelAttribute Client client, @PathVariable Long idCommande, RedirectAttributes redirectAttributes) {
+        clientManager.updateClient(client);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le client a été modifié avec succès"));
+        return "redirect:/show-creation-commande/" + idCommande;
+    }
+
     @GetMapping("/delete-client/{id}")
     public String deleteClient(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 

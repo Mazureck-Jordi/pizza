@@ -79,6 +79,7 @@ public class SecurityConfig {
                         .requestMatchers("/details-detail-commande/**").hasAnyAuthority("2", "1")
                         .requestMatchers("/show-client-form/**").hasAnyAuthority("2", "1")
                         .requestMatchers("/show-client-form").hasAnyAuthority("2", "1")
+                        .requestMatchers("/client-form/**").permitAll()
                         .requestMatchers("/client-form").hasAnyAuthority("2", "1")
                         .requestMatchers("/delete-client/**").hasAnyAuthority("2", "1")
                         .requestMatchers("/list-clients").hasAnyAuthority("2", "1")
@@ -117,7 +118,7 @@ public class SecurityConfig {
                         .requestMatchers("/list-detail-commande").permitAll()
                         .requestMatchers("detail-commande-form").permitAll()
                         //rejette toutes les requêtes non configurées
-                        .anyRequest().denyAll()
+                        .anyRequest().permitAll()
                         //rejette toutes les requêtes non configurée aux utilisateurs non connectés
                         //.anyRequest().authenticated()
                         //accepte toutes les requêtes non configurée à tous les utilisateurs

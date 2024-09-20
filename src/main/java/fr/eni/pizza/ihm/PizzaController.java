@@ -66,8 +66,8 @@ model.addAttribute("loggedUser", loggedUser);
         List<TypeProduit> TypeProduits = produitManager.getAllTypeProduits();
         model.addAttribute("TypeProduits", TypeProduits);
 
-        List<Client> clients = clientManager.getAllClients();
-        model.addAttribute("clients", clients);
+        Client client = clientManager.getClientByID(commande.getId_client().getId_client());
+        model.addAttribute("client", client);
 
         List<Utilisateur> utilisateurs = utilisateurManager.getAllUtilisateurs();
         model.addAttribute("utilisateurs", utilisateurs);

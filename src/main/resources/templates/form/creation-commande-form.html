@@ -90,7 +90,11 @@
         </div>
     </form>
 
-    <form th:if="${commande.livraison} == 1" th:object="${commande.id_client}" th:action="@{'/client-form/' + ${commande.getId_commande()}}" method="post">
+    <form th:if="${commande.livraison} == 1" th:object="${client}" th:action="@{'/client-form/' + ${commande.getId_commande()}}" method="post">
+
+        <!-- champ id -->
+        <input th:field="*{id_client}" type="hidden">
+
         <!-- champ rue -->
         <div class="uk-margin">
             <div class="uk-inline uk-width-1-1">
@@ -123,7 +127,7 @@
     <h2> État de la commande </h2>
     <ul>
         <!--  faire un th:each pour afficher le prix de chaque article et les additionner et les enregistrer dans prix total      -->
-        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison.minusHours(2)}"></li>
+        <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison}"></li>
         <li th:if="${commande.est_paye} == 0">Commande non réglées</li>
         <li th:if="${commande.est_paye} == 1">Commande réglées</li>
         <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
