@@ -1,28 +1,29 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${produit.nom}"></title>
+    <title layout:fragment="Formulaire">Formulaire création de commande </title>
 </head>
 <body>
+<div layout:fragment="content">
+<h1 class="black centrer souligner police">Détails du produit</h1>
 
-<h1>Détails du produit</h1>
-
-<ul>
-    <img th:src="${produit.image_url}" alt="image d'un produit"></img>
+    <img th:src="${produit.image_url}" class="arrondir" alt="image d'un produit"></img>
+<ul class="uk-container opacité ">
     <li th:text="${'Nom : ' + produit.nom}"></li>
     <li th:text="${'Description : ' + produit.description}"></li>
     <li th:text="${'Prix : ' + produit.prix} + ' €'"></li>
     <li th:text="${'Type de produit : ' + produit.getId_type_produit().libelle}"></li>
 </ul>
-
 <div>
-    <a th:href="@{'/show-produit-form/' + ${produit.idProduit}}">Modifier</a>
+    <a class="centrer2 souligner" th:href="@{'/show-produit-form/' + ${produit.idProduit}}">Modifier</a>
 </div>
 
 <div>
-    <a th:href="@{'/delete-produit/' + ${produit.idProduit}}">Supprimer</a>
+    <a class="centrer2 souligner" th:href="@{'/delete-produit/' + ${produit.idProduit}}">Supprimer</a>
 </div>
-
+</div>
 </body>
 </html>

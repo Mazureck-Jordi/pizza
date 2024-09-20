@@ -1,26 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    <title th:text="${'Détail-commande' + detailcommande.id_detail_commande}"></title>-->
+    <title layout:fragment="Formulaire">Formulaire création de commande </title>
 </head>
 <body>
-<h1> Details de la détails commande</h1>
+<div layout:fragment="content">
+<h1 class="black centrer souligner police"> Details de la détails commande</h1>
 
 <div>
-    <li th:text="${'Commande N°' + commande.id_commande}"></li>
+    <li class="uk-container opacité " th:text="${'Commande N°' + commande.id_commande}"></li>
 
-    <h2> Produits de la commande </h2>
-    <ul th:each="d: ${detailCommandes}">
+    <h2 class="black centrer souligner police"> Produits de la commande </h2>
+    <ul class="uk-container opacité " th:each="d: ${detailCommandes}">
         <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
         <li th:text="${'Quantité : ' + d.quantite}"></li>
         <li th:text="${'Type de produit : ' + d.id_produit.id_type_produit.libelle}"></li>
         <li th:text="${'Prix cumulé : ' + d.id_produit.prix + ' €'}"></li>
     </ul>
 
-    <h2>Information de la commande</h2>
-    <ul>
+    <h2 class="black centrer souligner police">Information de la commande</h2>
+    <ul class="uk-container opacité ">
         <li th:text="${'Prix de la commande : ' + commande.prix_total + ' €'}"></li>
         <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison}"></li>
         <li th:text="${'Etat de la commande : ' + commande.id_etat.libelle}"></li>
@@ -30,8 +32,8 @@
         <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
     </ul>
 
-    <h2>Utilisateur de la commande</h2>
-    <ul>
+    <h2 class="black centrer souligner police">Utilisateur de la commande</h2>
+    <ul class="uk-container opacité ">
         <li th:text="${'Identifiant : ' + commande.id_utilisateur.id_utilisateur}"></li>
         <li th:if="${commande.id_etat.id_etat} == 1"
             th:text="${'Commande prise par : ' + commande.id_utilisateur.prenom + ' ' + commande.id_utilisateur.nom}"></li>
@@ -52,14 +54,14 @@
     </ul>
 
 
-    <h2>Client de la commande</h2>
-    <ul>
+    <h2 class="black centrer souligner police">Client de la commande</h2>
+    <ul class="uk-container opacité ">
         <li th:text="${'Identifiant : ' + commande.id_client.id_client}"></li>
         <li th:text="${'Nom : ' + commande.id_client.prenom + ' ' + commande.id_client.nom}"></li>
         <li th:text="${'Adresse  : ' + commande.id_client.rue + ', ' + commande.id_client.ville + ' ' + commande.id_client.code_postal}"></li>
     </ul>
 
-    <ul>
+    <ul class="uk-container opacité ">
         <li>
             <form th:action="@{'/enregistrer/' + ${commande.id_commande}}" method="post">
                 <input class="semi-transparent essai" type="submit" value="Commande en cours de création">
@@ -75,47 +77,47 @@
         <li>
             <form th:object="${commande}" th:action="@{'/en-preparation-form/' + ${commande.id_commande}}"
                   method="post">
-                <input type="submit" value="Commande en préparation">
+                <input class="semi-transparent essai" type="submit" value="Commande en préparation">
             </form>
         </li>
 
         <li>
             <form th:object="${commande}" th:action="@{'/fin de-preparation-form/' + ${commande.id_commande}}"
                   method="post">
-                <input type="submit" value="Commande préparée">
+                <input class="semi-transparent essai" type="submit" value="Commande préparée">
             </form>
         </li>
 
         <li>
             <form th:object="${commande}" th:action="@{'/en-livraison-form/' + ${commande.id_commande}}"
                   method="post">
-                <input type="submit" value="Commande en cours de livraison">
+                <input class="semi-transparent essai" type="submit" value="Commande en cours de livraison">
             </form>
         </li>
 
         <li>
             <form th:object="${commande}" th:action="@{'/fin de-livraison-form/' + ${commande.id_commande}}"
                   method="post">
-                <input type="submit" value="Commande livrée">
+                <input class="semi-transparent essai" type="submit" value="Commande livrée">
             </form>
         </li>
 
         <li>
             <form th:object="${commande}" th:action="@{'/non-paye/' + ${commande.id_commande}}"
                   method="post">
-                <input type="submit" value="Commande non payée">
+                <input class="semi-transparent essai" type="submit" value="Commande non payée">
             </form>
         </li>
 
         <li>
             <form th:object="${commande}" th:action="@{'/est-paye/' + ${commande.id_commande}}"
                   method="post">
-                <input type="submit" value="Commande payée">
+                <input class="semi-transparent essai" type="submit" value="Commande payée">
             </form>
         </li>
 
         <li>
-            <input type="button" value="Accueil"
+            <input class="semi-transparent essai" type="button" value="Accueil"
                    th:onclick="'window.location.href=\'/\''">
         </li>
     </ul>

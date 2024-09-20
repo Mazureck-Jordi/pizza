@@ -22,7 +22,7 @@
                 <div>
                     <a class="souligner" th:href="@{'/details-detail-commande/' + ${detailCommande.getId_commande().getId_commande()}}">Voir
                         détails</a>
-                </div>
+                </div >
                 <form th:action="@{'/delete-detail-commande/' + ${detailCommande.id_commande.id_commande} + '/' + ${detailCommande.id_produit.idProduit}}" method="post">
                     <input type="submit" value="Supprimer ce detail commande">
                 </form>

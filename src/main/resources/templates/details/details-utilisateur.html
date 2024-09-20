@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${utilisateur.nom}"></title>
+    <title layout:fragment="Formulaire">Détails de l'utilisateur </title>
 </head>
 <body>
-<h1>Détails de l'utilisateur</h1>
+<div layout:fragment="content">
+<h1 class="black centrer souligner police">Détails de l'utilisateur</h1>
 
-<ul>
+<ul class="uk-container opacité " >
     <li th:text="${'Identifiant : ' + utilisateur.id_utilisateur}"></li>
     <li th:text="${'Nom : ' + utilisateur.nom}"></li>
     <li th:text="${'Prénom : ' + utilisateur.prenom}"></li>

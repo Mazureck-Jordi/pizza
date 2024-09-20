@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
   <meta charset="UTF-8">
-  <title th:text="${'Commande ' + commande.id_commande}"></title>
+  <title layout:fragment="Formulaire">Formulaire création de commande </title>
 </head>
 <body>
+<div layout:fragment="content">
 
-<h1>Détails de la commande</h1>
+<h1 class="black centrer souligner police">Détails de la commande</h1>
 
-  <ul>
+  <ul class="uk-container opacité ">
     <li th:text="${'N° de la commande : ' + commande.id_commande}"></li>
     <li th:text="${'Prix total de la commande : ' + commande.prix_total}"></li>
     <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison}"></li>
@@ -21,11 +24,11 @@
     <li th:if="${commande.est_paye} == 1">Commande réglées</li>
   </ul>
 <div>
-  <a th:href="@{'/show-commande-form/' + ${commande.id_commande}}">Modifier</a>
+  <a class="centrer2 souligner" th:href="@{'/show-commande-form/' + ${commande.id_commande}}">Modifier</a>
 </div>
 
 <div>
-  <a th:href="@{'/delete-commande/' + ${commande.id_commande}}">Supprimer</a>
+  <a class="centrer2 souligner" th:href="@{'/delete-commande/' + ${commande.id_commande}}">Supprimer</a>
 </div>
 </body>
 </html>
