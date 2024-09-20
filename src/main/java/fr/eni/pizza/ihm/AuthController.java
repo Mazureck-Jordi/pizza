@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.security.Principal;
 
@@ -21,10 +22,10 @@ public class AuthController {
     private IUtilisateurManager utilisateurManager;
 
     @GetMapping("/login")
-    public String showloginPage(Model model, @AuthenticationPrincipal UserDetails loggedUser) {
+    public String showloginPage(Model model, @AuthenticationPrincipal UserDetails loggedUser, RedirectAttributes redirectAttributes) {
 
         if (loggedUser != null) {
-            System.out.println("Utilisateur connecté : " + loggedUser.getUsername());
+            redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_ERROR, "Vous êtes déjà connecté(e)"));
             return "redirect:/";
         }
 
@@ -35,9 +36,11 @@ public class AuthController {
     }
 
     @GetMapping("/logout")
-    public String Logout(SessionStatus sessionStatus) {
+    public String Logout(SessionStatus sessionStatus, RedirectAttributes redirectAttributes) {
         sessionStatus.setComplete();
         System.out.println("Vous êtes déconnecté");
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Vous êtes déconnecté(e)"));
+
         return "redirect:/";
     }
 

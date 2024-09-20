@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,7 +85,7 @@ model.addAttribute("loggedUser", loggedUser);
     }
 
     @PostMapping("/creation-commande")
-    public String creationCommande(DetailCommande detailCommande) {
+    public String creationCommande(DetailCommande detailCommande, RedirectAttributes redirectAttributes) {
 
         Long lastId = detailCommande.getId_commande().getId_commande();
         detailCommande.setId_commande(commandeManager.getCommandeById(lastId));
@@ -113,14 +114,16 @@ model.addAttribute("loggedUser", loggedUser);
         commande.setPrix_total(prixTotal);
         commandeManager.updteCommandeById(commande);
 
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le(s) produit(s) a(ont) été(s) ajouté(s) avec succès"));
 
         return "redirect:/show-creation-commande/" + detailCommande.getId_commande().getId_commande();
     }
 
     @GetMapping("/delete-produit-details-commande/{idCommande}/{idProduit}")
-    public String deleteProduitOfDetailCommande(@PathVariable Long idProduit, @PathVariable Long idCommande) {
+    public String deleteProduitOfDetailCommande(@PathVariable Long idProduit, @PathVariable Long idCommande, RedirectAttributes redirectAttributes) {
 
         detailCommandeManager.deleteDetailCommande(idCommande, idProduit);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_WARNING, "Le detail de la commande a été supprimé avec succès"));
 
         return "redirect:/show-creation-commande/" + idCommande;
     }

@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -151,13 +152,15 @@ public class DetailCommandeController {
     }
 
     @PostMapping("/delete-detail-commande/{idCommande}/{idProduit}")
-    public String deleteDetailCommande(@PathVariable Long idCommande, @PathVariable Long idProduit) {
+    public String deleteDetailCommande(@PathVariable Long idCommande, @PathVariable Long idProduit, RedirectAttributes redirectAttributes) {
         if (detailCommandeManager.getDetailCommandeByIdCommandeAndIdProduit(idCommande, idProduit) == null){
             System.out.println("Erreur");
         }
         if (detailCommandeManager.getDetailCommandeByIdCommandeAndIdProduit(idCommande, idProduit) != null){
             detailCommandeManager.deleteDetailCommande(idCommande, idProduit);
         }
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_WARNING, "Le detail de la commande a été supprimée"));
+
         return "redirect:/list-detail-commande";
     }
 

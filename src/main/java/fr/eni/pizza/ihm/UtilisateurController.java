@@ -118,14 +118,18 @@ public class UtilisateurController {
     }
 
 
+
+
     @GetMapping("/profil-utilisateur")
-    public String showProfilUtilisateur(@AuthenticationPrincipal UserDetails loggedUser, Model model) {
+    public String showProfilUtilisateur(@AuthenticationPrincipal UserDetails loggedUser, Model model, RedirectAttributes redirectAttributes) {
 
         Utilisateur utilisateur = utilisateurManager.getById(utilisateurManager.getByEmail(loggedUser.getUsername()).getId_utilisateur());
         if (utilisateur == null) {
             return "redirect:/";
         }
         model.addAttribute("utilisateur", utilisateur);
+
+//        PizzaHMHelpers.sendCommonFlashMessage(redirectAttributes, PizzaFlashMessage.TYPE_FLASH_SUCCES, "Vous êtes connecté(e)");
 
         return "profil/profil-utilisateur";
     }

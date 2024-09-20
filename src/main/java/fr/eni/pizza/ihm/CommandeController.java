@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
@@ -190,93 +191,104 @@ public class CommandeController {
     }
 
     @PostMapping("/date-form/{idCommande}")
-    public String dateForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String dateForm(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setDate_heure_livraison(commande.getDate_heure_livraison());
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "La date de livraison de la commande a été enregistrée avec succès"));
         return "redirect:/show-creation-commande/" + commandeToUpdate.getId_commande();
     }
 
     @PostMapping("/livraison-form/{idCommande}")
-    public String livraisonForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String livraisonForm(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setLivraison(commande.getLivraison());
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le type de commande a été enregistrée avec succès"));
         return "redirect:/show-creation-commande/" + commandeToUpdate.getId_commande();
     }
 
     @PostMapping("/en-cours-creation/{idCommande}")
-    public String enCoursCreationForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String enCoursCreationForm(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setId_etat(commandeManager.getEtatById(1L));
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "La commande est en cours de création"));
         return "redirect:/details-detail-commande/" + commandeToUpdate.getId_commande();
     }
 
     @PostMapping("/enregistrer/{idCommande}")
-    public String enregistrerForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String enregistrerForm(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setId_etat(commandeManager.getEtatById(2L));
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "La commande est créée"));
         return "redirect:/details-detail-commande/" + commandeToUpdate.getId_commande();
     }
 
     @PostMapping("/en-preparation-form/{idCommande}")
-    public String enPreparationForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String enPreparationForm(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setId_etat(commandeManager.getEtatById(3L));
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "La commande est en cours de préparation"));
         return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
     }
 
     @PostMapping("/fin de-preparation-form/{idCommande}")
-    public String finDePrerationForm(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String finDePrerationForm(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setId_etat(commandeManager.getEtatById(4L));
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "La commande est prépararée"));
         return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
     }
 
     @PostMapping("/en-livraison-form/{idCommande}")
-    public String enLivraison(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String enLivraison(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setId_etat(commandeManager.getEtatById(5L));
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "La commande est en cours de livraison"));
         return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
     }
 
     @PostMapping("/fin de-livraison-form/{idCommande}")
-    public String finDeLivraison(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String finDeLivraison(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setId_etat(commandeManager.getEtatById(6L));
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "La commande est livrée"));
         return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
     }
 
     @PostMapping("/non-paye/{idCommande}")
-    public String nonPaye(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String nonPaye(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setEst_paye(0);
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "La commande est non payée"));
         return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
     }
 
     @PostMapping("/est-paye/{idCommande}")
-    public String estPaye(@PathVariable Long idCommande, @ModelAttribute Commande commande) {
+    public String estPaye(@PathVariable Long idCommande, @ModelAttribute Commande commande, RedirectAttributes redirectAttributes) {
         Commande commandeToUpdate = commandeManager.getCommandeById(idCommande);
         commandeToUpdate.setEst_paye(1);
         commandeManager.updateCommande(commandeToUpdate);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "La commande est payée"));
         return "redirect:/detail-commande-pizzaiolo/" + commandeToUpdate.getId_commande();
     }
 
     @GetMapping("/delete-commande/{id}")
-    public String deleteCommande(@PathVariable Long id) {
+    public String deleteCommande(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         if (commandeManager.getCommandeById(id) == null) {
             System.out.println("Erreur");
         }
         if (commandeManager.getCommandeById(id) != null) {
             commandeManager.deleteCommande(commandeManager.getCommandeById(id));
         }
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_WARNING, "La commande a été supprimée avec succès"));
         return "redirect:/list-commandes";
     }
 

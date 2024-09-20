@@ -1,7 +1,13 @@
 package fr.eni.pizza.bo;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class DetailCommande {
 
+    @NotNull(message = "La quantité doit être renseignée")
+    @Positive(message = "La quantité doit être supérieur à 0")
     private int quantite;
     private Commande id_commande;
     private Produit id_produit;
