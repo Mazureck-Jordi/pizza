@@ -1,7 +1,6 @@
 package fr.eni.pizza.bo;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 
 public class Client {
 
@@ -10,8 +9,11 @@ public class Client {
     private String prenom;
     @NotBlank(message = "Le nom doit être renseigné")
     private String nom;
+    @NotBlank(message = "L'adresse doit être renseignée")
     private String rue;
+    @NotBlank(message = "Le code postal doit être renseigné")
     private String code_postal;
+    @NotBlank(message = "La ville doit être renseignée")
     private String ville;
 
     public Client() {

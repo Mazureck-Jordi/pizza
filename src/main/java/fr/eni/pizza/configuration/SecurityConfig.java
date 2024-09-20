@@ -79,7 +79,7 @@ public class SecurityConfig {
                         .requestMatchers("/details-detail-commande/**").hasAnyAuthority("2", "1")
                         .requestMatchers("/show-client-form/**").hasAnyAuthority("2", "1")
                         .requestMatchers("/show-client-form").hasAnyAuthority("2", "1")
-                        .requestMatchers("/client-form/**").permitAll()
+                        .requestMatchers("/client-form/**").hasAnyAuthority("2", "1")
                         .requestMatchers("/client-form").hasAnyAuthority("2", "1")
                         .requestMatchers("/delete-client/**").hasAnyAuthority("2", "1")
                         .requestMatchers("/list-clients").hasAnyAuthority("2", "1")

@@ -19,4 +19,6 @@ public interface IDetailCommandeManager {
     void updateDetailCommande(DetailCommande detailCommande);
 
     void deleteDetailCommande(Long idCommande, Long idProduit);
+
+    void deleteDetailCommandeByIdCommande(Long idCommande);
 }

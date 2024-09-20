@@ -48,4 +48,9 @@ public class DetailCommandeManager implements IDetailCommandeManager {
     public void deleteDetailCommande(Long idCommande, Long idProduit) {
        detailCommandeDAO.deleteDetailCommandeToDB(idCommande, idProduit);
     }
+
+    @Override
+    public void deleteDetailCommandeByIdCommande(Long idCommande) {
+        detailCommandeDAO.deleteDetailCommandesToDBByIdCommande(idCommande);
+    }
 }

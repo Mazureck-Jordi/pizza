@@ -286,6 +286,7 @@ public class CommandeController {
             System.out.println("Erreur");
         }
         if (commandeManager.getCommandeById(id) != null) {
+            detailCommandeManager.deleteDetailCommandeByIdCommande(id);
             commandeManager.deleteCommande(commandeManager.getCommandeById(id));
         }
         redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_WARNING, "La commande a été supprimée avec succès"));

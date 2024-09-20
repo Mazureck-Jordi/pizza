@@ -19,4 +19,6 @@ public interface IDAODetailCommande {
     void updateDetailCommandeToDB(DetailCommande detailCommande);
 
     void deleteDetailCommandeToDB(Long idCommande, Long idProduit);
+
+    void deleteDetailCommandesToDBByIdCommande(Long idCommande);
 }
