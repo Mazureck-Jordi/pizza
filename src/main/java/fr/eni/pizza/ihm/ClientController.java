@@ -68,17 +68,19 @@ public String clientForm(@Valid @ModelAttribute Client client, BindingResult bin
 
         if (client.getId_client() == null) {
             clientManager.addClient(client);
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le client a été ajouté à la liste des clients"));
+            return "redirect:/list-clients";
+
         }
         if (client.getId_client() != null) {
             clientManager.updateClient(client);
+            redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le client a été modifié avec succès"));
+
         }
-
-        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le client a été ajouté à la liste des clients"));
-
-        return "redirect:/show-commande-form";
+        return "redirect:/list-clients";
     }
     @GetMapping("/delete-client/{id}")
-    public String deleteClient(@PathVariable Long id) {
+    public String deleteClient(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 
         if (clientManager.getClientByID(id) == null) {
 
@@ -86,6 +88,9 @@ public String clientForm(@Valid @ModelAttribute Client client, BindingResult bin
         if (clientManager.getClientByID(id) != null) {
             clientManager.deleteClient(clientManager.getClientByID(id));
         }
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_WARNING, "Le client a été supprimé avec succès"));
+
+
         return "redirect:/list-clients";
     }
 }

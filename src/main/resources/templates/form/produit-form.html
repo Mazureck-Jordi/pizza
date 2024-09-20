@@ -22,6 +22,10 @@
         <div class="uk-inline uk-width-1-1">
         <label for="nom">Nom</label><br>
         <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input "  th:field="*{nom}" type="text" placeholder="Saisir le nom">
+            <ul th:if="${#fields.hasErrors('nom')}">
+                <li class="uk-form-danger" th:each="error:${#fields.errors('nom')}" th:text="${error}">
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -30,6 +34,10 @@
         <div class="uk-inline uk-width-1-1">
         <label for="description">Description</label><br>
         <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input "  th:field="*{description}" type="text" placeholder="Saisir la description">
+            <ul th:if="${#fields.hasErrors('description')}">
+                <li class="uk-form-danger" th:each="error:${#fields.errors('description')}" th:text="${error}">
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -37,7 +45,11 @@
     <div class="uk-margin">
         <div class="uk-inline uk-width-1-1">
         <label for="prix">Prix</label><br>
-        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input"  th:field="*{prix}" type="number" placeholder="Saisir le prix">
+        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input"  th:field="*{prix}" type="number" min="0" placeholder="Saisir le prix">
+            <ul th:if="${#fields.hasErrors('prix')}">
+                <li class="uk-form-danger" th:each="error:${#fields.errors('prix')}" th:text="${error}">
+                </li>
+            </ul>
         </div>
     </div>
 
@@ -46,7 +58,11 @@
         <div class="uk-inline uk-width-1-1">
         <label for="image">Image</label><br>
         <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input" th:field="*{image_url}" type="text" placeholder="Saisir l' url de l'image">
-    </div>
+            <ul th:if="${#fields.hasErrors('image_url')}">
+                <li class="uk-form-danger" th:each="error:${#fields.errors('image_url')}" th:text="${error}">
+                </li>
+            </ul>
+        </div>
     </div>
 
     <!-- Champ typeProduit -->

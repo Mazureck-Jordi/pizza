@@ -1,11 +1,19 @@
 package fr.eni.pizza.bo;
 
+import jakarta.validation.constraints.*;
+
 public class Produit {
 
     private Long idProduit;
+    @NotBlank(message = "Le prénom doit être renseigné")
     private String nom;
+    @NotBlank(message = "Le nom doit être renseigné")
     private String description;
+    @NotNull(message = "Le prix doit être renseigné")
+    @PositiveOrZero(message = "Le prix doit être supérieur ou égal à 0.0 €")
+    @DecimalMin(value = "0.0", message = "Le prix doit être supérieur ou égal à 0.0 €")
     private Double prix;
+    @NotBlank(message = "L''image doit être renseignée")
     private String image_url;
     private TypeProduit id_type_produit;
     private int quantite;

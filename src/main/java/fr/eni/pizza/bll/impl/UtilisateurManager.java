@@ -115,6 +115,7 @@ public class UtilisateurManager implements IUtilisateurManager {
 
     @Override
     public void deleteUtilisateur(Utilisateur utilisateur) {
+        daoUtilisateur.deleteRoleUtilisateursToDB(utilisateur);
         daoUtilisateur.deleteUtilisateurToDB(utilisateur);
     }
 

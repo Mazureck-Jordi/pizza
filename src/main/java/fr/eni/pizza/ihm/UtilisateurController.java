@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -69,8 +70,7 @@ public class UtilisateurController {
     }
 
     @PostMapping("/utilisateur-form")
-    public String utilisateurForm(@Valid @ModelAttribute ("utilisateur") Utilisateur utilisateur, BindingResult bindingResult, Model model) {
-
+    public String utilisateurForm(@Valid @ModelAttribute ("utilisateur") Utilisateur utilisateur, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
 
         List<Role> roles = utilisateurManager.getAllRoles();
 
@@ -83,31 +83,38 @@ public class UtilisateurController {
 
         if (utilisateur.getId_utilisateur() == null) {
             utilisateurManager.addUtilisateur(utilisateur);
+            redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "L'utilisateur a été ajouté à la liste des utilisateurs"));
             return "redirect:/list-utilisateur";
         }
         if (utilisateur.getId_utilisateur() != null) {
+
             utilisateurManager.updateUtilisateur(utilisateur);
-        }
-            return "redirect:/details-utilisateur/" + utilisateur.getId_utilisateur();
-
-    }
-
-    @GetMapping("/delete-utilisateur/{id}")
-    public String deleteUtilisateur(@PathVariable Long id) {
-
-        if (utilisateurManager.getUtilisateurById(id) == null) {
-            System.out.println("erreur");
-        }
-        if (utilisateurManager.getUtilisateurById(id) == null) {
-            utilisateurManager.deleteUtilisateur(utilisateurManager.getUtilisateurById(id));
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "L'utilisateur a été modifié avec succès"));
         }
         return "redirect:/list-utilisateur";
     }
 
+    @GetMapping("/delete-utilisateur/{id}")
+    public String deleteUtilisateur(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+
+        if (utilisateurManager.getUtilisateurById(id) == null) {
+            System.out.println("erreur");
+        }
+        if (utilisateurManager.getUtilisateurById(id) != null) {
+
+            utilisateurManager.deleteUtilisateur(utilisateurManager.getUtilisateurById(id));
+        }
+
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_WARNING, "L'utilisateur a été supprimé avec succès"));
+
+        return "redirect:/list-utilisateur";
+    }
+
     @GetMapping("/delete-role-utilisateur/{idUtilisateur}/{idRole}")
-    public String deleteRoleUtilisateur(@PathVariable Long idUtilisateur , @PathVariable Long idRole) {
+    public String deleteRoleUtilisateur(@PathVariable Long idUtilisateur , @PathVariable Long idRole, RedirectAttributes redirectAttributes) {
         utilisateurManager.deteteRoleUtilisateur(idUtilisateur, idRole);
-        return "redirect:/details-utilisateur/" + idUtilisateur;
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_WARNING, "Le rôle de l'utilisateur a été supprimé avec succès"));
+        return "redirect:/list-utilisateur";
     }
 
 
@@ -139,12 +146,17 @@ public class UtilisateurController {
     }
 
     @PostMapping("/simple-utilisateur-form")
-    public String utilisateurFormSimple(@ModelAttribute (name = "utilisateur") Utilisateur utilisateur) {
+    public String utilisateurFormSimple(@Valid @ModelAttribute (name = "utilisateur") Utilisateur utilisateur, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 
-            utilisateurManager.updateUtilisateur(utilisateur);
+        if(bindingResult.hasErrors()) {
+            return "form/simple-utilisateur-form";
+        }
 
-        return "redirect:/logout";
+        utilisateurManager.updateUtilisateur(utilisateur);
 
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Votre profil a bien été modifié avec succès"));
+
+        return "redirect:/profil-utilisateur";
     }
 
 }

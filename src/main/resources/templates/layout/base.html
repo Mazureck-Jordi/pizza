@@ -48,14 +48,15 @@
         <ul class="uk-nav uk-nav-default">
             <div sec:authorize="isAuthenticated()">
                 Logged user: <span sec:authentication="name"></span>
-<!--                Roles: <span sec:authentication="principal.authorities"></span>-->
             </div>
+            <li class="uk-active">
+                <a th:href="@{'/'}">Accueil</a>
+            </li>
             <li sec:authorize="isAuthenticated()" class="uk-active">
                 <a th:href="@{'/profil-utilisateur'}">Mon profil</a>
             </li>
             <li sec:authorize="isAuthenticated()" class="uk-active">
                 <a th:href="@{'/list-commande-by-etat'}">Mes Commandes</a>
-
             </li>
             <li class="uk-active">
                 <a th:href="@{'/list-produits'}">Liste des produits</a>

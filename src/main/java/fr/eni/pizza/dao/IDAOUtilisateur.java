@@ -28,4 +28,6 @@ public interface IDAOUtilisateur {
     void deleteUtilisateurToDB (Utilisateur utilisateur);
 
     void updateRoleUtilisateursToDB(Utilisateur utilisateur);
+
+    void deleteRoleUtilisateursToDB (Utilisateur utilisateur);
 }

@@ -113,6 +113,7 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
 
     private String sqlDeleteUtilisateur = "DELETE FROM utilisateur WHERE id_utilisateur = :idUtilisateur";
 
+    private String sqlDeleteAllRoleUtilisateurByIdUtilisateur = "DELETE FROM role_utilisateur WHERE UTILISATEUR_id_utilisateur = :idUtilisateur";
 
     @Override
     public List<Utilisateur> findAllSimple() {
@@ -161,13 +162,19 @@ public class DAOUtilisateurMySQL implements IDAOUtilisateur {
     @Override
     public void updateUtilisateurToDB(Utilisateur utilisateur) {
         namedParameterJdbcTemplate.update(sqlUpdateUtilisateur, map(utilisateur));
-
     }
 
     @Override
     public void deleteUtilisateurToDB(Utilisateur utilisateur) {
         namedParameterJdbcTemplate.update(sqlDeleteUtilisateur, map(utilisateur));
 
+    }
+
+    @Override
+    public void deleteRoleUtilisateursToDB(Utilisateur utilisateur) {
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("idUtilisateur", utilisateur.getId_utilisateur());
+        namedParameterJdbcTemplate.update(sqlDeleteAllRoleUtilisateurByIdUtilisateur, map);
     }
 
     @Override

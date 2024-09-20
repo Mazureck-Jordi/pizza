@@ -1,6 +1,7 @@
 package fr.eni.pizza.bo;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 public class Client {
 

@@ -78,4 +78,9 @@ public class DAOUtilisateurMock implements IDAOUtilisateur {
     public void updateRoleUtilisateursToDB(Utilisateur utilisateur) {
 
     }
+
+    @Override
+    public void deleteRoleUtilisateursToDB(Utilisateur utilisateur) {
+
+    }
 }

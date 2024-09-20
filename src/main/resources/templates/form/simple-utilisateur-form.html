@@ -21,7 +21,11 @@
     <!-- Champ nom utilisateur -->
     <label for="nom"> Nom</label><br>
     <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{nom}" type="text" placeholder="Saisir le nom">
-  </div>
+      <ul th:if="${#fields.hasErrors('nom')}">
+        <li class="uk-form-danger" th:each="error:${#fields.errors('nom')}" th:text="${error}">
+        </li>
+      </ul>
+    </div>
   </div>
 
   <!-- Champ prénom utilisateur -->
@@ -29,7 +33,11 @@
     <div class="uk-inline uk-width-1-1">
     <label for="penom">Prénom </label><br>
     <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{prenom}" type="text" placeholder="Saisir le prénom">
-  </div>
+      <ul th:if="${#fields.hasErrors('prenom')}">
+        <li class="uk-form-danger" th:each="error:${#fields.errors('prenom')}" th:text="${error}">
+        </li>
+      </ul>
+    </div>
   </div>
 
   <!-- Champ email de l'utilisateur -->
@@ -37,7 +45,11 @@
     <div class="uk-inline uk-width-1-1">
     <label for="email">Email</label><br>
     <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{email}" type="text" placeholder="Saisir l'email">
-  </div>
+      <ul th:if="${#fields.hasErrors('email')}">
+        <li class="uk-form-danger" th:each="error : ${#fields.errors('email')}" th:text="${error}">
+        </li>
+      </ul>
+    </div>
   </div>
 
   <!-- Champ du Mot de passe de l'utilisateur -->
@@ -45,7 +57,11 @@
     <div class="uk-inline uk-width-1-1">
     <label for="Motdepasse">Mot de passe</label><br>
     <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{mot_de_passe}" type="password" placeholder="Saisir le mot de passe">
-  </div>
+      <ul th:if="${#fields.hasErrors('mot_de_passe')}">
+        <li class="uk-form-danger" th:each="error : ${#fields.errors('mot_de_passe')}" th:text="${error}">
+        </li>
+      </ul>
+    </div>
   </div>
   <!-- Champ Submit -->
   <div class="uk-margin">

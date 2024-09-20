@@ -4,6 +4,7 @@ public class PizzaFlashMessage {
 
     public static final int TYPE_FLASH_SUCCES = 0;
     public static final int TYPE_FLASH_ERROR = 1;
+public static final int TYPE_FLASH_WARNING = 2;
 
     public int type;
     public String message;
@@ -19,6 +20,9 @@ public class PizzaFlashMessage {
         }
         if(type==TYPE_FLASH_ERROR){
             return "uk-alert-danger";
+        }
+        if(type == TYPE_FLASH_WARNING){
+            return "uk-alert-warning";
         }
         return "uk-alert-primary";
     }

@@ -1,5 +1,7 @@
 package fr.eni.pizza.bo;
 
+import jakarta.validation.constraints.*;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -8,9 +10,20 @@ import java.util.List;
 public class Commande {
 
     private Long id_commande;
+    @NotNull(message="La date doit être renseignée")
+    @FutureOrPresent(message = "La date doit être dans le futur ou aujourd'hui")
     private LocalDateTime date_heure_livraison;
+    @NotNull(message = "La livraison doit être renseignée")
+    @Min(value = 0, message = "La livraison être comprise entre 0 et 1")
+    @Max(value = 1 , message = "La livraison être comprise entre 0 et 1")
     private int livraison;
+    @NotNull(message = "Le prix total doit être renseigné")
+    @PositiveOrZero(message = "Le prix total doit être supérieur ou égal à 0.0 €")
+    @DecimalMin(value = "0.0", message = "Le prix total doit être supérieur ou égal à 0.0 €")
     private double prix_total;
+    @NotNull(message = "L'etat doit être renseigné")
+    @Min(value = 0, message = "L'etat être compris entre 0 et 1")
+    @Max(value = 1 , message = "L'etat être compris entre 0 et 1")
     private int est_paye;
     private Etat id_etat;
     private Client id_client;

@@ -3,10 +3,13 @@ package fr.eni.pizza.ihm;
 import fr.eni.pizza.bll.IProduitManager;
 import fr.eni.pizza.bo.Produit;
 import fr.eni.pizza.bo.TypeProduit;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -74,31 +77,48 @@ public class ProduitController {
     }
 
     @PostMapping("/produit-form")
-    public String produitForm(@ModelAttribute Produit produit) {
+    public String produitForm(@Valid @ModelAttribute Produit produit, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+
+        //On récupère la liste de type de produit
+        List<TypeProduit> typeProduits = produitManager.getAllTypeProduits();
+
+        //On injecte la liste de type de produit
+        model.addAttribute("typeProduits", typeProduits);
+
+        if (bindingResult.hasErrors()) {
+            return "form/produit-form";
+        }
 
         //Si le produit n'existe pas on l'ajoute
         if (produit.getIdProduit() == null) {
             produitManager.addProduit(produit);
+            redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le produit a été ajouté à la liste des produits"));
+            return "redirect:/list-produits";
         }
 
         //Si le produit existe on le modifie
         if (produit.getIdProduit() != null) {
             produitManager.updateProduit(produit);
+            redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le produit a été modifié avec succès"));
         }
 
-            return "redirect:/list-produits";
+
+        return "redirect:/list-produits";
     }
 
     @GetMapping("/delete-produit/{id}")
-    public String deleteProduit (@PathVariable Long id) {
+    public String deleteProduit(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 
         if (produitManager.getProduitById(id) == null) {
-        System.out.println("erreur");
+            System.out.println("erreur");
         }
         if (produitManager.getProduitById(id) != null) {
             //Supprime le produit
             produitManager.deleteProduit(produitManager.getProduitById(id));
         }
+
+        redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_WARNING, "Le produit a été supprimé avec succès"));
+
         return "redirect:/list-produits";
     }
 
