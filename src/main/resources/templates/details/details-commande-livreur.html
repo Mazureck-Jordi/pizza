@@ -1,24 +1,26 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="fr"
+      layout:decorate="~{layout/base}">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--    <title th:text="${'Détail-commande' + detailcommande.id_detail_commande}"></title>-->
+  <title layout:fragment="Formulaire">Formulaire création de commande </title>
 </head>
 <body>
-<h1> Details de la détails commande</h1>
+<div layout:fragment="content">
+<h1 class="black centrer souligner police"> Details de la détails commande</h1>
 
 <div>
-  <li th:text="${'Commande N°' + commande.id_commande}"></li>
+  <li class="uk-container opacité " th:text="${'Commande N°' + commande.id_commande}"></li>
 
-  <h2> Détails de la commande </h2>
-  <ul th:each="d: ${detailCommandes}">
+  <h2 class="black centrer souligner police"> Détails de la commande </h2>
+  <ul class="uk-container opacité " th:each="d: ${detailCommandes}">
     <li th:text="${'Nom du produit : ' + d.id_produit.nom}"></li>
     <li th:text="${'Quantité : ' + d.quantite}"></li>
   </ul>
 
-  <h2>Information de la commande</h2>
-  <ul>
+  <h2 class="black centrer souligner police">Information de la commande</h2>
+  <ul class="uk-container opacité ">
     <li th:text="${'Prix de la commande : ' + commande.prix_total + ' €'}"></li>
     <li th:text="${'Date et heure de livraison : ' + commande.date_heure_livraison}"></li>
     <li th:if="${commande.livraison} == 1">Type de commande : Livraison</li>
@@ -53,12 +55,12 @@
     <li>
       <form th:object="${commande}" th:action="@{'/est-paye/' + ${commande.id_commande}}"
             method="post">
-        <input type="submit" value="Commande payée">
+        <input class="semi-transparent essai black" type="submit" value="Commande payée">
       </form>
     </li>
 
     <li>
-      <input type="button" value="Accueil"
+      <input class="semi-transparent essai black" type="button" value="Accueil"
              th:onclick="'window.location.href=\'/\''">
     </li>
   </ul>

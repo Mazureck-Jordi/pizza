@@ -122,4 +122,9 @@ htm
     flex-direction: column-reverse;
     flex-wrap: wrap;
 }
-
+.centrer2{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    flex-direction: column;
+}

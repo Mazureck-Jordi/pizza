@@ -4,7 +4,7 @@
       layout:decorate="~{layout/base}">
 <head>
     <meta charset="UTF-8">
-    <title layout:fragment="Formulaire">Formulaire création de commande </title>
+    <title layout:fragment="Formulaire">Détails de la commande </title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -53,11 +53,11 @@
         </li>
         <li>
             <form th:action="@{'/enregistrer/' + ${commande.id_commande}}" method="post">
-                <input class="semi-transparent essai black" type="submit" value="Enregister la commande">
+                <input class="centrer2 souligner" type="submit" value="Enregister la commande">
             </form>
         </li>
         <li>
-            <input class="semi-transparent essai black"  type="button" value="Accueil"
+            <input class="centrer2 souligner"  type="button" value="Accueil"
                    th:onclick="'window.location.href=\'/\''">
         </li>
     </ul>
