@@ -83,9 +83,9 @@ public class ClientController {
 
     @PostMapping("/client-form/{idCommande}")
     public String clientFormByidCommande(@Valid @ModelAttribute Client client, @PathVariable Long idCommande, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
-        if (bindingResult.hasErrors()) {
-            return "form/client-form";
-        }
+//        if (bindingResult.hasErrors()) {
+//            return "form/client-form";
+//        }
         clientManager.updateClient(client);
         redirectAttributes.addFlashAttribute("flashMessage", new PizzaFlashMessage(PizzaFlashMessage.TYPE_FLASH_SUCCES, "Le client a été modifié avec succès"));
         return "redirect:/show-creation-commande/" + idCommande;
