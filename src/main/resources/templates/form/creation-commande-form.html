@@ -96,32 +96,10 @@
             <form th:if="${commande.livraison} == 1" th:object="${client}"
                   th:action="@{'/client-form/' + ${commande.getId_commande()}}" method="post">
 
-                <!-- champ id -->
-                <input th:field="*{id_client}" type="hidden">
+                <input type="hidden" th:field="*{id_client}" th:value="${client.id_client}">
+                <input type="hidden" th:field="*{nom}" th:value="${client.nom}">
+                <input type="hidden" th:field="*{prenom}" th:value="${client.prenom}">
 
-<!--                &lt;!&ndash; champ prenom &ndash;&gt;-->
-<!--                <div class="uk-margin">-->
-<!--                    <div class="uk-inline uk-width-1-1">-->
-<!--                        <label for="prenom">Prenom</label><br>-->
-<!--                        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{prenom}" type="text" placeholder="Saisir le Prénom">-->
-<!--                        <ul th:if="${#fields.hasErrors('prenom')}">-->
-<!--                            <li class="uk-form-danger" th:each="error:${#fields.errors('prenom')}" th:text="${error}">-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--                &lt;!&ndash; champ nom &ndash;&gt;-->
-<!--                <div class="uk-margin">-->
-<!--                    <div class="uk-inline uk-width-1-1">-->
-<!--                        <label for="nom">Nom</label><br>-->
-<!--                        <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input " th:field="*{nom}" type="text" placeholder="Saisir le Nom de famille">-->
-<!--                        <ul th:if="${#fields.hasErrors('nom')}">-->
-<!--                            <li class="uk-form-danger" th:each="error:${#fields.errors('nom')}" th:text="${error}">-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </div>-->
-<!--                </div>-->
 
                 <!-- champ rue -->
                 <div class="uk-margin">
@@ -129,10 +107,6 @@
                         <label for="rue">Rue</label><br>
                         <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input "
                                th:field="*{rue}" type="text" placeholder="Saisir le nom de la rue">
-<!--                        <ul th:if="${#fields.hasErrors('rue')}">-->
-<!--                            <li class="uk-form-danger" th:each="error:${#fields.errors('rue')}" th:text="${error}">-->
-<!--                            </li>-->
-<!--                        </ul>-->
                     </div>
                 </div>
 
@@ -142,11 +116,6 @@
                         <label for="code_postal">Code postal</label><br>
                         <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input "
                                th:field="*{code_postal}" type="text" placeholder="Saisir le Code Postal">
-<!--                        <ul th:if="${#fields.hasErrors('code_postal')}">-->
-<!--                            <li class="uk-form-danger" th:each="error:${#fields.errors('code_postal')}"-->
-<!--                                th:text="${error}">-->
-<!--                            </li>-->
-<!--                        </ul>-->
                     </div>
                 </div>
 
@@ -156,10 +125,6 @@
                         <label for="ville">Ville</label><br>
                         <input class="uk-input uk-width-1-1 oval centrer semi-transparent longueur-input "
                                th:field="*{ville}" type="text" placeholder="Saisir le nom de la ville">
-<!--                        <ul th:if="${#fields.hasErrors('ville')}">-->
-<!--                            <li class="uk-form-danger" th:each="error:${#fields.errors('ville')}" th:text="${error}">-->
-<!--                            </li>-->
-<!--                        </ul>-->
                     </div>
                 </div>
                 <!-- Bouton submit -->
@@ -178,8 +143,9 @@
                 <li th:if="${commande.livraison} == 0">Type de commande : A emporter</li>
                 <li th:if="${commande.livraison} == 1"
                     th:text="${'Adresse du client : ' + commande.id_client.getRue() + ', ' + commande.id_client.ville + ' ' + commande.id_client.code_postal}"></li>
+                <li class="uk-form-danger" th:if="${(commande.livraison == 1 && (client.code_postal.isBlank() || client.rue.isBlank() || client.ville.isBlank()))}" >Veuillez renseigner l'adresse complète du client pour enregistrer la commande</li>
             </ul>
-            <input class="semi-transparent essai black" type="button" value="Etape final"
+            <input th:if="${(commande.livraison == 1 && !client.code_postal.isBlank() && !client.rue.isBlank() && !client.ville.isBlank()) || commande.livraison == 0}" class="semi-transparent essai black" type="button" value="Etape final"
                    th:onclick="'window.location.href=\'/details-detail-commande/' + ${commande.id_commande} + '\''">
         </div>
     </div>

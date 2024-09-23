@@ -175,7 +175,7 @@ public class CommandeController {
     @PostMapping("/commande-form")
     public String commandeForm(@ModelAttribute Commande commande) {
 
-        commande.setDate_heure_livraison(LocalDateTime.now());
+        commande.setDate_heure_livraison(LocalDateTime.now().plusMinutes(20));
         commande.setLivraison(0);
         commande.setPrix_total(0);
         commande.setEst_paye(0);
